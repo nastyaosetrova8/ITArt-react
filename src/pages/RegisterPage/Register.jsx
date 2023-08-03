@@ -1,11 +1,10 @@
-import React from 'react'
-
-export const Register = () => {
+function Register() {
   return (
-    
     <>
-    <div>Register</div>
-    <button type='submit'>REGISTER</button>
+      <div>Register</div>
+      <button type="submit">REGISTER</button>
     </>
-  )
+  );
 }
+
+export default Register;
