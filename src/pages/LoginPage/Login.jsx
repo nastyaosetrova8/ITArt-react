@@ -1,10 +1,10 @@
-import React from 'react'
-
-export const Login = () => {
+function Login() {
   return (
     <>
-    <div>Login</div>
-    <button type='submit'>LOG IN</button>
+      <div>Login</div>
+      <button type="submit">LOG IN</button>
     </>
-  )
+  );
 }
+
+export default Login;
