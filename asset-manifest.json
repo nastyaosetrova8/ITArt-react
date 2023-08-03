@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ITArt/static/css/main.7acaea2f.css",
+    "main.js": "/ITArt/static/js/main.07d3183d.js",
+    "index.html": "/ITArt/index.html",
+    "main.7acaea2f.css.map": "/ITArt/static/css/main.7acaea2f.css.map",
+    "main.07d3183d.js.map": "/ITArt/static/js/main.07d3183d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.07d3183d.js"
+  ]
+}
