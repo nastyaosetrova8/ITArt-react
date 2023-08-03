@@ -6,8 +6,8 @@ import { Layout } from './Layout/Layout';
 
 
 const Home = lazy(() => import('pages/HomePage/Home'));
-const Login = lazy(() => import('pages/LoginPage/Login'));
-const Register = lazy(() => import('pages/RegisterPage/Register'));
+const Login = lazy(() => import('pages/LoginPage/LoginPage'));
+const Register = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const Statistic = lazy(() => import('pages/StatisticPage/Statistic'));
 
 export const App = () => {  
