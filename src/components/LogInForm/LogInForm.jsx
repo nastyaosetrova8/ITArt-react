@@ -1,9 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { logInUserThunk, logOutUserThunk } from 'redux/Thunks/AuthUserThunk';
-import { selectUserName } from 'redux/selectors';
+import { useDispatch } from 'react-redux';
+import { logInUserThunk } from 'redux/Thunks/AuthUserThunk';
+
 
 export const LogInForm = () => {
-  const userName = useSelector(selectUserName)
   const dispatch = useDispatch();
 
   const handlerOnSubmit = evt => {
@@ -15,14 +14,8 @@ export const LogInForm = () => {
 
     const logInUserData = { email, password };
     dispatch(logInUserThunk(logInUserData));
-    //evt.currentTarget.reset();
+    evt.currentTarget.reset();
   };
-
-  const handleOnClick = () => {
-    dispatch(logOutUserThunk());
-  };
-
-
 
   return (
     <>
@@ -42,14 +35,6 @@ export const LogInForm = () => {
         <input type="password" name="password" />
         <button type="submit">LOG IN</button>
       </form>
-
-      <div>
-        <p>Hello, {userName}</p>
-        <button type="submit" onClick={handleOnClick}>
-          Log Out
-        </button>
-      </div>
-
     </>
   );
 };

@@ -17,7 +17,7 @@ export const RegistrationForm = () => {
     const registerUserData = {username, email, password}
     console.log(registerUserData);
     dispatch(registerUserThunk(registerUserData))
-    //evt.currentTarget.reset();
+    evt.currentTarget.reset();
   }
   
   return (
