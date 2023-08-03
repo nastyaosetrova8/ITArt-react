@@ -3,25 +3,22 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Layout } from './Layout/Layout';
 
+const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
+const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
+const SummaryPage = lazy(() => import('pages/SummaryPage/SummaryPage'));
 
-
-const Home = lazy(() => import('pages/HomePage/Home'));
-const Login = lazy(() => import('pages/LoginPage/LoginPage'));
-const Register = lazy(() => import('pages/RegisterPage/RegisterPage'));
-const Statistic = lazy(() => import('pages/StatisticPage/Statistic'));
-
-export const App = () => {  
-  
+export const App = () => {
   return (
     <Suspense
     // fallback={<Loader />}
     >
       <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<Layout />}>
-          <Route path="statistic" element={<Statistic />} />
-          <Route path="/" element={<Home />} />
+          <Route path="home" element={<DashboardPage />} />
+          <Route path="statistic" element={<SummaryPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/register" replace />}></Route>
       </Routes>
