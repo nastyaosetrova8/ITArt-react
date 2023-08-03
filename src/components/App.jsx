@@ -1,17 +1,21 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Layout } from './Layout/Layout';
-
-
+import { useDispatch } from 'react-redux';
+import { getCurrentUserThunk } from 'redux/Thunks/AuthUserThunk';
 
 const Home = lazy(() => import('pages/HomePage/Home'));
 const Login = lazy(() => import('pages/LoginPage/LoginPage'));
-const Register = lazy(() => import('pages/RegisterPage/RegisterPage'));
+const Register = lazy(() => import('pages/RegistrationPage/RegistrationPage'));
 const Statistic = lazy(() => import('pages/StatisticPage/Statistic'));
 
-export const App = () => {  
-  
+export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentUserThunk());
+  }, [dispatch]);
   return (
     <Suspense
     // fallback={<Loader />}
