@@ -15,13 +15,13 @@ export const registerRequest = async (registerUserData)=>{
     return data
 }
 
-export const signInRequest = async (signInUserData)=>{
-    const {data} = await instance.post('/api/auth/sign-in', signInUserData)
+export const logInRequest = async (logInUserData)=>{
+    const {data} = await instance.post('/api/auth/sign-in', logInUserData)
     token.set(data.token)
     return data
 }
 
-export const signOutRequest = async () =>{
+export const logOutRequest = async () =>{
     await instance.delete('/api/auth/sign-out')
     token.unset()
 }

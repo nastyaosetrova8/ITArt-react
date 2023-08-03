@@ -1,10 +1,11 @@
-function Login() {
+import { LogInForm } from "components/LogInForm/LogInForm";
+
+function LoginPage() {
   return (
     <>
-      <div>Login</div>
-      <button type="submit">LOG IN</button>
+      <LogInForm/>      
     </>
   );
 }
 
-export default Login;
+export default LoginPage;
