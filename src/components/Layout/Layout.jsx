@@ -13,12 +13,10 @@ export const Layout = () => {
     dispatch(logOutUserThunk());
   };
 
-
-
   return (
     <>
       <StyledHeader>
-        <Link to="/">LOGO link to HOME</Link>
+        <Link to="/home">LOGO link to HOME</Link>
         <p>Hello, {userName}</p>
         <button type="submit" onClick={handleOnClick}>
           Log out
