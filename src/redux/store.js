@@ -12,6 +12,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { transactionsSummaryReducer } from './Slices/TransactionsSumSlice';
 
 const registerPersistConfig = {
   key: 'auth',
@@ -21,16 +22,17 @@ const registerPersistConfig = {
 
 
 const store = configureStore({
-  reducer:{
+  reducer: {
     register: persistReducer(registerPersistConfig, registerReducer),
     root: rootReducer,
+    transactoinsSummary: transactionsSummaryReducer,
   },
   middleware: getDefaultMiddleware =>
-  getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 })
 
 export const persistor = persistStore(store);
