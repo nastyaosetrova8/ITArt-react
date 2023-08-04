@@ -63,8 +63,3 @@ const transactionsSlice = createSlice({
 });
 
 export const transactionsReducer = transactionsSlice.reducer;
-export const initialTransactionState = {
-  transactions: [],
-  isLoading: false,
-  error: '',
-};

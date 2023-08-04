@@ -13,6 +13,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { transactionsSummaryReducer } from './Slices/TransactionsSumSlice';
+import { transactionsReducer } from './Slices/TransactionsSlice';
 
 const registerPersistConfig = {
   key: 'auth',
@@ -26,6 +27,7 @@ const store = configureStore({
     register: persistReducer(registerPersistConfig, registerReducer),
     root: rootReducer,
     transactoinsSummary: transactionsSummaryReducer,
+    transactions: transactionsReducer
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
