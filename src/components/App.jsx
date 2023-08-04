@@ -8,7 +8,9 @@ import { getCurrentUserThunk } from 'redux/Thunks/AuthUserThunk';
 
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
-const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
+const RegistrationPage = lazy(() =>
+  import('pages/RegistrationPage/RegistrationPage')
+);
 const SummaryPage = lazy(() => import('pages/SummaryPage/SummaryPage'));
 
 export const App = () => {
@@ -23,7 +25,7 @@ export const App = () => {
     // fallback={<Loader />}
     >
       <Routes>
-        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/register" element={<RegistrationPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<Layout />}>
           <Route path="home" element={<DashboardPage />} />
