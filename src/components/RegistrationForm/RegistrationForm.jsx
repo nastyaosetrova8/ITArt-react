@@ -1,24 +1,23 @@
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { registerUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Stack, TextField } from '@mui/material';
 
 export const RegistrationForm = () => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-  
-  const handlerOnSubmit = (evt) =>{
-    evt.preventDefault();
-   
-    const children = evt.currentTarget.elements
-    const username = children.username.value
-    const email = children.email.value
-    const password = children.password.value
+  const handlerOnSubmit = evt => {
+    //evt.preventDefault();
+    const children = evt.currentTarget.elements;
+    const username = children.username.value;
+    const email = children.email.value;
+    const password = children.password.value;
 
-    const registerUserData = {username, email, password}
+    const registerUserData = { username, email, password };
     console.log(registerUserData);
-    dispatch(registerUserThunk(registerUserData))
+    dispatch(registerUserThunk(registerUserData));
     evt.currentTarget.reset();
   }
 
@@ -35,7 +34,7 @@ export const RegistrationForm = () => {
   >
     {formik => (
       <Stack sx={{ margin: '75px auto', width: '400px' }}>
-        <Form>
+        <Form onSubmit={formik.handleSubmit}>
           <Stack spacing={4}>
           <TextField
               variant="standard"
@@ -56,9 +55,9 @@ export const RegistrationForm = () => {
               type="email"
               onChange={formik.handleChange}
               error={formik.errors.email}
-              helperText={
-                formik.errors.email && 'Please enter a valid email address'
-              }
+              // helperText={
+              //   formik.errors.email && 'Please enter a valid email address'
+              // }
             />
             <TextField
               variant="standard"
@@ -66,10 +65,10 @@ export const RegistrationForm = () => {
               name="password"
               type="password"
               onChange={formik.handleChange}
-              error={formik.errors.password}
-              helperText={
-                formik.errors.password && 'Please enter your valid password (from 6 to 12 symbols)'
-              }
+              // error={formik.errors.password}
+              // helperText={
+              //   formik.errors.password && 'Please enter your valid password (from 6 to 12 symbols)'
+              // }
             />
             <TextField
               variant="standard"
@@ -77,10 +76,10 @@ export const RegistrationForm = () => {
               name="confirmPassword"
               type="password"
               onChange={formik.handleChange}
-              error={formik.errors.confirmPassword}
-              helperText={
-                formik.errors.confirmPassword && 'Please enter your valid password'
-              }
+              // error={formik.errors.confirmPassword}
+              // helperText={
+              //   formik.errors.confirmPassword && 'Please enter your valid password'
+              // }
             />
             <Stack
               direction="row"
@@ -104,6 +103,7 @@ export const RegistrationForm = () => {
               >
                 Register
               </Button>
+              <Link to="/login">Log In</Link>
             </Stack>
           </Stack>
         </Form>

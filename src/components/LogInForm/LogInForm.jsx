@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { logInUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -40,7 +41,7 @@ export const LogInForm = () => {
                 name='email'
                 type='email'
                 onChange={formik.handleChange}
-                error={formik.errors.email}
+                error={formik.errors.email}                
                 helperText={
                   formik.errors.email && 'Please enter a valid email address'
                 }
@@ -78,13 +79,14 @@ export const LogInForm = () => {
               >
                 Register
               </Button>
+              <Link to="/register">Register</Link>
             </Stack>
             </Stack>
           </Form>
         </Stack>
       )}
     </Formik>
-
+//=======================================================
     //======================================
     // <>
     //   <h3>LogInForm</h3>
