@@ -1,19 +1,20 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Navigate, Outlet } from 'react-router-dom';
 
 import StyledHeader from './StyledHeader';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUserName } from 'redux/selectors';
+import { selectIsAuth, selectUserName } from 'redux/selectors';
 import { logOutUserThunk } from 'redux/Thunks/AuthUserThunk';
 
 export const Layout = () => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
+  const isAuth = useSelector(selectIsAuth);
 
   const handleOnClick = () => {
     dispatch(logOutUserThunk());
   };
 
-  return (
+  return isAuth ? (
     <>
       <StyledHeader>
         <Link to="/home">LOGO link to HOME</Link>
@@ -26,5 +27,7 @@ export const Layout = () => {
         <Outlet />
       </main>
     </>
+  ) : (
+    <Navigate to="/register" replace={true} />
   );
 };
