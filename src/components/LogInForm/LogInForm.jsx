@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { logInUserThunk } from 'redux/Thunks/AuthUserThunk';
-
 
 export const LogInForm = () => {
   const dispatch = useDispatch();
@@ -34,6 +34,7 @@ export const LogInForm = () => {
         <label htmlFor="">Password</label>
         <input type="password" name="password" />
         <button type="submit">LOG IN</button>
+        <Link to="/register">Register</Link>
       </form>
     </>
   );
