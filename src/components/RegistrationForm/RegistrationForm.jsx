@@ -8,17 +8,17 @@ import { Button, Stack, TextField } from '@mui/material';
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
 
-  const handlerOnSubmit = evt => {
-    //evt.preventDefault();
-    const children = evt.currentTarget.elements;
-    const username = children.username.value;
-    const email = children.email.value;
-    const password = children.password.value;
-
-    const registerUserData = { username, email, password };
-    console.log(registerUserData);
-    dispatch(registerUserThunk(registerUserData));
-    evt.currentTarget.reset();
+  const handlerOnSubmit = values => {
+    //evt.preventDefault();    
+    
+    const registerUserData = {
+      username: values.username,
+      email: values.email,
+      password: values.password
+    };
+     
+     dispatch(registerUserThunk(registerUserData));
+    //evt.currentTarget.reset();
   }
 
   const validationSchema = Yup.object({
@@ -55,9 +55,9 @@ export const RegistrationForm = () => {
               type="email"
               onChange={formik.handleChange}
               error={formik.errors.email}
-              // helperText={
-              //   formik.errors.email && 'Please enter a valid email address'
-              // }
+              helperText={
+                formik.errors.email && 'Please enter a valid email address'
+              }
             />
             <TextField
               variant="standard"
@@ -65,10 +65,10 @@ export const RegistrationForm = () => {
               name="password"
               type="password"
               onChange={formik.handleChange}
-              // error={formik.errors.password}
-              // helperText={
-              //   formik.errors.password && 'Please enter your valid password (from 6 to 12 symbols)'
-              // }
+              error={formik.errors.password}
+              helperText={
+                formik.errors.password && 'Please enter your valid password (from 6 to 12 symbols)'
+              }
             />
             <TextField
               variant="standard"
@@ -76,10 +76,10 @@ export const RegistrationForm = () => {
               name="confirmPassword"
               type="password"
               onChange={formik.handleChange}
-              // error={formik.errors.confirmPassword}
-              // helperText={
-              //   formik.errors.confirmPassword && 'Please enter your valid password'
-              // }
+              error={formik.errors.confirmPassword}
+              helperText={
+                formik.errors.confirmPassword && 'Please enter your valid password'
+              }
             />
             <Stack
               direction="row"
@@ -109,27 +109,6 @@ export const RegistrationForm = () => {
         </Form>
       </Stack>
     )}
-  </Formik>
-
-  //===============================================
-  // <>
-  // <h3>RegistrationForm</h3>
-  // <form onSubmit={handlerOnSubmit} style={{
-  //   width: '500px',
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   gap: '15px'
-  //   }}>
-  //   <label htmlFor="">Name</label>
-  //   <input type="text" name="username"/>
-  //   <label htmlFor="">Email</label>
-  //   <input type="email" name="email"/>
-  //   <label htmlFor="">Password</label>
-  //   <input type="password" name="password"/>
-  //   <label htmlFor="">Confirm Password</label>
-  //   <input type="password" />
-  //   <button type='submit'>REGISTER</button>
-  // </form>
-  // </>
+  </Formik>  
 );
 }
