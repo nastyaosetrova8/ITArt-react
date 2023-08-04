@@ -1,21 +1,23 @@
 import { useDispatch } from 'react-redux';
 import { registerUserThunk } from 'redux/Thunks/AuthUserThunk';
 
+
 export const RegistrationForm = () => {
 
   const dispatch = useDispatch()
   
-
   const handlerOnSubmit = (evt) =>{
     evt.preventDefault();
-    console.log(123);
+   
     const children = evt.currentTarget.elements
-    const name = children.name.value
+    const username = children.username.value
     const email = children.email.value
     const password = children.password.value
 
-    const registerUserData = {name, email, password}
+    const registerUserData = {username, email, password}
+    console.log(registerUserData);
     dispatch(registerUserThunk(registerUserData))
+    evt.currentTarget.reset();
   }
   
   return (
@@ -28,7 +30,7 @@ export const RegistrationForm = () => {
       gap: '15px'
       }}>
       <label htmlFor="">Name</label>
-      <input type="text" name="name"/>
+      <input type="text" name="username"/>
       <label htmlFor="">Email</label>
       <input type="email" name="email"/>
       <label htmlFor="">Password</label>
