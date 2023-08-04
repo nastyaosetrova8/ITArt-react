@@ -2,13 +2,14 @@ import { Suspense, lazy, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Layout } from './Layout/Layout';
+
 import { useDispatch } from 'react-redux';
 import { getCurrentUserThunk } from 'redux/Thunks/AuthUserThunk';
 
-const Home = lazy(() => import('pages/HomePage/Home'));
-const Login = lazy(() => import('pages/LoginPage/LoginPage'));
-const Register = lazy(() => import('pages/RegistrationPage/RegistrationPage'));
-const Statistic = lazy(() => import('pages/StatisticPage/Statistic'));
+const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
+const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
+const SummaryPage = lazy(() => import('pages/SummaryPage/SummaryPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -16,16 +17,17 @@ export const App = () => {
   useEffect(() => {
     dispatch(getCurrentUserThunk());
   }, [dispatch]);
+
   return (
     <Suspense
     // fallback={<Loader />}
     >
       <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<Layout />}>
-          <Route path="statistic" element={<Statistic />} />
-          <Route path="/" element={<Home />} />
+          <Route path="home" element={<DashboardPage />} />
+          <Route path="statistic" element={<SummaryPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/register" replace />}></Route>
       </Routes>
