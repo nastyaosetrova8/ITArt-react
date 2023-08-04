@@ -10,16 +10,16 @@ export const LogInForm = () => {
 
   const handlerOnSubmit = values => {
     //evt.preventDefault();
-    console.log(values);    
-    const logInUserData = values;    
-     dispatch(logInUserThunk(logInUserData));
+    console.log(values);
+    const logInUserData = values;
+    dispatch(logInUserThunk(logInUserData));
     // evt.currentTarget.reset();
   };
 
-  const validationSchema=Yup.object({
+  const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email address').required('Required'),
     password: Yup.string().required('Required'),
-  })
+  });
 
   return (
     <Formik
@@ -27,60 +27,63 @@ export const LogInForm = () => {
       onSubmit={values => handlerOnSubmit(values)}
       validationSchema={validationSchema}
     >
-      {formik => (      
+      {formik => (
         <Stack sx={{ margin: '75px auto', width: '400px' }}>
           <Form>
-            <Stack spacing={4}>              
+            <Stack spacing={4}>
               <TextField
-                variant='standard'
-                label='Email'
-                name='email'
-                type='email'
-                onChange={formik.handleChange}                
-                error={formik.errors.email}                
-                helperText={
-                  Boolean(formik.errors.email) && 'Please enter a valid email address'
+                variant="standard"
+                label="Email"
+                name="email"
+                type="email"
+                onChange={formik.handleChange}
+                error={Boolean(formik.errors.email)}
+                 helperText={
+                  formik.errors.email &&
+                  'Please enter a valid email address'
                 }
               />
               <TextField
-              variant='standard'
-              label='Password'
-              name='password'
-              type='password'
-              onChange={formik.handleChange}
-              error={formik.errors.password}
-              helperText={
-                formik.errors.password && 'Please enter your valid password'
-              }
+                variant="standard"
+                label="Password"
+                name="password"
+                type="password"
+                onChange={formik.handleChange}
+                error={Boolean(formik.errors.password)}
+                helperText={
+                  formik.errors.password && 'Please enter your valid password'
+                }
               />
               <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              mt={4}
-            >
-              <Button
-                variant="contained"
-                type="submit"
-                size="large"
-                //disabled={!formik.isValid}
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                mt={4}
               >
-                Log in
-              </Button>
-              <Button
-                variant="contained"
-                type="submit"
-                size="large"
-                //disabled={!formik.isValid}
-              >
-                Register
-              </Button>
-              <Link to="/register">Register</Link>
-            </Stack>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  size="large"
+                  //disabled={!formik.isValid}
+                >
+                  Log in
+                </Button>
+
+                <Link to="/register">
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    size="large"
+                    //disabled={!formik.isValid}
+                  >
+                    Register
+                  </Button>
+                </Link>
+              </Stack>
             </Stack>
           </Form>
         </Stack>
       )}
-    </Formik>  
+    </Formik>
   );
 };
