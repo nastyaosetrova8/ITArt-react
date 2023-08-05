@@ -1,7 +1,6 @@
-
+import { Container,  LoginPageStyle } from './LoginPageStyled';
 import { Stack } from '@mui/material';
 import { LogInForm } from 'components/LogInForm/LogInForm';
-import { Container, LoginContainer, LoginPageStyle } from './LoginPageStyled';
 //import Logo from '../../assets/images/'
 
 function LoginPage() {
