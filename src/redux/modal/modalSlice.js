@@ -20,24 +20,24 @@ const initialState = {
   // export const ModalAddOpenReduser = ModalOpenSlice.reducer;
   // export const { toggleOpenModal } = ModalOpenSlice.actions;
 
-    export const ModalOpenSlice = createSlice({
+    export const modalOpenSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {
-      openAddTransOpen(state) {
+      openAddTrans: state => {
         state.isAddTransOpen = true;
       },
-      closeAddTransOpen(state) {
+      closeAddTrans(state) {
         state.isAddTransOpen = false;
       },
-      openEditTransOpen(state) {
+      openEditTrans(state) {
         state.isEditTransOpen = true;
       },
-      closeEditTransOpen(state) {
+      closeEditTrans(state) {
         state.isEditTransOpen = false;
       },
       }
   });
   
-  export const modalReduser = ModalOpenSlice.reducer;
-  export const { openAddTransOpen, closeAddTransOpen, openEditTransOpen, closeEditTransOpen } = ModalOpenSlice.actions;
+  export const modalReducer = modalOpenSlice.reducer;
+  export const { openAddTrans, closeAddTrans, openEditTrans, closeEditTrans } = modalOpenSlice.actions;

@@ -13,7 +13,7 @@ export const StyledOverlay = styled.div`
   background-color: rgba(34, 13, 91, 0.23);
   backdrop-filter: blur(3.5px);
   overscroll-behavior: contain;
-  /* z-index: 1200; */
+  /* z-index: 100; */
 `;
 
 export const StyledModal = styled.div`
