@@ -1,22 +1,19 @@
 import styled from 'styled-components';
+import RegisterPicture from '../../assets/images/registration_desktop@1x.jpg';
 import { Card } from '@mui/material';
-import loginPicture from '../../assets/images/login_desktop@1x.jpg';
-import loginPicture2 from '../../assets/images/login_desktop@2x.jpg';
 
-export const LoginPageStyle = styled.div`
+
+export const RegistrationPageStyle = styled.div`
   width: 100%;
   height: 100vh;
-  background-image: url(${loginPicture});
+  background-image: url(${RegisterPicture});
   //background-color: rgba(255, 255, 255, 0.3);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 0px;
-  @media (max-width: 780px) {
-    width: 600px;
-    background-image: url(${loginPicture2});
-  }
 `;
+
 export const Container = styled(Card)`
   margin: 0 auto;
   width: 533px;
@@ -38,10 +35,4 @@ export const Container = styled(Card)`
     font-weight: 400;
     line-height: normal;
   }
-
-  @media (max-width: 780px) {
-    width: 533px;
-  }
-  @media (max-width: 370px) {
-  }
-`;
+  `
