@@ -10,7 +10,7 @@ export const LogInForm = () => {
 
   const handlerOnSubmit = values => {
     //evt.preventDefault();
-    console.log(values);
+    // console.log(values);
     const logInUserData = values;
     dispatch(logInUserThunk(logInUserData));
     // evt.currentTarget.reset();
@@ -38,9 +38,8 @@ export const LogInForm = () => {
                 type="email"
                 onChange={formik.handleChange}
                 error={Boolean(formik.errors.email)}
-                 helperText={
-                  formik.errors.email &&
-                  'Please enter a valid email address'
+                helperText={
+                  formik.errors.email && 'Please enter a valid email address'
                 }
               />
               <TextField
