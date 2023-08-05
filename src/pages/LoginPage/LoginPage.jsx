@@ -1,3 +1,4 @@
+
 import { Stack } from '@mui/material';
 import { LogInForm } from 'components/LogInForm/LogInForm';
 import { Container, LoginContainer, LoginPageStyle } from './LoginPageStyled';
@@ -14,7 +15,6 @@ function LoginPage() {
           <LogInForm />
         </Container>
       </LoginPageStyle>
-    
   );
 }
 

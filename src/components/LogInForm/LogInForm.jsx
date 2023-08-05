@@ -19,7 +19,7 @@ export const LogInForm = () => {
 
   const handlerOnSubmit = values => {
     //evt.preventDefault();
-    console.log(values);
+    // console.log(values);
     const logInUserData = values;
     dispatch(logInUserThunk(logInUserData));
     // evt.currentTarget.reset();
@@ -71,6 +71,7 @@ export const LogInForm = () => {
                 <HttpsIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
 
               <TextField
+
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
