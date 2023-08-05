@@ -30,6 +30,11 @@ export const initialSummaryState = {
     month: 0,
 };
 
+export const initialModalState = {
+  transactions: [],
+  categories: [],
+//   isShowModal: false,
+};
 
 // user
 // :
