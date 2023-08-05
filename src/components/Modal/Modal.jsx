@@ -26,7 +26,7 @@ import { ModalAddTransaction } from 'components/ModalAddTransactions/ModalAddTra
 
 const modalRoot = document.querySelector('#modal-root');
 
-export default function Modal({ children }) {
+export default function Modal() {
   // const modal = useSelector(selectShowModal);
 
   const dispatch = useDispatch();
