@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { registerUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, InputAdornment, Stack, TextField } from '@mui/material';
+import { Button, InputAdornment, Stack, TextField } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
