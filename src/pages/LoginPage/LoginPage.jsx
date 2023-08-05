@@ -1,15 +1,18 @@
-import { Container, LoginPageStyle } from './LoginPageStyled';
-import { Stack } from '@mui/material';
+import { Container, LoginPageStyle, LogoStyle } from './LoginPageStyled';
+//import { Stack } from '@mui/material';
 import { LogInForm } from 'components/LogInForm/LogInForm';
-//import Logo from '../../assets/images/'
+import Logo from '../../assets/images/logo.svg';
 
 function LoginPage() {
   return (
     <LoginPageStyle>
       <Container sx={{ backgroundColor: 'rgba(255, 255, 255, 0.25)' }}>
-        <Stack>
+        {/* <Stack> */}
+        <LogoStyle>
+          <img src={Logo} alt="Logo Wallet" width="36px" height="36px" />
           <h3>MoneyGuard</h3>
-        </Stack>
+        </LogoStyle>
+        {/* </Stack> */}
         <LogInForm />
       </Container>
     </LoginPageStyle>
