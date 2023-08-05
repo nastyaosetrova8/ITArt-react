@@ -1,14 +1,13 @@
-import { NavLink } from 'react-router-dom';
-import StyledSideBar from './StyledSideBar';
 import Balance from 'components/Balance/Balance';
+import { StyledLink, StyledSideBar } from './StyledSideBar';
 import Currency from 'components/Currency/Currency';
 
 function SideBar() {
   return (
     <StyledSideBar>
       <nav>
-        <NavLink to="/home">HOME</NavLink>
-        <NavLink to="/statistic">Statistic</NavLink>
+        <StyledLink to="/home">Home</StyledLink>
+        <StyledLink to="/statistic">Statistic</StyledLink>
       </nav>
       <Balance />
       <Currency />

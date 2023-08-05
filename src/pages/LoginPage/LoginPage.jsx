@@ -1,11 +1,10 @@
-import { LogInForm } from "components/LogInForm/LogInForm";
+import { LogInForm } from 'components/LogInForm/LogInForm';
+import { useSelector } from 'react-redux';
+import { selectIsLoading } from 'redux/selectors';
 
 function LoginPage() {
-  return (
-    <>
-      <LogInForm/>      
-    </>
-  );
+  const isLoading = useSelector(selectIsLoading);
+  return <>{!isLoading && <LogInForm />}</>;
 }
 
 export default LoginPage;
