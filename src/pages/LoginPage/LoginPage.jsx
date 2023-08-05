@@ -7,7 +7,7 @@ function LoginPage() {
   return (
     
       <LoginPageStyle>
-        <Container>
+        <Container sx={{backgroundColor: 'rgba(255, 255, 255, 0.25)'}}>
           <Stack>
             <h3>MoneyGuard</h3>
           </Stack>
