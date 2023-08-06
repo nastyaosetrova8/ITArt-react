@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+// import { useSelector } from 'react-redux';
 import { addTransactionThunk, editTransactionThunk, fetchTransactionsThunk, getTransCategoriesThunk } from 'redux/Thunks/TransactionsThunk';
 // import { addTransactionThunk, editTransactionThunk } from './modalThunks';
 // import { getTransCategoriesThunk, getTransactionsThunk } from './modalTransThunks';
 import { initialModalState } from 'redux/initialState';
+// import { selectBalance } from 'redux/selectors';
 
 // import { handlePending, handleRejected } from './rootSlice';
 
@@ -44,7 +46,7 @@ const transactionsSlice = createSlice({
         // console.log(payload)
         // console.log(state)
         state.categories = payload;
-        state.transactions = [];
+        // state.transactions = [];
       })
 
       // .addCase(getTransCategoriesThunk.fulfilled, handlerCategories)
@@ -53,7 +55,8 @@ const transactionsSlice = createSlice({
       // -------- Add transactions --------
       .addCase(addTransactionThunk.fulfilled, (state, { payload }) => {
         // state.isLoading = false;
-        state.transactions.items.push(payload);
+        state.transactions.push(payload);
+
       })
 
       // -------- Edit transactions --------

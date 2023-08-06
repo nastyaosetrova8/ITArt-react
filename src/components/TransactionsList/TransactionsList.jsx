@@ -9,10 +9,8 @@ const dispatch = useDispatch();
 const tokenTrans = useSelector(selectToken);
 
 const trans = useSelector(selectTransactions);
-console.log(trans)
 
    const handleOnClick = (evt) => {
-    console.log(evt)
     // const id = evt.CurrentTarget
 dispatch(editTransactionThunk())
    }
