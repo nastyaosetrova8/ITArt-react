@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import RegisterPicture from '../../assets/images/registration_desktop@1x.jpg';
 import { Card } from '@mui/material';
 
-
 export const RegistrationPageStyle = styled.div`
   width: 100%;
   height: 100vh;
@@ -25,14 +24,14 @@ export const Container = styled(Card)`
   left: 50%;
   transform: translate(-50%, -50%);
   //background-color: rgba(255, 255, 255, 0.25);
-  
+
   h3 {
     margin: 0 auto;
     //color: var(--white, #fbfbfb);
-    font-family: Poppins;
+    /* font-family: Poppins; */
     font-size: 28px;
-    font-style: normal;
+    /* font-style: normal; */
     font-weight: 400;
     line-height: normal;
   }
-  `
+`;

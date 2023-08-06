@@ -28,13 +28,13 @@ export const Container = styled(Card)`
   left: 50%;
   transform: translate(-50%, -50%);
   //background-color: rgba(255, 255, 255, 0.25);
-  
+
   h3 {
     margin: 0 auto;
     //color: var(--white, #fbfbfb);
-    font-family: Poppins;
+    /* font-family: Poppins; */
     font-size: 28px;
-    font-style: normal;
+    /* font-style: normal; */
     font-weight: 400;
     line-height: normal;
   }
