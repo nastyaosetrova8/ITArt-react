@@ -1,3 +1,4 @@
+//import Modal from 'components/Modal/Modal';
 import Modal from 'components/Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAddTransOpen } from 'redux/modal/modalSelectors';

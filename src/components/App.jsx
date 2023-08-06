@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getCurrentUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { PrivateRoute } from 'redux/Guard/PrivateRoute';
 import { PublicRoute } from 'redux/Guard/PublicRoute';
+import Loader from './Loader/Loader';
 
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -23,9 +24,7 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <Suspense
-    // fallback={<Loader />}
-    >
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route
           path="/register"
