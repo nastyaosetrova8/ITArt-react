@@ -8,20 +8,26 @@ import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
 import { ButtonsBox } from 'pages/RegistrationPage/RegistrationPageStyled';
+//import { ButtonsBox } from 'pages/RegistrationPage/RegistrationPageStyled';
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
 
   const handlerOnSubmit = values => {
-    //evt.preventDefault();
-
-    const registerUserData = {
-      username: values.username,
-      email: values.email,
-      password: values.password,
-    };
-
-    dispatch(registerUserThunk(registerUserData));
+    if (values.password === values.confirmPassword) {
+      console.log('yes');
+      const registerUserData = {
+        username: values.username,
+        email: values.email,
+        password: values.password,
+      };
+      console.log(registerUserData);
+  
+      dispatch(registerUserThunk(registerUserData))
+      
+    }else{
+      console.log("not valid passsword");
+    }
     //evt.currentTarget.reset();
   };
 
@@ -40,10 +46,6 @@ export const RegistrationForm = () => {
         <Stack sx={{ margin: '75px auto', width: '400px' }}>
           <Form onSubmit={formik.handleSubmit}>
             <Stack spacing={4}>
-              {/* <Box
-                sx={{ display: 'flex', alignItems: 'flex-end', width: '100%' }}
-              >
-                <PersonIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
               <TextField
                 InputProps={{
                   startAdornment: (
@@ -61,11 +63,6 @@ export const RegistrationForm = () => {
                 error={Boolean(formik.errors.username)}
                 helperText={formik.errors.username && 'Please enter your name'}
               />
-              {/* </Box> */}
-              {/* <Box
-                sx={{ display: 'flex', alignItems: 'flex-end', width: '100%' }}
-              >
-                <EmailIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
               <TextField
                 InputProps={{
                   startAdornment: (
@@ -85,11 +82,7 @@ export const RegistrationForm = () => {
                   formik.errors.email && 'Please enter a valid email address'
                 }
               />
-              {/* </Box> */}
-              {/* <Box
-                sx={{ display: 'flex', alignItems: 'flex-end', width: '100%' }}
-              >
-                <HttpsIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
+
               <TextField
                 InputProps={{
                   startAdornment: (
@@ -110,11 +103,7 @@ export const RegistrationForm = () => {
                   'Please enter your valid password (from 6 to 12 symbols)'
                 }
               />
-              {/* </Box> */}
-              {/* <Box
-                sx={{ display: 'flex', alignItems: 'flex-end', width: '100%' }}
-              >
-                <HttpsIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
+
               <TextField
                 InputProps={{
                   startAdornment: (
@@ -135,12 +124,15 @@ export const RegistrationForm = () => {
                   'Please enter your valid password'
                 }
               />
-              {/* </Box> */}
-              <ButtonsBox style={{margin:'52px auto 0'}}>
+
+              <ButtonsBox style={{ margin: '52px auto 0' }}>
                 <Button
                   variant="contained"
                   type="submit"
-                  sx={{backgroundImage:'linear-gradient(120deg, rgba(255, 199, 39, 1), rgba(158, 64, 186, 1) 80%, rgba(112, 0, 256))'}}                  
+                  sx={{
+                    backgroundImage:
+                      'linear-gradient(120deg, rgba(255, 199, 39, 1), rgba(158, 64, 186, 1) 80%, rgba(112, 0, 256))',
+                  }}
                 >
                   Register
                 </Button>
@@ -149,12 +141,12 @@ export const RegistrationForm = () => {
                   <Button
                     variant="contained"
                     type="submit"
-                    sx={{backgroundColor: 'rgba(252, 252, 252, 1)'}}               
+                    sx={{ backgroundColor: 'rgba(252, 252, 252, 1)' }}
                   >
                     Log in
                   </Button>
                 </Link>
-                </ButtonsBox>
+              </ButtonsBox>
             </Stack>
           </Form>
         </Stack>
