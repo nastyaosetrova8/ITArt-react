@@ -13,6 +13,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { transactionsSummaryReducer } from './Slices/TransactionsSumSlice';
+import { modalReducer } from './modal/modalSlice';
 import { transactionsReducer } from './Slices/TransactionsSlice';
 
 const registerPersistConfig = {
@@ -27,7 +28,8 @@ const store = configureStore({
     register: persistReducer(registerPersistConfig, registerReducer),
     root: rootReducer,
     transactoinsSummary: transactionsSummaryReducer,
-    transactions: transactionsReducer
+    modal: modalReducer,
+    transactions: transactionsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

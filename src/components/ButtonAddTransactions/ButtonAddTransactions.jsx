@@ -1,17 +1,28 @@
-import { useState } from "react";
+//import Modal from 'components/Modal/Modal';
+import Modal from 'components/Modal/Modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsAddTransOpen } from 'redux/modal/modalSelectors';
+import { openAddTrans } from 'redux/modal/modalSlice';
+
 
 export const ButtonAddTransactions = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleClick = () => {
-    console.log('axaxax');
-    setModalOpen(true);
+  // const tokenTrans = useSelector(selectToken);
+  const isAddTransOpen = useSelector(selectIsAddTransOpen);
+  const dispatch = useDispatch();
+
+  
+  // ==============OPEN MODAL
+  const handleOpenModal = () => {
+    dispatch(openAddTrans());
   };
+
+
   return (
-    <div>
-      <button type="button" onClick={handleClick}>
-        Add transaction
+    <>
+      <button type="button" onClick={handleOpenModal}>
+        Open Modal
       </button>
-      {modalOpen && '</>'}
-    </div>
+      {isAddTransOpen && <Modal />}
+    </>
   );
 };

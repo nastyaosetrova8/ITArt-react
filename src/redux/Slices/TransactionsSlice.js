@@ -1,65 +1,70 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  addTransactionThunk,
-  deleteTransactionThunk,
-  fetchTransactionsThunk,
-  updateTransactionThunk,
-} from 'redux/Thunks/TransactionsThunk';
-import { initialTransactionState } from 'redux/initialState';
+import { addTransactionThunk, editTransactionThunk, fetchTransactionsThunk, getTransCategoriesThunk } from 'redux/Thunks/TransactionsThunk';
+// import { addTransactionThunk, editTransactionThunk } from './modalThunks';
+// import { getTransCategoriesThunk, getTransactionsThunk } from './modalTransThunks';
+import { initialModalState } from 'redux/initialState';
 
-const handlePending = state => {
-  state.isLoading = true;
-  state.error = '';
-};
-const handleRejected = (state, { payload }) => {
-  state.isLoading = false;
-  state.error = payload;
-};
-const fulfilledFetch = (state, { payload }) => {
-  state.isLoading = false;
-  state.transactions = payload;
-};
-const fulfilledAdd = (state, { payload }) => {
-  state.isLoading = false;
-  state.transactions.push(payload);
-};
-const fulfilledDelete = (state, { payload }) => {
-  state.isLoading = false;
-  state.transactions = state.contacts.transactions.filter(
-    transaction => transaction.id !== payload
-  );
-};
-const fulfilledUpdate = (state, { payload }) => {
-  state.isLoading = false;
-  state.transactions = state.transactions.map(transaction => {
-    if (transaction.id === payload.id) {
-      return payload;
-    }
-    return transaction;
-  });
-};
+// import { handlePending, handleRejected } from './rootSlice';
+
+
+// const initialState = {
+//   transactions: [],
+//   categories: [],
+// };
+
+// function handlePending(state) {
+//   state.isLoading = true;
+//   state.error = null;
+// }
+
+// function handleRejected(state, { payload }) {
+//   state.isLoading = false;
+//   state.error = payload;
+// }
+
+// const handlerCategories = (state, {payload}) => {
+//   console.log(payload)
+//   state.categories = payload;}
+
 const transactionsSlice = createSlice({
   name: 'transactions',
-  initialState: initialTransactionState,
-
-  extraReducers: builder => {
+  initialState: initialModalState,
+  extraReducers: builder =>
     builder
-      .addCase(fetchTransactionsThunk.pending, handlePending)
-      .addCase(fetchTransactionsThunk.fulfilled, fulfilledFetch)
-      .addCase(fetchTransactionsThunk.rejected, handleRejected)
-      // =============ADD Transaction================
-      .addCase(addTransactionThunk.pending, handlePending)
-      .addCase(addTransactionThunk.fulfilled, fulfilledAdd)
-      .addCase(addTransactionThunk.rejected, handleRejected)
-      // =============DELETE Transaction================
-      .addCase(deleteTransactionThunk.pending, handlePending)
-      .addCase(deleteTransactionThunk.fulfilled, fulfilledDelete)
-      .addCase(deleteTransactionThunk.rejected, handleRejected)
-      //===============Update Transaction============
-      .addCase(updateTransactionThunk.pending, handlePending)
-      .addCase(updateTransactionThunk.fulfilled, fulfilledUpdate)
-      .addCase(updateTransactionThunk.rejected, handleRejected);
-  },
+
+      // -------- Get transactions -------- 
+      .addCase(fetchTransactionsThunk.fulfilled, (state, { payload }) => {
+        // state.isLoading = false;
+        state.transactions = payload;
+      })
+
+      // -------- Get categories --------
+      .addCase(getTransCategoriesThunk.fulfilled, (state,  {payload} ) => {
+        // state.isLoading = false;
+        // console.log(payload)
+        // console.log(state)
+        state.categories = payload;
+        state.transactions = [];
+      })
+
+      // .addCase(getTransCategoriesThunk.fulfilled, handlerCategories)
+    
+
+      // -------- Add transactions --------
+      .addCase(addTransactionThunk.fulfilled, (state, { payload }) => {
+        // state.isLoading = false;
+        state.transactions.items.push(payload);
+      })
+
+      // -------- Edit transactions --------
+      .addCase(editTransactionThunk.fulfilled, (state, { payload }) => {
+        // state.isLoading = false;
+        console.log(payload)
+        const index = state.transactions.findIndex(item => item.id === payload);
+        state.transactions.splice(index, 1);
+      })
+      // .addMatcher(action => action.type.endsWith('/pending'), handlePending)
+      // .addMatcher(action => action.type.endsWith('/rejected'), handleRejected),
 });
 
 export const transactionsReducer = transactionsSlice.reducer;

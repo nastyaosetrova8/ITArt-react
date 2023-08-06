@@ -15,12 +15,6 @@ export const initialRootState = {
   error: '',
 };
 
-export const initialTransactionState = {
-  transactions: [],
-  isLoading: false,
-  error: '',
-};
-
 export const initialSummaryState = {
   categoriesSummary: [
     {
@@ -34,6 +28,11 @@ export const initialSummaryState = {
   periodTotal: 0,
   year: 0,
   month: 0,
+};
+export const initialModalState = {
+  transactions: [],
+  categories: [],
+  //   isShowModal: false,
 };
 
 // user
