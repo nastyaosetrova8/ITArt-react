@@ -27,7 +27,7 @@ export const ModalAddTransaction = () => {
 
   const income = allCategories.filter(category => category.type === 'INCOME');
   const expense = allCategories.filter(category => category.type === 'EXPENSE');
-  const options = expense.map(category => ({
+  const options =  expense.map(category => ({
     id: category.id,
     value: category.name,
     label: category.name,
@@ -48,19 +48,21 @@ export const ModalAddTransaction = () => {
     categoryId: Yup.string().required('Required'),
   });
 
-  const handleSubmit = (value, { resetForm }) => {
+  const handleSubmit = (values) => {
+    console.log(values); 
     const data = {
-      ...value,
+      ...values,
       type: typeSelect ? 'INCOME' : 'EXPENSE',
-      amount: `${!typeSelect ? Number(-value.amount) : Number(value.amount)}`,
+      amount: `${!typeSelect ? Number(-values.amount) : Number(values.amount)}`,
       categoryId: `${
         !typeSelect
           ? categoryItem?.id ?? '27eb4b75-9a42-4991-a802-4aefe21ac3ce'
           : income[0].id
       }`,
     };
-    dispatch(addTransactionThunk(data));
-    resetForm();
+   console.log(data);
+    dispatch(addTransactionThunk(values));
+    // resetForm();
   };
 
   // ================GET CATEGORIES
@@ -92,35 +94,7 @@ export const ModalAddTransaction = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
-      // initialValues={{
-      //   type: typeSelect ? 'INCOME' : 'EXPENSE',
-      //   categoryId: '',
-      //   amount: '',
-      //   transactionDate: new Date().toISOString().slice(0, 10),
-      //   comment: '',
-      // }}
-      // validationSchema={Yup.object().shape({
-      //   amount: Yup.number()
-      //     .typeError('Please enter a valid number')
-      //     .required('Required'),
-      //   categoryId: Yup.string().required('Required'),
-      // })}
-      // handleSubmit={(value, { resetForm }) => {
-      //   const data = {
-      //     ...value,
-      //     type: typeSelect ? 'INCOME' : 'EXPENSE',
-      //     amount: `${
-      //       !typeSelect ? Number(-value.amount) : Number(value.amount)
-      //     }`,
-      //     categoryId: `${
-      //       !typeSelect
-      //         ? categoryItem?.id ?? '27eb4b75-9a42-4991-a802-4aefe21ac3ce'
-      //         : income[0].id
-      //     }`,
-      //   };
-      //   dispatch(addTransactionThunk(data));
-      //   resetForm();
-      // }}
+    
     >
       {formik => (
         <div>
