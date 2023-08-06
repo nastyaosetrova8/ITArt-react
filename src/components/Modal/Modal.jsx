@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { StyledModal, StyledOverlay } from './Modal.styled';
+import { StyledCloseBtn, StyledModal, StyledOverlay } from './Modal.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineClose } from 'react-icons/ai';
 import { selectIsAddTransOpen } from 'redux/modal/modalSelectors';
@@ -26,7 +26,7 @@ import { ModalAddTransaction } from 'components/ModalAddTransactions/ModalAddTra
 
 const modalRoot = document.querySelector('#modal-root');
 
-export default function Modal({ children }) {
+export default function Modal() {
   // const modal = useSelector(selectShowModal);
 
   const dispatch = useDispatch();
@@ -64,11 +64,11 @@ export default function Modal({ children }) {
   return createPortal (
      <StyledOverlay onClick={handleClickOverlay}>
       <StyledModal>
-      {isAddTransOpen && <span onClick={handleClickBtnClose}>
-          <AiOutlineClose />
-        </span>}
+      {isAddTransOpen && <StyledCloseBtn type="button" onClick={handleClickBtnClose}>
+          <AiOutlineClose size={16} fill="white"/>
+        </StyledCloseBtn>}
         {/* {children} */}
-        <ModalAddTransaction/>
+        <ModalAddTransaction />
 
 
       </StyledModal>
