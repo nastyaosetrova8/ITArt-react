@@ -22,11 +22,10 @@ export const RegistrationForm = () => {
         password: values.password,
       };
       console.log(registerUserData);
-  
-      dispatch(registerUserThunk(registerUserData))
-      
-    }else{
-      console.log("not valid passsword");
+
+      dispatch(registerUserThunk(registerUserData));
+    } else {
+      console.log('not valid passsword');
     }
     //evt.currentTarget.reset();
   };

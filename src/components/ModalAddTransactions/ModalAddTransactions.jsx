@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -20,25 +19,21 @@ export const ModalAddTransaction = () => {
   const [typeSelect, setTypeSelect] = useState(false);
   const [categoryItem, setCategoryItem] = useState('');
 
-
   useEffect(() => {
     dispatch(getTransCategoriesThunk(tokenTrans));
   }, [dispatch, tokenTrans]);
 
   // const income = allCategories?.find(category => category.type === 'INCOME');
   // const expense = allCategories?.filter(category => category.type !== 'INCOME');
- 
-  const options = allCategories.map(category => (
-    {
+
+  const options = allCategories.map(category => ({
     // id: category.id,
     // value: category.type,
     // label: category.name,
-  
+
     value: category.id,
     label: category.name,
-  }))
-
-
+  }));
 
   // console.log(options)
   const initialValues = {
@@ -59,12 +54,11 @@ export const ModalAddTransaction = () => {
   const handleSubmit = values => {
     //evt.preventDefault();
     console.log(values);
-    console.log(123)
+    console.log(123);
     // const logInUserData = values;
     dispatch(addTransactionThunk(values));
     // evt.currentTarget.reset();
   };
-
 
   // const handleSubmit = (value) => {
   //   const data = {
@@ -82,33 +76,28 @@ export const ModalAddTransaction = () => {
   // };
 
   // ================GET CATEGORIES
-  
-  
-  const handleGetCatigories= () => {
+
+  const handleGetCatigories = () => {
     dispatch(getTransCategoriesThunk(tokenTrans));
   };
 
   // ========== ADD TRANS
   const handleAddTrans = () => {
-
     const data = {
-      transactionDate: "2023-01-23",
-    type: "INCOME",
-    categoryId: "063f1132-ba5d-42b4-951d-44011ca46262",
-    comment: "string",
-    amount: 25}
-    
-    dispatch(addTransactionThunk(data));
+      transactionDate: '2023-01-23',
+      type: 'INCOME',
+      categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
+      comment: 'string',
+      amount: 25,
+    };
 
+    dispatch(addTransactionThunk(data));
   };
 
   // =================CLOSE MODAL
   const handleClickBtnClose = () => {
     dispatch(closeAddTrans());
   };
-
-
-
 
   return (
     <Formik
@@ -145,7 +134,6 @@ export const ModalAddTransaction = () => {
       //   resetForm();
       // }}
     >
-
       {formik => (
         <div>
           <h2>Add transaction</h2>
@@ -182,14 +170,13 @@ export const ModalAddTransaction = () => {
                 options={options}
                 value={formik.values.value}
                 name={formik.values.label}
-                type='text'
+                type="text"
                 onChange={({ value }) =>
                   formik.setFieldValue('categoryId', value)
                 }
                 // onBlur={formik.handleBlur}
                 // onClick = {handleGetCatigories}
               />
-              
             )}
             <div>
               <input
@@ -227,7 +214,7 @@ SVG
               placeholder="Comment"
               onChange={formik.handleChange}
             />
-            <button type="submit" >Add</button>
+            <button type="submit">Add</button>
           </form>
           <button type="button" onClick={handleClickBtnClose}>
             Cancel
@@ -239,7 +226,3 @@ SVG
 };
 
 // onClick={handleAddTrans}
-
-
-
-
