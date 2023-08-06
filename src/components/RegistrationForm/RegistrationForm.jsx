@@ -7,6 +7,7 @@ import { Button, InputAdornment, Stack, TextField } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
+import { ButtonsBox } from 'pages/RegistrationPage/RegistrationPageStyled';
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -135,31 +136,25 @@ export const RegistrationForm = () => {
                 }
               />
               {/* </Box> */}
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                mt={4}
-              >
+              <ButtonsBox style={{margin:'52px auto 0'}}>
                 <Button
                   variant="contained"
                   type="submit"
-                  size="large"
-                  //disabled={!formik.isValid}
+                  sx={{backgroundImage:'linear-gradient(120deg, rgba(255, 199, 39, 1), rgba(158, 64, 186, 1) 80%, rgba(112, 0, 256))'}}                  
                 >
                   Register
                 </Button>
+
                 <Link to="/login">
                   <Button
                     variant="contained"
                     type="submit"
-                    size="large"
-                    //disabled={!formik.isValid}
+                    sx={{backgroundColor: 'rgba(252, 252, 252, 1)'}}               
                   >
                     Log in
                   </Button>
                 </Link>
-              </Stack>
+                </ButtonsBox>
             </Stack>
           </Form>
         </Stack>
