@@ -3,16 +3,10 @@ import { Link } from 'react-router-dom';
 import { logInUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import {
-  // Box,
-  Button,
-  // IconButton,
-  InputAdornment,
-  Stack,
-  TextField,
-} from '@mui/material';
+import { Button, InputAdornment, Stack, TextField } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
+import { ButtonsBox } from 'pages/LoginPage/LoginPageStyled';
 
 export const LogInForm = () => {
   const dispatch = useDispatch();
@@ -89,23 +83,28 @@ export const LogInForm = () => {
                 }
               />
               {/* </Box> */}
-              <Stack
-                direction="column"
-                spacing={4}
-                justifyContent="space-between"
-                alignItems="center"
-                mt={4}
-              >
-                <Button variant="contained" type="submit" size="large">
+              <ButtonsBox style={{ margin: '52px auto 0' }}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  sx={{
+                    backgroundImage:
+                      'linear-gradient(120deg, rgba(255, 199, 39, 1), rgba(158, 64, 186, 1) 80%, rgba(112, 0, 256))',
+                  }}
+                >
                   Log in
                 </Button>
 
                 <Link to="/register">
-                  <Button variant="contained" type="submit" size="large">
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    sx={{ backgroundColor: 'rgba(252, 252, 252, 1)' }}
+                  >
                     Register
                   </Button>
                 </Link>
-              </Stack>
+              </ButtonsBox>
             </Stack>
           </Form>
         </Stack>

@@ -25,10 +25,9 @@ export const TransactionsList = () => {
   const transactions = useSelector(selectTransactions);
   const nameCategories = useSelector(selectCategories);
 
-  console.log('nameCategories: ', nameCategories);
+  const trans = useSelector(selectTransactions);
 
   const handleOnClick = evt => {
-    console.log(evt);
     // const id = evt.CurrentTarget
     dispatch(editTransactionThunk());
   };

@@ -1,13 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
+// import { useSelector } from 'react-redux';
 import {
   addTransactionThunk,
   editTransactionThunk,
-  getTransactionsThunk,
+  fetchTransactionsThunk,
   getTransCategoriesThunk,
+  getTransactionsThunk,
 } from 'redux/Thunks/TransactionsThunk';
 // import { addTransactionThunk, editTransactionThunk } from './modalThunks';
 // import { getTransCategoriesThunk, getTransactionsThunk } from './modalTransThunks';
 import { initialModalState } from 'redux/initialState';
+// import { selectBalance } from 'redux/selectors';
 
 // import { handlePending, handleRejected } from './rootSlice';
 

@@ -8,57 +8,75 @@ import { selectCategories, selectToken } from 'redux/selectors';
 import { AiOutlineClose } from 'react-icons/ai';
 import { closeAddTrans } from 'redux/modal/modalSlice';
 import { Formik } from 'formik';
-import { Select } from '@mui/material';
-import * as Yup from 'yup';
+import Select from 'react-select';
+// import { Select } from '@mui/material';
+// import * as Yup from 'yup';
 
 export const ModalAddTransaction = () => {
   const dispatch = useDispatch();
   const tokenTrans = useSelector(selectToken);
   const allCategories = useSelector(selectCategories);
-  const [typeSelect] = useState(false);
-  // setTypeSelect
-  const [categoryItem] = useState('');
-  // setCategoryItem
+  const [typeSelect, setTypeSelect] = useState(false);
+  const [categoryItem, setCategoryItem] = useState('');
 
-  const income = allCategories.filter(category => category.type === 'INCOME');
-  const expense = allCategories.filter(category => category.type === 'EXPENSE');
-  const options = expense.map(category => ({
-    id: category.id,
-    value: category.name,
+  useEffect(() => {
+    dispatch(getTransCategoriesThunk(tokenTrans));
+  }, [dispatch, tokenTrans]);
+
+  // const income = allCategories?.find(category => category.type === 'INCOME');
+  // const expense = allCategories?.filter(category => category.type !== 'INCOME');
+
+  const options = allCategories.map(category => ({
+    // id: category.id,
+    // value: category.type,
+    // label: category.name,
+
+    value: category.id,
     label: category.name,
   }));
 
+  // console.log(options)
   const initialValues = {
     type: typeSelect ? 'INCOME' : 'EXPENSE',
-    categoryId: '',
+    categoryId: typeSelect ? '063f1132-ba5d-42b4-951d-44011ca46262' : '',
     amount: '',
     transactionDate: new Date().toISOString().slice(0, 10),
     comment: '',
   };
 
-  const validationSchema = Yup.object().shape({
-    amount: Yup.number()
-      .typeError('Please enter a valid number')
-      .required('Required'),
-    categoryId: Yup.string().required('Required'),
-  });
+  // const validationSchema = Yup.object().shape({
+  //   amount: Yup.number()
+  //     .typeError('Please enter a valid number')
+  //     .required('Required'),
+  //   categoryId: Yup.string().required('Required'),
+  // });
 
-  const handleSubmit = (value, { resetForm }) => {
-    const data = {
-      ...value,
-      type: typeSelect ? 'INCOME' : 'EXPENSE',
-      amount: `${!typeSelect ? Number(-value.amount) : Number(value.amount)}`,
-      categoryId: `${
-        !typeSelect
-          ? categoryItem?.id ?? '27eb4b75-9a42-4991-a802-4aefe21ac3ce'
-          : income[0].id
-      }`,
-    };
-    dispatch(addTransactionThunk(data));
-    resetForm();
+  const handleSubmit = values => {
+    //evt.preventDefault();
+    console.log(values);
+    console.log(123);
+    // const logInUserData = values;
+    dispatch(addTransactionThunk(values));
+    // evt.currentTarget.reset();
   };
 
+  // const handleSubmit = (value) => {
+  //   const data = {
+  //     ...value,
+  //     type: typeSelect ? 'INCOME' : 'EXPENSE',
+  //     amount: `${!typeSelect ? Number(value.amount) * -1 : Number(value.amount)}`,
+  //     categoryId: `${
+  //       !typeSelect
+  //         ? categoryItem?.id ?? '27eb4b75-9a42-4991-a802-4aefe21ac3ce'
+  //         : income[0].id
+  //     }`,
+  //   };
+  //   dispatch(addTransactionThunk(data));
+  //   // resetForm();
+  // };
+
   // ================GET CATEGORIES
+
   const handleGetCatigories = () => {
     dispatch(getTransCategoriesThunk(tokenTrans));
   };
@@ -84,8 +102,8 @@ export const ModalAddTransaction = () => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
+      // validationSchema={validationSchema}
+      onSubmit={values => handleSubmit(values)}
       // initialValues={{
       //   type: typeSelect ? 'INCOME' : 'EXPENSE',
       //   categoryId: '',
@@ -144,17 +162,20 @@ export const ModalAddTransaction = () => {
             </label>
             <p>Expense</p>
           </div>
+
           <form onSubmit={formik.handleSubmit}>
             {!typeSelect && (
               <Select
                 placeholder="Select a category"
                 options={options}
-                value={formik.values.categoryId?.value}
+                value={formik.values.value}
+                name={formik.values.label}
+                type="text"
                 onChange={({ value }) =>
                   formik.setFieldValue('categoryId', value)
                 }
-                onBlur={formik.handleBlur}
-                onClick={handleGetCatigories}
+                // onBlur={formik.handleBlur}
+                // onClick = {handleGetCatigories}
               />
             )}
             <div>
@@ -193,9 +214,7 @@ SVG
               placeholder="Comment"
               onChange={formik.handleChange}
             />
-            <button type="submit" onClick={handleAddTrans}>
-              Add
-            </button>
+            <button type="submit">Add</button>
           </form>
           <button type="button" onClick={handleClickBtnClose}>
             Cancel
@@ -205,3 +224,5 @@ SVG
     </Formik>
   );
 };
+
+// onClick={handleAddTrans}
