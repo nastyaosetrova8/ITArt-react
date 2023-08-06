@@ -4,9 +4,9 @@ import { logInUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import {
-  Box,
+  // Box,
   Button,
-  IconButton,
+  // IconButton,
   InputAdornment,
   Stack,
   TextField,
@@ -37,33 +37,32 @@ export const LogInForm = () => {
       validationSchema={validationSchema}
     >
       {formik => (
-        <Stack sx={{ margin: '75px auto'}}>
+        <Stack sx={{ margin: '75px auto' }}>
           <Form>
             <Stack spacing={4}>
               {/* <Box
                 sx={{ display: 'flex', alignItems: 'flex-end', width: '100%' }}
               >
                 <EmailIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
-                <TextField
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <EmailIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                  
-                  style={{ width: '100%' }}
-                  variant="standard"
-                  label="Email"
-                  name="email"
-                  type="email"
-                  onChange={formik.handleChange}
-                  error={Boolean(formik.errors.email)}
-                  helperText={
-                    formik.errors.email && 'Please enter a valid email address'
-                  }
-                />
+              <TextField
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <EmailIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                style={{ width: '100%' }}
+                variant="standard"
+                label="Email"
+                name="email"
+                type="email"
+                onChange={formik.handleChange}
+                error={Boolean(formik.errors.email)}
+                helperText={
+                  formik.errors.email && 'Please enter a valid email address'
+                }
+              />
               {/* </Box> */}
               {/* <Box
                 sx={{ display: 'flex', alignItems: 'flex-end', width: '100%' }}
@@ -71,7 +70,6 @@ export const LogInForm = () => {
                 <HttpsIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
 
               <TextField
-
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -98,21 +96,12 @@ export const LogInForm = () => {
                 alignItems="center"
                 mt={4}
               >
-                <Button
-                  variant="contained"
-                  type="submit"
-                  size="large"
-                  
-                >
+                <Button variant="contained" type="submit" size="large">
                   Log in
                 </Button>
 
                 <Link to="/register">
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    size="large"                    
-                  >
+                  <Button variant="contained" type="submit" size="large">
                     Register
                   </Button>
                 </Link>

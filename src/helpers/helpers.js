@@ -1,3 +1,5 @@
+import { columnsDashboardTab } from 'data/data';
+
 export const handleCurrency = data => {
   const currency = data.filter(item => {
     const isRateUahToUSD =
@@ -9,4 +11,31 @@ export const handleCurrency = data => {
   });
 
   return currency;
+};
+
+// =====================================================
+
+export const makerDasboardTab = ({
+  transactionDate,
+  type,
+  categoryId,
+  comment,
+  amount,
+  id,
+}) => {
+  const dataTable = {
+    columns: columnsDashboardTab,
+    rows: [
+      {
+        date: transactionDate,
+        type: type === 'INCOME' ? '+' : '-',
+        category: categoryId,
+        comment,
+        sum: amount,
+        id,
+      },
+    ],
+  };
+
+  return dataTable;
 };

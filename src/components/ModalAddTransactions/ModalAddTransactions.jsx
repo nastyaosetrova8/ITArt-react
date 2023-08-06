@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -20,10 +19,6 @@ export const ModalAddTransaction = () => {
   // setTypeSelect
   const [categoryItem] = useState('');
   // setCategoryItem
-
-  useEffect(() => {
-    dispatch(getTransCategoriesThunk(tokenTrans));
-  }, [dispatch, tokenTrans]);
 
   const income = allCategories.filter(category => category.type === 'INCOME');
   const expense = allCategories.filter(category => category.type === 'EXPENSE');
@@ -64,22 +59,21 @@ export const ModalAddTransaction = () => {
   };
 
   // ================GET CATEGORIES
-  const handleGetCatigories= () => {
+  const handleGetCatigories = () => {
     dispatch(getTransCategoriesThunk(tokenTrans));
   };
 
   // ========== ADD TRANS
-  const handleAddTrans= () => {
-
+  const handleAddTrans = () => {
     const data = {
-      transactionDate: "2023-01-23",
-    type: "INCOME",
-    categoryId: "063f1132-ba5d-42b4-951d-44011ca46262",
-    comment: "string",
-    amount: 25}
-    
-    dispatch(addTransactionThunk(data));
+      transactionDate: '2023-01-23',
+      type: 'INCOME',
+      categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
+      comment: 'string',
+      amount: 25,
+    };
 
+    dispatch(addTransactionThunk(data));
   };
 
   // =================CLOSE MODAL
@@ -160,7 +154,7 @@ export const ModalAddTransaction = () => {
                   formik.setFieldValue('categoryId', value)
                 }
                 onBlur={formik.handleBlur}
-                onClick = {handleGetCatigories}
+                onClick={handleGetCatigories}
               />
             )}
             <div>
@@ -199,7 +193,9 @@ SVG
               placeholder="Comment"
               onChange={formik.handleChange}
             />
-            <button type="submit" onClick={handleAddTrans}>Add</button>
+            <button type="submit" onClick={handleAddTrans}>
+              Add
+            </button>
           </form>
           <button type="button" onClick={handleClickBtnClose}>
             Cancel
