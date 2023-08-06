@@ -30,8 +30,7 @@ const fulfilledLogOut = state => {
   state.isAuth = false;
 };
 
-const fulfilledCurrentUser = (state, { payload }) => {
-  console.log(payload);
+const fulfilledCurrentUser = (state, { payload }) => {  
   state.user = payload;
   state.isAuth = true;
 };
