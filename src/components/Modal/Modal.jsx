@@ -3,9 +3,11 @@ import { createPortal } from 'react-dom';
 import { StyledCloseBtn, StyledModal, StyledOverlay } from './Modal.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineClose } from 'react-icons/ai';
-import { selectIsAddTransOpen } from 'redux/modal/modalSelectors';
-import { closeAddTrans } from 'redux/modal/modalSlice';
+import { selectIsAddTransOpen, selectIsLogoutOpen, selectIsModalClose, selectIsShowModal, selectModalName } from 'redux/modal/modalSelectors';
+import { closeAddTrans, closeModal, toggleShowModal } from 'redux/modal/modalSlice';
 import { ModalAddTransaction } from 'components/ModalAddTransactions/ModalAddTransactions';
+import { LogOutForm } from './ModalLogOut';
+import { ModalEditTransaction } from 'components/ModalEditTransactions/ModalEditTransactions';
 
 // import { createPortal } from "react-dom";
 
@@ -31,6 +33,13 @@ export default function Modal() {
 
   const dispatch = useDispatch();
   const isAddTransOpen = useSelector(selectIsAddTransOpen);
+  const isOpenLogout = useSelector(selectIsLogoutOpen);
+  const isModalClose = useSelector(selectIsModalClose);
+
+  const isShowModal = useSelector(selectIsShowModal)
+
+  const modalName = useSelector(selectModalName)
+  
   // const Edit = useSelector(selectIsEditTransOpen);
 
   // const onCloseModal = () =>
@@ -41,7 +50,7 @@ export default function Modal() {
   useEffect(() => {
     const handleKeyDown = e => {
       if (e.code === 'Escape') {
-        dispatch(closeAddTrans());
+        dispatch(toggleShowModal(''));
       }
     };
 
@@ -51,24 +60,37 @@ export default function Modal() {
     };
   }, [dispatch]);
 
-  const handleClickOverlay = e => {
-    if (e.target === e.currentTarget) {
-      dispatch(closeAddTrans());
-    }
-  };
+// const handleModalClose =(e) => {
+
+ 
+//   handleClickBtnClose()
+// }
+
+const handleClickOverlay = e => {
+  if (e.target === e.currentTarget) {
+    dispatch(toggleShowModal(''));
+  }
+};
+
+// const handleClickBtnClose = () => {
+//   dispatch(closeAddTrans());
+// };
 
   const handleClickBtnClose = () => {
-    dispatch(closeAddTrans());
-  };
+ dispatch(toggleShowModal(''));
+};
 
   return createPortal (
      <StyledOverlay onClick={handleClickOverlay}>
       <StyledModal>
-      {isAddTransOpen && <StyledCloseBtn type="button" onClick={handleClickBtnClose}>
+     {isShowModal && <StyledCloseBtn type="button" onClick={handleClickBtnClose}>
           <AiOutlineClose size={16} fill="white"/>
         </StyledCloseBtn>}
+
         {/* {children} */}
-        {isAddTransOpen && <ModalAddTransaction />}
+        {isShowModal && modalName === 'addBtn' && <ModalAddTransaction />}
+        {isShowModal &&  modalName === 'logout' && <LogOutForm />}
+        {isShowModal &&  modalName === 'edit' && <ModalEditTransaction />}
 
 
       </StyledModal>
@@ -76,6 +98,16 @@ export default function Modal() {
     modalRoot
   );
 }
+
+
+// {isAddTransOpen && <StyledCloseBtn type="button" onClick={handleClickBtnClose}>
+// <AiOutlineClose size={16} fill="white"/>
+// </StyledCloseBtn>}
+
+
+
+// {isOpenLogout && <StyledCloseBtn type="button" onClick={handleClickBtnClose}>}
+
 
 //   Modal.propTypes = {
 //     onCloseModal: PropTypes.func.isRequired,

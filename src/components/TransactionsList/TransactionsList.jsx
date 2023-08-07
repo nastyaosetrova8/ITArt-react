@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { selectTransactions } from 'redux/selectors';
 
@@ -14,9 +14,11 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import { toggleShowModal } from 'redux/modal/modalSlice';
 
 export const TransactionsList = () => {
   const transactions = useSelector(selectTransactions);
+  const dispatch = useDispatch()
 
   // const transactions = useSelector(selectTransactions);
 
@@ -24,6 +26,10 @@ export const TransactionsList = () => {
 
   //   dispatch(editTransactionThunk());
   // };
+
+  const handleOnClick = e => {
+      dispatch(toggleShowModal(e.currentTarget.name));
+  };
 
   // ==========DELETE TRANS
   // const handleClickDElete = () => {
@@ -105,7 +111,7 @@ export const TransactionsList = () => {
 
                       return idx === columns.length - 1 ? (
                         <TableCell key={column.id} align={column.align}>
-                          <Button type="button">edit</Button>
+                          <Button type="button" name='edit' onClick={handleOnClick}>edit</Button>
                           <Button type="button">del</Button>
                         </TableCell>
                       ) : (

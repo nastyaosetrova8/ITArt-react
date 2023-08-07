@@ -2,9 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    isAddTransOpen: false,
-    isEditTransOpen: false,
-    isLogoutOpen: false,
+    // isAddTransOpen: false,
+    // isEditTransOpen: false,
+    // isLogoutOpen: false,
+    isShowModal: false,
+    modalName: '',
   };
 
 
@@ -25,26 +27,33 @@ const initialState = {
     name: 'modal',
     initialState,
     reducers: {
-      openAddTrans: state => {
-        state.isAddTransOpen = true;
+
+      toggleShowModal: (state, {payload}) => {
+        console.log(payload)
+        state.isShowModal = !state.isShowModal
+        state.modalName = payload
       },
-      closeAddTrans(state) {
-        state.isAddTransOpen = false;
-      },
-      openEditTrans(state) {
-        state.isEditTransOpen = true;
-      },
-      closeEditTrans(state) {
-        state.isEditTransOpen = false;
-      },
-      openLogout: state => {
-        state.isLogoutOpen = true;
-      },
-      closeLogout(state) {
-        state.isLogoutOpen = false;
-      },
+
+      // openAddTrans: state => {
+      //   state.isAddTransOpen = true;
+      // },
+      // closeAddTrans(state) {
+      //   state.isAddTransOpen = false;
+      // },
+      // openEditTrans(state) {
+      //   state.isEditTransOpen = true;
+      // },
+      // closeEditTrans(state) {
+      //   state.isEditTransOpen = false;
+      // },
+      // openLogout: state => {
+      //   state.isLogoutOpen = true;
+      // },
+      // closeModal(state) {
+      //   state.isModalClose = false;
+      // },
       }
   });
   
   export const modalReducer = modalOpenSlice.reducer;
-  export const { openAddTrans, closeAddTrans, openEditTrans, closeEditTrans, openLogout, closeLogout } = modalOpenSlice.actions;
+  export const { openAddTrans, closeAddTrans, openEditTrans, closeEditTrans, openLogout, closeLogout, closeModal, toggleShowModal } = modalOpenSlice.actions;
