@@ -23,7 +23,7 @@ export const LogInForm = () => {
     password: Yup.string().required('Required'),
   });
 
-  return (
+  return (   
     <Formik
       initialValues={{ email: '', password: '' }}
       onSubmit={values => handlerOnSubmit(values)}
@@ -108,6 +108,6 @@ export const LogInForm = () => {
           </Form>
         </Stack>
       )}
-    </Formik>
+    </Formik>   
   );
 };

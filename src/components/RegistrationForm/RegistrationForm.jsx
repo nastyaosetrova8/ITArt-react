@@ -8,9 +8,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
 import { ButtonsBox } from 'pages/RegistrationPage/RegistrationPageStyled';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { notifyRegisterError} from 'components/Toastify/Toastify';
+
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -35,20 +34,7 @@ export const RegistrationForm = () => {
     password: Yup.string().min(6).max(12).required('Required'),
   });
 
-  return (
-    <>
-      <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+  return (   
       <Formik
         initialValues={{ email: '', password: '' }}
         onSubmit={values => handlerOnSubmit(values)}
@@ -165,7 +151,6 @@ export const RegistrationForm = () => {
             </Form>
           </Stack>
         )}
-      </Formik>
-    </>
+      </Formik>    
   );
 };

@@ -9,6 +9,8 @@ import { PrivateRoute } from 'redux/Guard/PrivateRoute';
 import { PublicRoute } from 'redux/Guard/PublicRoute';
 import Loader from './Loader/Loader';
 import { selectToken } from 'redux/selectors';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -27,6 +29,19 @@ export const App = () => {
   }, [dispatch, token]);
 
   return (
+    <>
+    <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     <Suspense fallback={<Loader />}>
       <Routes>
         <Route
@@ -66,5 +81,6 @@ export const App = () => {
         <Route path="*" element={<Navigate to="/register" replace />}></Route>
       </Routes>
     </Suspense>
+    </>
   );
 };
