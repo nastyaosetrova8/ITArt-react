@@ -1,94 +1,128 @@
-import { useDispatch, useSelector } from "react-redux";
-import { deleteTransactionThunk } from "redux/Thunks/TransactionsThunk";
-import { editTransactionThunk } from "redux/modalTransRedux/modalTransThunks";
-import { selectToken, selectTransactions } from "redux/selectors";
+import { useSelector } from 'react-redux';
 
-export const TransactionsList = ({ transactions }) => {
+import { selectTransactions } from 'redux/selectors';
 
-const dispatch = useDispatch();
-const tokenTrans = useSelector(selectToken);
+import { makerDasboardTab } from 'helpers/helpers';
 
-const trans = useSelector(selectTransactions);
+import {
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
 
-   const handleOnClick = (evt) => {
-    // const id = evt.CurrentTarget
-dispatch(editTransactionThunk())
-   }
-  
-   // ==========DELETE TRANS
-  const handleClickDElete = () => {
- 
-    const dataEdit = {
-      id: 'f2103647-98f1-4278-96b7-3b33112ef5e7',
-      transactionDate: '2023-01-23',
-      type: 'INCOME',
-      categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-      comment: 'string',
-      amount: 25,
-    };
+export const TransactionsList = () => {
+  const transactions = useSelector(selectTransactions);
 
-    // const dataEx = {
-    //   transactionDate: "2023-01-23",
-    // type: "EXPENSE",
-    // categoryId: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
-    // comment: "string",
-    // amount: -5}
-    
-    dispatch(deleteTransactionThunk({ dataEdit, tokenTrans }));
-  };
+  // const transactions = useSelector(selectTransactions);
 
+  // const handleOnClick = evt => {
+
+  //   dispatch(editTransactionThunk());
+  // };
+
+  // ==========DELETE TRANS
+  // const handleClickDElete = () => {
+  //   const dataEdit = {
+  //     id: 'f2103647-98f1-4278-96b7-3b33112ef5e7',
+  //     transactionDate: '2023-01-23',
+  //     type: 'INCOME',
+  //     categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
+  //     comment: 'string',
+  //     amount: 25,
+  //   };
+
+  //   // const dataEx = {
+  //   //   transactionDate: "2023-01-23",
+  //   // type: "EXPENSE",
+  //   // categoryId: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
+  //   // comment: "string",
+  //   // amount: -5}
+
+  //   dispatch(deleteTransactionThunk({ dataEdit, token }));
+  // };
+
+  // ============================ TABLE+++++++++++
+
+  const rows = makerDasboardTab(transactions).rows;
+  const columns = makerDasboardTab(transactions).columns;
+  // const rows = transactions.transactions?.map(
+  //   ({ transactionDate, type, categoryId, comment, amount, id }) => {
+  //     return {
+  //       date: transactionDate,
+  //       type: type === 'INCOME' ? '+' : '-',
+  //       category: categoryId,
+  //       comment,
+  //       sum: amount,
+  //       id,
+  //     };
+  //   }
+  // );
+
+  // const columns = columnsDashboardTab;
 
   return (
     <>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Category</th>
-            <th>Comment</th>
-            <th>Sum</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* {transactions.map(
-          ({ id, transactionDate, type, categoryId, comment, amount }) => {
-            return (
-            //   <tr key={id}>
-            //     <td>{transactionDate}</td>
-            //     <td>{type === 'INCOME' ? '+' : '-'}</td>
-            //     <td>{categoryId}</td>
-            //     <td>{comment}</td>
-            //     <td>{amount}</td>
-            //     <td>
-            //       <button>
-            //         <Link to={`/api/transactions/${id}`}>Update</Link>
-            //       </button>
+      <Paper
+        sx={{
+          width: '100%',
+          maxWidth: '715px',
+          overflow: 'hidden',
+          background: 'transparent',
+        }}
+      >
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table
+            stickyHeader
+            aria-label="sticky table"
+            sx={{
+              background: 'transparent',
+            }}
+          >
+            <TableHead>
+              <TableRow>
+                {columns.map(column => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ maxWidth: column.maxWidth }}
+                  >
+                    {column.name}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map(row => {
+                return (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                    {columns.map((column, idx) => {
+                      const value = row[column.id];
 
-            //       <button>Delete</button>
-            //     </td>
-            //     </tr> */}
-          <tr>
-            <td>11.09.20023</td>
-            <td>-</td>
-            <td>car</td>
-            <td>my comment</td>
-            <td>12222</td>
-            <td>
-              <button onClick={handleOnClick}>
-                {/* <Link to={`/api/transactions/${id}`}>Update</Link> */}
-                update
-              </button>
-
-              <button type="button"  onClick={handleClickDElete}>Delete</button>
-            </td>
-          </tr>
-          {/* );
-          }
-        )} */}
-        </tbody>
-      </table>
+                      return idx === columns.length - 1 ? (
+                        <TableCell key={column.id} align={column.align}>
+                          <Button type="button">edit</Button>
+                          <Button type="button">del</Button>
+                        </TableCell>
+                      ) : (
+                        <TableCell key={column.id} align={column.align}>
+                          {column.format && typeof value === 'number'
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
     </>
   );
 };

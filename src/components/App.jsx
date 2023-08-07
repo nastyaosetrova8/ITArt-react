@@ -3,11 +3,14 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Layout } from './Layout/Layout';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { PrivateRoute } from 'redux/Guard/PrivateRoute';
 import { PublicRoute } from 'redux/Guard/PublicRoute';
 import Loader from './Loader/Loader';
+import { selectToken } from 'redux/selectors';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -18,12 +21,27 @@ const RegistrationPage = lazy(() =>
 
 export const App = () => {
   const dispatch = useDispatch();
+  const token = useSelector(selectToken)
 
   useEffect(() => {
+    if(!token)return
     dispatch(getCurrentUserThunk());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   return (
+    <>
+    <ToastContainer
+        position="top-right"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     <Suspense fallback={<Loader />}>
       <Routes>
         <Route
@@ -63,5 +81,6 @@ export const App = () => {
         <Route path="*" element={<Navigate to="/register" replace />}></Route>
       </Routes>
     </Suspense>
+    </>
   );
 };

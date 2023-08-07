@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addTransactionThunk,
-  getTransCategoriesThunk,
+  // getTransCategoriesThunk,
 } from 'redux/Thunks/TransactionsThunk';
 import { selectCategories, selectToken } from 'redux/selectors';
 import { closeAddTrans } from 'redux/modal/modalSlice';
@@ -37,7 +37,7 @@ import {
 
 export const ModalAddTransaction = () => {
   const dispatch = useDispatch();
-  const tokenTrans = useSelector(selectToken);
+  // const tokenTrans = useSelector(selectToken);
   const allCategories = useSelector(selectCategories);
 
   useEffect(() => {
