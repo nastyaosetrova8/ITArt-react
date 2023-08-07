@@ -2,6 +2,8 @@
 import { DiagramSelect } from 'components/DiagramSelect/DiagramSelect';
 import { useCategoriesType } from 'hooks/selectedCategories';
 import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   selectExpenseSummary,
   selectIncomeSummary,
@@ -31,6 +33,18 @@ export const Table = () => {
 
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       Table statistic
       <DiagramSelect></DiagramSelect>
       <table>
