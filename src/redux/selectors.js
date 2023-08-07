@@ -10,3 +10,7 @@ export const selectCategories = state => state.transactions.categories;
 
 export const selectIsLoading = state => state.root.isLoading;
 export const selectError = state => state.root.error;
+
+export const selectSummary = state => state.transactionsSummary.categoriesSummary;
+export const selectIncomeSummary = state => state.transactionsSummary.incomeSummary;
+export const selectExpenseSummary = state => state.transactionsSummary.expenseSummary;
