@@ -1,23 +1,20 @@
 import { styled } from 'styled-components';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 
-export const Table = styled.table`
+export const TableSt = styled.table`
   margin-top: 46px;
   width: 100%;
   height: 356px;
   overflow-y: auto;
 `;
-export const TableHead = styled.thead`
+export const TableHeadSt = styled.thead`
   background-color: rgba(81.88, 59, 126.44, 0.8);
 `;
 export const HeadRow = styled.tr`
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr 1.2fr 1.7fr 0.7fr 0.4fr 0.6fr;
+  grid-template-columns: 1.11fr 0.5fr 1fr 1.4fr 0.7fr 0.68fr;
   width: 100%;
   color: #fbfbfb;
-  padding-left: 20px;
-  padding-top: 16px;
-  padding-bottom: 16px;
   border-radius: 8px;
   box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(100px);
@@ -29,17 +26,16 @@ export const HeadTitle = styled.th`
   color: #fbfbfb;
   text-align: left;
 `;
-export const TableBody = styled.tbody`
+export const TableBodySt = styled.tbody`
   display: block;
 `;
-export const TableRow = styled.tr`
+export const TableRowStyled = styled.tr`
   border-top: none;
   font-size: 14px;
   color: #fbfbfb;
   font-weight: 400;
   text-align: left;
   position: relative;
-  padding-left: 20px;
   margin: 0;
   display: grid;
   grid-template-columns: 1.4fr 0.6fr 1.2fr 1.7fr 0.7fr 0.4fr 0.1fr;
