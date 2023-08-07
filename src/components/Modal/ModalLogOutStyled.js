@@ -11,6 +11,14 @@ export const LogoStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  h3 {
+    margin: 0 auto;
+    color: var(--white, #fbfbfb);    
+    font-size: 28px;
+    /* font-style: normal; */
+    font-weight: 400;
+    line-height: normal;
+  }
 `;
 export const ButtonsBox = styled.div`
   //margin: 52px auto 0;

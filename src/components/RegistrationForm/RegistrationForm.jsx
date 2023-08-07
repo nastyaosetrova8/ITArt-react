@@ -159,21 +159,21 @@ export const RegistrationForm = () => {
 
                 <ButtonsBox style={{ margin: '52px auto 0' }}>
                   <Button
-                    variant="contained"
-                    type="submit"
                     sx={{
                       backgroundImage:
                         'linear-gradient(120deg, rgba(255, 199, 39, 1), rgba(158, 64, 186, 1) 80%, rgba(112, 0, 256))',
                     }}
+                    variant="contained"
+                    type="submit"
                   >
                     Register
                   </Button>
 
                   <Link to="/login">
                     <Button
+                      sx={{ backgroundColor: 'rgba(252, 252, 252, 1)' }}
                       variant="contained"
                       type="submit"
-                      sx={{ backgroundColor: 'rgba(252, 252, 252, 1)' }}
                     >
                       Log in
                     </Button>

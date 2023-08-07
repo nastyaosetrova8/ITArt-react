@@ -1,44 +1,49 @@
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { logOutUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Button } from '@mui/material';
 import { ButtonsBox } from 'pages/LoginPage/LoginPageStyled';
+import { LogoStyle } from './ModalLogOutStyled';
+import Logo from '../../assets/images/logo.svg';
 import { toggleShowModal } from 'redux/modal/modalSlice';
 
-
 export const LogOutForm = () => {
-  
   const dispatch = useDispatch();
+
+  const handleLogOut = () => {
+    dispatch(logOutUserThunk());
+  };
 
   const handleOnClick = () => {
     dispatch(toggleShowModal(''));
-  }; 
- 
-  
+  };
 
   return (
     <>
+      <LogoStyle>
+        <img src={Logo} alt="Logo Wallet" width="36px" height="36px" />
+        <h3>Are you sure you want to log out?</h3>
+      </LogoStyle>
       <ButtonsBox style={{ margin: '52px auto 0' }}>
         <Button
-          variant="contained"
-          type="submit"
           sx={{
             backgroundImage:
               'linear-gradient(120deg, rgba(255, 199, 39, 1), rgba(158, 64, 186, 1) 80%, rgba(112, 0, 256))',
           }}
+          variant="contained"
+          type="submit"
+          onClick={handleLogOut}
         >
-          Log out
+          Log Out
         </Button>
 
-        <Link to="/register">
-          <Button
+        <Button
+          sx={{ backgroundColor: 'rgba(252, 252, 252, 1)' }}
+          variant="contained"
+          type="submit"
           onClick={handleOnClick}
-            variant="contained"
-            type="submit"
-            sx={{ backgroundColor: 'rgba(252, 252, 252, 1)' }}
-          >
-            Cancel
-          </Button>
-        </Link>
+        >
+          Cancel
+        </Button>
       </ButtonsBox>
     </>
   );
