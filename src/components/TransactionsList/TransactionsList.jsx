@@ -133,7 +133,7 @@ export const TransactionsList = () => {
                           <BtnDelete
                             id={row.id}
                             type="button"
-                            onClick={()=>handleClickDelete(row.id)}
+                            onClick={() => handleClickDelete(row.id)}
                           >
                             Delete
                           </BtnDelete>
