@@ -4,13 +4,17 @@ import { Button } from '@mui/material';
 import { ButtonsBox } from 'pages/LoginPage/LoginPageStyled';
 import { LogoStyle } from './ModalLogOutStyled';
 import Logo from '../../assets/images/logo.svg';
+import { toggleShowModal } from 'redux/modal/modalSlice';
 
 export const LogOutForm = () => {
   const dispatch = useDispatch();
 
-  const handleLogOut = () => {    
+  const handleOnClick = () => {
+    dispatch(toggleShowModal(''));
     dispatch(logOutUserThunk());
-  };
+  }; 
+ 
+  
 
   return (
     <>
@@ -35,6 +39,7 @@ export const LogOutForm = () => {
           sx={{ backgroundColor: 'rgba(252, 252, 252, 1)' }}
           variant="contained"
           type="submit"
+          onClick={handleOnClick}
         >
           Cancel
         </Button>

@@ -1,50 +1,60 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { selectTransactions } from 'redux/selectors';
+import { selectToken, selectTransactions } from 'redux/selectors';
 
 import { makerDasboardTab } from 'helpers/helpers';
 
+import { Paper, Table, TableCell, TableContainer } from '@mui/material';
+import { deleteTransactionThunk } from 'redux/Thunks/TransactionsThunk';
 import {
-  Button,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material';
+  BtnCont,
+  BtnDelete,
+  BtnEdit,
+  BtnIcon,
+  HeadRow,
+  TableBodySt,
+  TableHeadSt,
+  TableRowStyled,
+} from './TransactionsListStyled';
 
 export const TransactionsList = () => {
+  const tokenTrans = useSelector(selectToken);
+  const dispatch = useDispatch();
   const transactions = useSelector(selectTransactions);
-
-  // const transactions = useSelector(selectTransactions);
+  
 
   // const handleOnClick = evt => {
 
   //   dispatch(editTransactionThunk());
   // };
 
+  const handleOnClick = e => {
+      dispatch(toggleShowModal(e.currentTarget.name));
+  };
+
   // ==========DELETE TRANS
-  // const handleClickDElete = () => {
-  //   const dataEdit = {
-  //     id: 'f2103647-98f1-4278-96b7-3b33112ef5e7',
-  //     transactionDate: '2023-01-23',
-  //     type: 'INCOME',
-  //     categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-  //     comment: 'string',
-  //     amount: 25,
-  //   };
+  const handleClickDelete = transactionId => {
+    const dataEdit = {
+      id: transactionId,
+    };
+    // const dataEdit = {
+    //   id: '2b3b84b1-97b5-49ed-9ed5-ebba5197b66b',
+    //   transactionDate: '2023-01-23',
+    //   type: 'INCOME',
+    //   categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
+    //   comment: 'string',
+    //   amount: 25,
+    // };
 
-  //   // const dataEx = {
-  //   //   transactionDate: "2023-01-23",
-  //   // type: "EXPENSE",
-  //   // categoryId: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
-  //   // comment: "string",
-  //   // amount: -5}
-
-  //   dispatch(deleteTransactionThunk({ dataEdit, token }));
-  // };
+    // const dataEx = {
+    //   transactionDate: "2023-01-23",
+    // type: "EXPENSE",
+    // categoryId: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
+    // comment: "string",
+    // amount: -5}
+    console.log('Token:', tokenTrans);
+    dispatch(deleteTransactionThunk({ dataEdit, transactionId }));
+  };
 
   // ============================ TABLE+++++++++++
 
@@ -83,43 +93,72 @@ export const TransactionsList = () => {
               background: 'transparent',
             }}
           >
-            <TableHead>
-              <TableRow>
+            <TableHeadSt>
+              <HeadRow>
                 {columns.map(column => (
                   <TableCell
                     key={column.id}
                     align={column.align}
                     style={{ maxWidth: column.maxWidth }}
+                    sx={{
+                      borderBottom: 'none',
+                      fontWeight: 600,
+                    }}
                   >
                     {column.name}
                   </TableCell>
                 ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
+              </HeadRow>
+            </TableHeadSt>
+            <TableBodySt>
               {rows.map(row => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                  <TableRowStyled
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={row.id}
+                  >
                     {columns.map((column, idx) => {
                       const value = row[column.id];
 
                       return idx === columns.length - 1 ? (
-                        <TableCell key={column.id} align={column.align}>
-                          <Button type="button">edit</Button>
-                          <Button type="button">del</Button>
-                        </TableCell>
+                        <BtnCont
+                          key={column.id}
+                          align={column.align}
+                          sx={{
+                            borderBottom: 'none',
+                          }}
+                        >
+                          <BtnEdit type="button" name='edit' onClick={handleOnClick}>
+                            <BtnIcon sx={{ fontSize: 18 }} />
+                          </BtnEdit>
+                          {/* <ModalEditTransactions /> */}
+                          <BtnDelete
+                            id={row.id}
+                            type="button"
+                            onClick={() => handleClickDelete(row.id)}
+                          >
+                            Delete
+                          </BtnDelete>
+                        </BtnCont>
                       ) : (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          sx={{
+                            borderBottom: 'none',
+                          }}
+                        >
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}
                         </TableCell>
                       );
                     })}
-                  </TableRow>
+                  </TableRowStyled>
                 );
               })}
-            </TableBody>
+            </TableBodySt>
           </Table>
         </TableContainer>
       </Paper>
