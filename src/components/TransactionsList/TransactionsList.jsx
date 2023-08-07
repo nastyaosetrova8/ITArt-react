@@ -16,12 +16,12 @@ import {
   TableHeadSt,
   TableRowStyled,
 } from './TransactionsListStyled';
+import { toggleShowModal } from 'redux/modal/modalSlice';
 
 export const TransactionsList = () => {
-  const tokenTrans = useSelector(selectToken);
+  const token = useSelector(selectToken);
   const dispatch = useDispatch();
   const transactions = useSelector(selectTransactions);
-  
 
   // const handleOnClick = evt => {
 
@@ -29,31 +29,28 @@ export const TransactionsList = () => {
   // };
 
   const handleOnClick = e => {
-      dispatch(toggleShowModal(e.currentTarget.name));
+    dispatch(toggleShowModal(e.currentTarget.name));
   };
 
   // ==========DELETE TRANS
-  const handleClickDelete = transactionId => {
+  const handleClickDelete = () => {
     const dataEdit = {
-      id: transactionId,
+      id: 'f2103647-98f1-4278-96b7-3b33112ef5e7',
+      transactionDate: '2023-01-23',
+      type: 'INCOME',
+      categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
+      comment: 'string',
+      amount: 25,
     };
-    // const dataEdit = {
-    //   id: '2b3b84b1-97b5-49ed-9ed5-ebba5197b66b',
-    //   transactionDate: '2023-01-23',
-    //   type: 'INCOME',
-    //   categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-    //   comment: 'string',
-    //   amount: 25,
-    // };
 
-    // const dataEx = {
-    //   transactionDate: "2023-01-23",
-    // type: "EXPENSE",
-    // categoryId: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
-    // comment: "string",
-    // amount: -5}
-    console.log('Token:', tokenTrans);
-    dispatch(deleteTransactionThunk({ dataEdit, transactionId }));
+    //   // const dataEx = {
+    //   //   transactionDate: "2023-01-23",
+    //   // type: "EXPENSE",
+    //   // categoryId: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
+    //   // comment: "string",
+    //   // amount: -5}
+
+    dispatch(deleteTransactionThunk({ dataEdit, token }));
   };
 
   // ============================ TABLE+++++++++++
@@ -113,11 +110,7 @@ export const TransactionsList = () => {
             <TableBodySt>
               {rows.map(row => {
                 return (
-                  <TableRowStyled
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={row.id}
-                  >
+                  <TableRowStyled role="checkbox" tabIndex={-1} key={row.id}>
                     {columns.map((column, idx) => {
                       const value = row[column.id];
 
@@ -129,14 +122,18 @@ export const TransactionsList = () => {
                             borderBottom: 'none',
                           }}
                         >
-                          <BtnEdit type="button" name='edit' onClick={handleOnClick}>
+                          <BtnEdit
+                            type="button"
+                            name="edit"
+                            onClick={handleOnClick}
+                          >
                             <BtnIcon sx={{ fontSize: 18 }} />
                           </BtnEdit>
                           {/* <ModalEditTransactions /> */}
                           <BtnDelete
                             id={row.id}
                             type="button"
-                            onClick={() => handleClickDelete(row.id)}
+                            onClick={handleClickDelete(row.id)}
                           >
                             Delete
                           </BtnDelete>
