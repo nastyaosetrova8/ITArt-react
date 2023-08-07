@@ -47,32 +47,50 @@ export const handleCurrency = data => {
 //   return dataTable;
 // };
 
-// export const makerDasboardTab = ({ transactions, categories }) => {
-//   console.log('categories: ', categories);
-//   if (!transactions) return;
-//   else {
-//     const dataTable = transactions.map(item => {
-//       const matchedNameCategory = categories.find(
-//         e => e.id === item.categoryId
-//       );
-//       if (matchedNameCategory) {
-//         return {
-//           ...item,
-//           category: matchedNameCategory.name,
-//           date: item.transactionDate,
-//           type: item.type === 'INCOME' ? '+' : '-',
-//           sum: item.amount,
-//         };
-//       } else {
-//         return {
-//           ...item,
-//           category: item.categoryId,
-//           date: item.transactionDate,
-//           type: item.type === 'INCOME' ? '+' : '-',
-//           sum: item.amount,
-//         };
-//       }
-//     });
-//     return dataTable;
-//   }
-// }
+export const makerDasboardTab = ({ transactions, categories }) => {
+  if (!transactions) return;
+  else {
+    const dataTable = {
+      columns: columnsDashboardTab,
+      rows: transactions?.map(item => {
+        const matchedNameCategory = categories.find(
+          e => e.id === item.categoryId
+        );
+        return matchedNameCategory
+          ? {
+              ...item,
+              category: matchedNameCategory.name,
+              date: item.transactionDate,
+              type: item.type === 'INCOME' ? '+' : '-',
+              sum: item.amount,
+            }
+          : {
+              ...item,
+              category: item.categoryId,
+              date: item.transactionDate,
+              type: item.type === 'INCOME' ? '+' : '-',
+              sum: item.amount,
+            };
+        // if (matchedNameCategory) {
+        //   return {
+        //     ...item,
+        //     category: matchedNameCategory.name,
+        //     date: item.transactionDate,
+        //     type: item.type === 'INCOME' ? '+' : '-',
+        //     sum: item.amount,
+        //   };
+        // } else {
+        //   return {
+        //     ...item,
+        //     category: item.categoryId,
+        //     date: item.transactionDate,
+        //     type: item.type === 'INCOME' ? '+' : '-',
+        //     sum: item.amount,
+        //   };
+        // }
+      }),
+    };
+
+    return dataTable;
+  }
+};
