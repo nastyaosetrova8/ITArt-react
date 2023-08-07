@@ -9,8 +9,6 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { closeAddTrans } from 'redux/modal/modalSlice';
 import { Formik } from 'formik';
 import Select from 'react-select';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 // import { Select } from '@mui/material';
 // import * as Yup from 'yup';
 
@@ -102,19 +100,7 @@ export const ModalAddTransaction = () => {
   };
 
   return (
-    <>
-    <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+    
     <Formik
       initialValues={initialValues}
       // validationSchema={validationSchema}
@@ -237,7 +223,6 @@ SVG
         </div>
       )}
     </Formik>
-    </>
   );
 };
 

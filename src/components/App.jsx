@@ -8,7 +8,7 @@ import { getCurrentUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { PrivateRoute } from 'redux/Guard/PrivateRoute';
 import { PublicRoute } from 'redux/Guard/PublicRoute';
 import Loader from './Loader/Loader';
-import { selectIsAuth, selectToken } from 'redux/selectors';
+import { selectToken } from 'redux/selectors';
 
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
