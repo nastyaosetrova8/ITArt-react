@@ -4,7 +4,7 @@ const StyledHeader = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid grey;
-  padding: 0 16px 0 16px;
+  padding: 16px;
   p {
     margin-left: auto;
   }

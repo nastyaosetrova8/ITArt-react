@@ -1,3 +1,15 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteTransactionThunk } from 'redux/Thunks/TransactionsThunk';
+import { editTransactionThunk } from 'redux/modalTransRedux/modalTransThunks';
+
+import {
+  selectCategories,
+  selectToken,
+  selectTransactions,
+} from 'redux/selectors';
+
+import { makerDasboardTab } from 'helpers/helpers';
+
 import {
   Button,
   Paper,
@@ -8,66 +20,71 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { makerDasboardTab } from 'helpers/helpers';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteTransactionThunk } from 'redux/Thunks/TransactionsThunk';
-import { editTransactionThunk } from 'redux/modalTransRedux/modalTransThunks';
-import {
-  selectCategories,
-  selectToken,
-  selectTransactions,
-} from 'redux/selectors';
+import { useEffect } from 'react';
+import { columnsDashboardTab } from 'data/data';
 
 export const TransactionsList = () => {
   const dispatch = useDispatch();
-  const token = useSelector(selectToken);
   const transactions = useSelector(selectTransactions);
-  const nameCategories = useSelector(selectCategories);
 
-  const trans = useSelector(selectTransactions);
+  // const transactions = useSelector(selectTransactions);
 
-  const handleOnClick = evt => {
-    // const id = evt.CurrentTarget
-    dispatch(editTransactionThunk());
-  };
+  // const handleOnClick = evt => {
+
+  //   dispatch(editTransactionThunk());
+  // };
 
   // ==========DELETE TRANS
-  const handleClickDElete = () => {
-    const dataEdit = {
-      id: 'f2103647-98f1-4278-96b7-3b33112ef5e7',
-      transactionDate: '2023-01-23',
-      type: 'INCOME',
-      categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-      comment: 'string',
-      amount: 25,
-    };
+  // const handleClickDElete = () => {
+  //   const dataEdit = {
+  //     id: 'f2103647-98f1-4278-96b7-3b33112ef5e7',
+  //     transactionDate: '2023-01-23',
+  //     type: 'INCOME',
+  //     categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
+  //     comment: 'string',
+  //     amount: 25,
+  //   };
 
-    // const dataEx = {
-    //   transactionDate: "2023-01-23",
-    // type: "EXPENSE",
-    // categoryId: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
-    // comment: "string",
-    // amount: -5}
+  //   // const dataEx = {
+  //   //   transactionDate: "2023-01-23",
+  //   // type: "EXPENSE",
+  //   // categoryId: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
+  //   // comment: "string",
+  //   // amount: -5}
 
-    dispatch(deleteTransactionThunk({ dataEdit, token }));
-  };
+  //   dispatch(deleteTransactionThunk({ dataEdit, token }));
+  // };
 
   // ============================ TABLE+++++++++++
 
-  const testTrans = {
-    amount: 100,
-    balanceAfter: 79,
-    categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-    comment: 'dfgbsgfb',
-    id: '84ebef4b-65e9-428c-8366-aa7f85a3c911',
-    transactionDate: '2023-08-06',
-    type: 'INCOME' /*'EXPENSE'*/,
-    userId: 'c39fa426-dee5-4c7d-8bac-8bb6cecc41f3',
-  };
+  // const testTrans = [
+  //   {
+  //     amount: 100,
+  //     balanceAfter: 79,
+  //     categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
+  //     comment: 'dfgbsgfb',
+  //     id: '84ebef4b-65e9-428c-8366-aa7f85a3c911',
+  //     transactionDate: '2023-08-06',
+  //     type: 'INCOME' /*'EXPENSE'*/,
+  //     userId: 'c39fa426-dee5-4c7d-8bac-8bb6cecc41f3',
+  //   },
+  // ];
+  console.log('transactions: ', transactions);
 
-  const myColumns = makerDasboardTab(testTrans).columns;
-  const rows = makerDasboardTab(testTrans).rows;
+  const rows = transactions.transactions?.map(
+    ({ transactionDate, type, categoryId, comment, amount, id }) => {
+      return {
+        date: transactionDate,
+        type: type === 'INCOME' ? '+' : '-',
+        category: categoryId,
+        comment,
+        sum: amount,
+        id,
+      };
+    }
+  );
+
+  const columns = columnsDashboardTab;
 
   return (
     <>
@@ -80,10 +97,16 @@ export const TransactionsList = () => {
         }}
       >
         <TableContainer sx={{ maxHeight: 440 }}>
-          <Table stickyHeader aria-label="sticky table">
+          <Table
+            stickyHeader
+            aria-label="sticky table"
+            sx={{
+              background: 'transparent',
+            }}
+          >
             <TableHead>
               <TableRow>
-                {myColumns.map(column => (
+                {columns.map(column => (
                   <TableCell
                     key={column.id}
                     align={column.align}
@@ -98,10 +121,10 @@ export const TransactionsList = () => {
               {rows.map(row => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                    {myColumns.map((column, idx) => {
+                    {columns.map((column, idx) => {
                       const value = row[column.id];
 
-                      return idx === myColumns.length - 1 ? (
+                      return idx === columns.length - 1 ? (
                         <TableCell key={column.id} align={column.align}>
                           <Button type="button">edit</Button>
                           <Button type="button">del</Button>
