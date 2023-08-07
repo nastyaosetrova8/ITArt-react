@@ -9,12 +9,13 @@ import { toggleShowModal } from 'redux/modal/modalSlice';
 export const LogOutForm = () => {
   const dispatch = useDispatch();
 
+  const handleLogOut = () => {
+    dispatch(logOutUserThunk());
+  };
+
   const handleOnClick = () => {
     dispatch(toggleShowModal(''));
-    dispatch(logOutUserThunk());
-  }; 
- 
-  
+  };
 
   return (
     <>
