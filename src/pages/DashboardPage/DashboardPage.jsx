@@ -10,6 +10,8 @@ import {
 } from 'redux/Thunks/TransactionsThunk';
 import { selectIsAuth, selectToken } from 'redux/selectors';
 import { StyledWrapperList } from './StyledWrapperList';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function DashboardPage() {
   const isAuth = useSelector(selectIsAuth);
@@ -25,6 +27,20 @@ function DashboardPage() {
 
   return (
     isAuth && (
+      <>
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      
       <StyledContainer>
         <SideBar />
         <StyledWrapperList>
@@ -32,6 +48,7 @@ function DashboardPage() {
           <ButtonAddTransactions />
         </StyledWrapperList>
       </StyledContainer>
+      </>
     )
   );
 }

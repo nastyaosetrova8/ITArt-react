@@ -69,8 +69,6 @@ export default function Modal() {
         </StyledCloseBtn>}
         {/* {children} */}
         <ModalAddTransaction />
-
-
       </StyledModal>
     </StyledOverlay>,
     modalRoot
