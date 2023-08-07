@@ -10,8 +10,10 @@ export const Layout = () => {
   const userName = useSelector(selectUserName);
   const isAuth = useSelector(selectIsAuth);
 
-  const handleOnClick = () => {
-    dispatch(logOutUserThunk());
+  
+  const handleOpenModal = () => {
+    
+    // dispatch(logOutUserThunk());
   };
 
   return isAuth ? (
@@ -19,7 +21,8 @@ export const Layout = () => {
       <StyledHeader>
         <Link to="/home">LOGO link to HOME</Link>
         <p>Hello, {userName}</p>
-        <button type="submit" onClick={handleOnClick}>
+        {/* <button type="submit" onClick={handleOnClick}> */}
+        <button type="submit" onClick={handleOpenModal}>
           Log out
         </button>
       </StyledHeader>
