@@ -1,4 +1,7 @@
+import { notifyRegisterSuccess } from 'components/Toastify/Toastify';
+
 const { createSlice } = require('@reduxjs/toolkit');
+
 const {
   registerUserThunk,
   logInUserThunk,
@@ -8,9 +11,11 @@ const {
 const { initialState } = require('redux/initialState');
 
 const fulfilledRegistration = (state, { payload }) => {
+  console.log(payload);
   state.user = payload.user;
   state.token = payload.token;
   state.isAuth = true;
+  //notifyRegisterSuccess();
 };
 
 const fulfilledLogIn = (state, { payload }) => {
@@ -39,6 +44,13 @@ const fulfilledCurrentUser = (state, { payload }) => {
 const registerSlice = createSlice({
   name: 'register',
   initialState: initialState,
+
+  reducers: {
+    updateBalance(state, { payload }) {
+      state.user.balance = payload.balanceAfter;
+    },
+  },
+
   extraReducers: builder =>
     builder
       .addCase(registerUserThunk.fulfilled, fulfilledRegistration)
@@ -48,3 +60,4 @@ const registerSlice = createSlice({
 });
 
 export const registerReducer = registerSlice.reducer;
+export const { updateBalance } = registerSlice.actions;

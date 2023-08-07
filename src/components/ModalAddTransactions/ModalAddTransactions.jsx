@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addTransactionThunk,
-  getTransCategoriesThunk,
+  // getTransCategoriesThunk,
 } from 'redux/Thunks/TransactionsThunk';
 import { selectCategories, selectToken } from 'redux/selectors';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -14,7 +14,7 @@ import Select from 'react-select';
 
 export const ModalAddTransaction = () => {
   const dispatch = useDispatch();
-  const tokenTrans = useSelector(selectToken);
+  // const tokenTrans = useSelector(selectToken);
   const allCategories = useSelector(selectCategories);
   const [typeSelect, setTypeSelect] = useState(false);
   const [categoryItem, setCategoryItem] = useState('');
@@ -53,11 +53,11 @@ export const ModalAddTransaction = () => {
 
   const handleSubmit = values => {
     //evt.preventDefault();
-    console.log(values);
-    console.log(123);
+
     // const logInUserData = values;
     dispatch(addTransactionThunk(values));
     // evt.currentTarget.reset();
+    dispatch(closeAddTrans());
   };
 
   // const handleSubmit = (value) => {
@@ -77,22 +77,22 @@ export const ModalAddTransaction = () => {
 
   // ================GET CATEGORIES
 
-  const handleGetCatigories = () => {
-    dispatch(getTransCategoriesThunk(tokenTrans));
-  };
+  // const handleGetCatigories = () => {
+  //   dispatch(getTransCategoriesThunk(tokenTrans));
+  // };
 
   // ========== ADD TRANS
-  const handleAddTrans = () => {
-    const data = {
-      transactionDate: '2023-01-23',
-      type: 'INCOME',
-      categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-      comment: 'string',
-      amount: 25,
-    };
+  // const handleAddTrans = () => {
+  //   const data = {
+  //     transactionDate: '2023-01-23',
+  //     type: 'INCOME',
+  //     categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
+  //     comment: 'string',
+  //     amount: 25,
+  //   };
 
-    dispatch(addTransactionThunk(data));
-  };
+  //   dispatch(addTransactionThunk(data));
+  // };
 
   // =================CLOSE MODAL
   const handleClickBtnClose = () => {
