@@ -3,11 +3,12 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Layout } from './Layout/Layout';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { PrivateRoute } from 'redux/Guard/PrivateRoute';
 import { PublicRoute } from 'redux/Guard/PublicRoute';
 import Loader from './Loader/Loader';
+import { selectIsAuth } from 'redux/selectors';
 
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -18,10 +19,12 @@ const RegistrationPage = lazy(() =>
 
 export const App = () => {
   const dispatch = useDispatch();
+  const isRegistered = useSelector(selectIsAuth)
 
   useEffect(() => {
+    if(!isRegistered)return
     dispatch(getCurrentUserThunk());
-  }, [dispatch]);
+  }, [dispatch, isRegistered]);
 
   return (
     <Suspense fallback={<Loader />}>

@@ -1,3 +1,5 @@
+import { notifyRegisterSuccess } from 'components/Toastify/Toastify';
+
 const { createSlice } = require('@reduxjs/toolkit');
 const {
   registerUserThunk,
@@ -8,9 +10,11 @@ const {
 const { initialState } = require('redux/initialState');
 
 const fulfilledRegistration = (state, { payload }) => {
+  console.log(payload);
   state.user = payload.user;
   state.token = payload.token;
   state.isAuth = true;
+  //notifyRegisterSuccess();
 };
 
 const fulfilledLogIn = (state, { payload }) => {
