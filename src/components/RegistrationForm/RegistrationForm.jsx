@@ -10,7 +10,7 @@ import HttpsIcon from '@mui/icons-material/Https';
 import { ButtonsBox } from 'pages/RegistrationPage/RegistrationPageStyled';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { notifyRegisterError, notifyTest} from 'components/Toastify/Toastify';
+import { notifyRegisterError} from 'components/Toastify/Toastify';
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -19,10 +19,9 @@ export const RegistrationForm = () => {
     if (values.password === values.confirmPassword) {     
       const registerUserData = {
         username: values.username,
-        //email: values.email,
+        email: values.email,
         password: values.password,
-      };
-      // notifyTest();
+      };      
       dispatch(registerUserThunk(registerUserData));
     } else {
       notifyRegisterError();

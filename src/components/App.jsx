@@ -8,7 +8,7 @@ import { getCurrentUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { PrivateRoute } from 'redux/Guard/PrivateRoute';
 import { PublicRoute } from 'redux/Guard/PublicRoute';
 import Loader from './Loader/Loader';
-import { selectIsAuth } from 'redux/selectors';
+import { selectIsAuth, selectToken } from 'redux/selectors';
 
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -19,12 +19,12 @@ const RegistrationPage = lazy(() =>
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isRegistered = useSelector(selectIsAuth)
+  const token = useSelector(selectToken)
 
   useEffect(() => {
-    if(!isRegistered)return
+    if(!token)return
     dispatch(getCurrentUserThunk());
-  }, [dispatch, isRegistered]);
+  }, [dispatch, token]);
 
   return (
     <Suspense fallback={<Loader />}>

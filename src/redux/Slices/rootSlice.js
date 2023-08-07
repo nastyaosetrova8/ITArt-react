@@ -8,11 +8,12 @@ export function handlePending(state) {
   state.error = null;
 }
 
-export function handleRejected(state, { error }) {  
+export function handleRejected(state, { error }) { 
+  console.log(error);
+  console.log(error.message); 
   state.isLoading = false;
   state.error = error.message;
-  notifyRegisterApiError(error.message)
-  // notifyTest();
+  notifyRegisterApiError(error.message)  
 }
 
 export function handleFulfilled(state) {

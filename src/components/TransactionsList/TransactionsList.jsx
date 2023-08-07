@@ -1,12 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteTransactionThunk } from 'redux/Thunks/TransactionsThunk';
-import { editTransactionThunk } from 'redux/modalTransRedux/modalTransThunks';
+import { useSelector } from 'react-redux';
 
-import {
-  selectCategories,
-  selectToken,
-  selectTransactions,
-} from 'redux/selectors';
+import { selectTransactions } from 'redux/selectors';
 
 import { makerDasboardTab } from 'helpers/helpers';
 
@@ -20,11 +14,8 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { useEffect } from 'react';
-import { columnsDashboardTab } from 'data/data';
 
 export const TransactionsList = () => {
-  const dispatch = useDispatch();
   const transactions = useSelector(selectTransactions);
 
   // const transactions = useSelector(selectTransactions);
@@ -57,34 +48,22 @@ export const TransactionsList = () => {
 
   // ============================ TABLE+++++++++++
 
-  // const testTrans = [
-  //   {
-  //     amount: 100,
-  //     balanceAfter: 79,
-  //     categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-  //     comment: 'dfgbsgfb',
-  //     id: '84ebef4b-65e9-428c-8366-aa7f85a3c911',
-  //     transactionDate: '2023-08-06',
-  //     type: 'INCOME' /*'EXPENSE'*/,
-  //     userId: 'c39fa426-dee5-4c7d-8bac-8bb6cecc41f3',
-  //   },
-  // ];
-  console.log('transactions: ', transactions);
+  const rows = makerDasboardTab(transactions).rows;
+  const columns = makerDasboardTab(transactions).columns;
+  // const rows = transactions.transactions?.map(
+  //   ({ transactionDate, type, categoryId, comment, amount, id }) => {
+  //     return {
+  //       date: transactionDate,
+  //       type: type === 'INCOME' ? '+' : '-',
+  //       category: categoryId,
+  //       comment,
+  //       sum: amount,
+  //       id,
+  //     };
+  //   }
+  // );
 
-  const rows = transactions.transactions?.map(
-    ({ transactionDate, type, categoryId, comment, amount, id }) => {
-      return {
-        date: transactionDate,
-        type: type === 'INCOME' ? '+' : '-',
-        category: categoryId,
-        comment,
-        sum: amount,
-        id,
-      };
-    }
-  );
-
-  const columns = columnsDashboardTab;
+  // const columns = columnsDashboardTab;
 
   return (
     <>
@@ -145,56 +124,5 @@ export const TransactionsList = () => {
         </TableContainer>
       </Paper>
     </>
-
-    // <>
-    //   <table>
-    //     <thead>
-    //       <tr>
-    //         <th>Date</th>
-    //         <th>Type</th>
-    //         <th>Category</th>
-    //         <th>Comment</th>
-    //         <th>Sum</th>
-    //         <th></th>
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {/* {transactions.map(
-    //       ({ id, transactionDate, type, categoryId, comment, amount }) => {
-    //         return (
-    //         //   <tr key={id}>
-    //         //     <td>{transactionDate}</td>
-    //         //     <td>{type === 'INCOME' ? '+' : '-'}</td>
-    //         //     <td>{categoryId}</td>
-    //         //     <td>{comment}</td>
-    //         //     <td>{amount}</td>
-    //         //     <td>
-    //         //       <button>
-    //         //         <Link to={`/api/transactions/${id}`}>Update</Link>
-    //         //       </button>
-
-    //         //       <button>Delete</button>
-    //         //     </td>
-    //         //     </tr> */}
-    //       <tr>
-    //         <td>11.09.20023</td>
-    //         <td>-</td>
-    //         <td>car</td>
-    //         <td>my comment</td>
-    //         <td>12222</td>
-    //         <td>
-    //           <button onClick={handleOnClick}>
-    //             {/* <Link to={`/api/transactions/${id}`}>Update</Link> */}
-    //             update
-    //           </button>
-
-    //           <button type="button" onClick={handleClickDElete}>
-    //             Delete
-    //           </button>
-    //         </td>
-    //       </tr>
-    //     </tbody>
-    //   </table>
-    // </>
   );
 };
