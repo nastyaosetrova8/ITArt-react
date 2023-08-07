@@ -8,6 +8,7 @@ import { closeAddTrans, closeModal, toggleShowModal } from 'redux/modal/modalSli
 import { ModalAddTransaction } from 'components/ModalAddTransactions/ModalAddTransactions';
 import { LogOutForm } from './ModalLogOut';
 import { ModalEditTransaction } from 'components/ModalEditTransactions/ModalEditTransactions';
+import { selectIsAuth } from 'redux/selectors';
 
 // import { createPortal } from "react-dom";
 
@@ -35,6 +36,7 @@ export default function Modal() {
   const isAddTransOpen = useSelector(selectIsAddTransOpen);
   const isOpenLogout = useSelector(selectIsLogoutOpen);
   const isModalClose = useSelector(selectIsModalClose);
+  const isAuth = useSelector(selectIsAuth)
 
   const isShowModal = useSelector(selectIsShowModal)
 
@@ -89,7 +91,7 @@ const handleClickOverlay = e => {
 
         {/* {children} */}
         {isShowModal && modalName === 'addBtn' && <ModalAddTransaction />}
-        {isShowModal &&  modalName === 'logout' && <LogOutForm />}
+        {isShowModal && modalName  === 'logout' && <LogOutForm />}
         {isShowModal &&  modalName === 'edit' && <ModalEditTransaction />}
 
 
