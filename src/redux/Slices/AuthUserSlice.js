@@ -33,7 +33,7 @@ const fulfilledLogOut = state => {
 const fulfilledCurrentUser = (state, { payload }) => {
   // console.log(payload);
   state.user = payload;
-  state.isAuth = true;
+  state.isAuth = true;  
 };
 
 const registerSlice = createSlice({
