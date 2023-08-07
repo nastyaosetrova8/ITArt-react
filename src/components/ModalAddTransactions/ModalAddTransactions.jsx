@@ -19,9 +19,9 @@ export const ModalAddTransaction = () => {
   const [typeSelect, setTypeSelect] = useState(false);
   const [categoryItem, setCategoryItem] = useState('');
 
-  useEffect(() => {
-    dispatch(getTransCategoriesThunk(tokenTrans));
-  }, [dispatch, tokenTrans]);
+  // useEffect(() => {
+  //   dispatch(getTransCategoriesThunk(tokenTrans));
+  // }, [dispatch, tokenTrans]);
 
   // const income = allCategories?.find(category => category.type === 'INCOME');
   // const expense = allCategories?.filter(category => category.type !== 'INCOME');
