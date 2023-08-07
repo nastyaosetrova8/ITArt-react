@@ -11,6 +11,7 @@ export const LogOutForm = () => {
 
   const handleLogOut = () => {
     dispatch(logOutUserThunk());
+    dispatch(toggleShowModal(''));
   };
 
   const handleOnClick = () => {
@@ -30,7 +31,7 @@ export const LogOutForm = () => {
               'linear-gradient(120deg, rgba(255, 199, 39, 1), rgba(158, 64, 186, 1) 80%, rgba(112, 0, 256))',
           }}
           variant="contained"
-          type="submit"
+          type="button"
           onClick={handleLogOut}
         >
           Log Out
@@ -39,7 +40,7 @@ export const LogOutForm = () => {
         <Button
           sx={{ backgroundColor: 'rgba(252, 252, 252, 1)' }}
           variant="contained"
-          type="submit"
+          type="button"
           onClick={handleOnClick}
         >
           Cancel
