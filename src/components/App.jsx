@@ -32,7 +32,7 @@ export const App = () => {
     <>
     <ToastContainer
         position="top-right"
-        autoClose={1500}
+        autoClose={1200}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
