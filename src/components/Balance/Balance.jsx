@@ -11,7 +11,7 @@ function Balance() {
   return (
     <StyledBalance>
       <h2 className="title-balance">Your balance</h2>
-      <p className="balance">₴ {balance}</p>
+      <p className="balance">₴ {balance.toFixed(2)}</p>
     </StyledBalance>
   );
 }
