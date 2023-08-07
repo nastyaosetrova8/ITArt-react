@@ -11,8 +11,7 @@ export const token = {
 
 export const registerRequest = async (registerUserData)=>{
     const {data} = await instance.post('/api/auth/sign-up', registerUserData)
-    token.set(data.token)
-    console.log(data);
+    token.set(data.token)   
     return data
 }
 
