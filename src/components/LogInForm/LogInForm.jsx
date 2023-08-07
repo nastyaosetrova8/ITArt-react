@@ -11,11 +11,10 @@ import { ButtonsBox } from 'pages/LoginPage/LoginPageStyled';
 export const LogInForm = () => {
   const dispatch = useDispatch();
 
-  const handlerOnSubmit = values => {
-    //evt.preventDefault();
-    // console.log(values);
+  const handlerOnSubmit = values => {    
     const logInUserData = values;
     dispatch(logInUserThunk(logInUserData));
+    //Form.reset();
     // evt.currentTarget.reset();
   };
 

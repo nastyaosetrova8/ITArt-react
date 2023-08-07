@@ -16,8 +16,12 @@ export const ModalAddTransaction = () => {
   const dispatch = useDispatch();
   // const tokenTrans = useSelector(selectToken);
   const allCategories = useSelector(selectCategories);
-  const [typeSelect, setTypeSelect] = useState(true);
-  // const [categoryItem, setCategoryItem] = useState('');
+  const [typeSelect, setTypeSelect] = useState(false);
+  const [categoryItem, setCategoryItem] = useState('');
+
+  // useEffect(() => {
+  //   dispatch(getTransCategoriesThunk(tokenTrans));
+  // }, [dispatch, tokenTrans]);
 
   // const income = allCategories?.find(category => category.type === 'INCOME');
   // const expense = allCategories?.filter(category => category.type !== 'INCOME');

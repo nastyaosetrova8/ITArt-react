@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { currentUserRequest, logInRequest, logOutRequest, registerRequest, token } from 'Api/authApi';
+//import { notifyRegisterApiError } from 'components/Toastify/Toastify';
 
 
 
@@ -19,3 +20,17 @@ export const getCurrentUserThunk = createAsyncThunk('user/currentUser', async (_
 
     }
 }) 
+
+// export const registerUserThunk = createAsyncThunk('user/register', async(registerUserData, thunkAPI)=>{
+//     try{
+//         const dataRequest = await registerRequest(registerUserData);
+//         console.log(dataRequest);
+//         return dataRequest
+//     }catch(error){
+//         // console.log(error.message);
+//         notifyRegisterApiError(error.message)
+//         thunkAPI.rejectWithValue(error.message);
+     
+//         return
+//     }
+//  })

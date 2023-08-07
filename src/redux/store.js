@@ -27,7 +27,7 @@ const store = configureStore({
   reducer: {
     register: persistReducer(registerPersistConfig, registerReducer),
     root: rootReducer,
-    transactoinsSummary: transactionsSummaryReducer,
+    transactionsSummary: transactionsSummaryReducer,
     modal: modalReducer,
     transactions: transactionsReducer,
   },

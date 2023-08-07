@@ -31,8 +31,7 @@ export const Container = styled(Card)`
 
   h3 {
     margin: 0 auto;
-    //color: var(--white, #fbfbfb);
-    font-family: Poppins;
+    color: var(--white, #fbfbfb);    
     font-size: 28px;
     /* font-style: normal; */
     font-weight: 400;
