@@ -3,15 +3,22 @@ import { Link } from 'react-router-dom';
 import { registerUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, InputAdornment, Stack, TextField } from '@mui/material';
+import { Button, IconButton, InputAdornment, Stack, TextField } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
 import { ButtonsBox } from 'pages/RegistrationPage/RegistrationPageStyled';
 import { notifyRegisterError} from 'components/Toastify/Toastify';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useState } from 'react';
 
 
 export const RegistrationForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(show => !show);
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
   const dispatch = useDispatch();
 
   const handlerOnSubmit = values => {
@@ -90,12 +97,25 @@ export const RegistrationForm = () => {
                         <HttpsIcon />
                       </InputAdornment>
                     ),
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
                   }}
                   style={{ width: '100%' }}
                   variant="standard"
                   label="Password"
                   name="password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
+                  //type="password"
                   onChange={formik.handleChange}
                   error={Boolean(formik.errors.password)}
                   helperText={
@@ -111,12 +131,24 @@ export const RegistrationForm = () => {
                         <HttpsIcon />
                       </InputAdornment>
                     ),
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >                          
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
                   }}
                   style={{ width: '100%' }}
                   variant="standard"
                   label="Confirm password"
                   name="confirmPassword"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
+                  // type="password"
                   onChange={formik.handleChange}
                   error={Boolean(formik.errors.confirmPassword)}
                   helperText={
