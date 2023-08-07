@@ -4,32 +4,36 @@ import { selectToken, selectTransactions } from 'redux/selectors';
 
 import { makerDasboardTab } from 'helpers/helpers';
 
-import {
-  Button,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material';
+import { Paper, Table, TableCell, TableContainer } from '@mui/material';
 import { deleteTransactionThunk } from 'redux/Thunks/TransactionsThunk';
+import {
+  BtnCont,
+  BtnDelete,
+  BtnEdit,
+  BtnIcon,
+  HeadRow,
+  TableBodySt,
+  TableHeadSt,
+  TableRowStyled,
+} from './TransactionsListStyled';
+import { toggleShowModal } from 'redux/modal/modalSlice';
 
 export const TransactionsList = () => {
-  const transactions = useSelector(selectTransactions);
-  const dispatch = useDispatch();
   const token = useSelector(selectToken);
-
-  // const transactions = useSelector(selectTransactions);
+  const dispatch = useDispatch();
+  const transactions = useSelector(selectTransactions);
 
   // const handleOnClick = evt => {
 
   //   dispatch(editTransactionThunk());
   // };
 
+  const handleOnClick = e => {
+    dispatch(toggleShowModal(e.currentTarget.name));
+  };
+
   // ==========DELETE TRANS
-  const handleClickDElete = () => {
+  const handleClickDelete = () => {
     const dataEdit = {
       id: 'f2103647-98f1-4278-96b7-3b33112ef5e7',
       transactionDate: '2023-01-23',
@@ -86,45 +90,72 @@ export const TransactionsList = () => {
               background: 'transparent',
             }}
           >
-            <TableHead>
-              <TableRow>
+            <TableHeadSt>
+              <HeadRow>
                 {columns.map(column => (
                   <TableCell
                     key={column.id}
                     align={column.align}
                     style={{ maxWidth: column.maxWidth }}
+                    sx={{
+                      borderBottom: 'none',
+                      fontWeight: 600,
+                    }}
                   >
                     {column.name}
                   </TableCell>
                 ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
+              </HeadRow>
+            </TableHeadSt>
+            <TableBodySt>
               {rows.map(row => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                  <TableRowStyled role="checkbox" tabIndex={-1} key={row.id}>
                     {columns.map((column, idx) => {
                       const value = row[column.id];
 
                       return idx === columns.length - 1 ? (
-                        <TableCell key={column.id} align={column.align}>
-                          <Button type="button">edit</Button>
-                          <Button type="button" onClick={handleClickDElete}>
-                            del
-                          </Button>
-                        </TableCell>
+                        <BtnCont
+                          key={column.id}
+                          align={column.align}
+                          sx={{
+                            borderBottom: 'none',
+                          }}
+                        >
+                          <BtnEdit
+                            type="button"
+                            name="edit"
+                            onClick={handleOnClick}
+                          >
+                            <BtnIcon sx={{ fontSize: 18 }} />
+                          </BtnEdit>
+                          {/* <ModalEditTransactions /> */}
+                          <BtnDelete
+                            id={row.id}
+                            type="button"
+                            onClick={handleClickDelete(row.id)}
+                          >
+                            Delete
+                          </BtnDelete>
+                        </BtnCont>
                       ) : (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          sx={{
+                            borderBottom: 'none',
+                          }}
+                        >
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}
                         </TableCell>
                       );
                     })}
-                  </TableRow>
+                  </TableRowStyled>
                 );
               })}
-            </TableBody>
+            </TableBodySt>
           </Table>
         </TableContainer>
       </Paper>

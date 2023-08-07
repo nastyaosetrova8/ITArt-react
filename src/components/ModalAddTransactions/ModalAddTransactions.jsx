@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   addTransactionThunk,
   getTransCategoriesThunk,
-  // getTransCategoriesThunk,
 } from 'redux/Thunks/TransactionsThunk';
 import { selectCategories, selectToken } from 'redux/selectors';
-import { closeAddTrans } from 'redux/modal/modalSlice';
+import { closeAddTrans, toggleShowModal } from 'redux/modal/modalSlice';
 import { useFormik } from 'formik';
 import Select from 'react-select';
 import css from './ModalAddTransactions.module.css';
@@ -80,8 +79,12 @@ export const ModalAddTransaction = () => {
   };
 
   // =================CLOSE MODAL
+  // const handleClickBtnClose = () => {
+  //   dispatch(closeAddTrans());
+  // };
+
   const handleClickBtnClose = () => {
-    dispatch(closeAddTrans());
+    dispatch(toggleShowModal(''));
   };
 
   const formik = useFormik({
