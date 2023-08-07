@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     isAddTransOpen: false,
     isEditTransOpen: false,
+    isLogoutOpen: false,
   };
 
 
@@ -36,8 +37,14 @@ const initialState = {
       closeEditTrans(state) {
         state.isEditTransOpen = false;
       },
+      openLogout: state => {
+        state.isLogoutOpen = true;
+      },
+      closeLogout(state) {
+        state.isLogoutOpen = false;
+      },
       }
   });
   
   export const modalReducer = modalOpenSlice.reducer;
-  export const { openAddTrans, closeAddTrans, openEditTrans, closeEditTrans } = modalOpenSlice.actions;
+  export const { openAddTrans, closeAddTrans, openEditTrans, closeEditTrans, openLogout, closeLogout } = modalOpenSlice.actions;

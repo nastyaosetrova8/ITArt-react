@@ -1,5 +1,7 @@
 //import { notifyRegisterSuccess } from 'components/Toastify/Toastify';
 
+import { notifyRegisterSuccess } from 'components/Toastify/Toastify';
+
 const { createSlice } = require('@reduxjs/toolkit');
 
 const {
@@ -10,14 +12,17 @@ const {
 } = require('redux/Thunks/AuthUserThunk');
 const { initialState } = require('redux/initialState');
 
-const fulfilledRegistration = (state, { payload }) => {  
+const fulfilledRegistration = (state, { payload }) => {
+  notifyRegisterSuccess(payload.user.username);  
   state.user = payload.user;
   state.token = payload.token;
   state.isAuth = true;
-  //notifyRegisterSuccess();
+  // notifyRegisterSuccess();
 };
 
 const fulfilledLogIn = (state, { payload }) => {
+  console.log(payload);
+  notifyRegisterSuccess(payload.user.username);
   state.user = payload.user;
   state.token = payload.token;
   state.isAuth = true;

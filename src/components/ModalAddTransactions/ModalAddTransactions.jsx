@@ -1,50 +1,57 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addTransactionThunk,
   // getTransCategoriesThunk,
 } from 'redux/Thunks/TransactionsThunk';
 import { selectCategories, selectToken } from 'redux/selectors';
-import { AiOutlineClose } from 'react-icons/ai';
 import { closeAddTrans } from 'redux/modal/modalSlice';
-import { Formik } from 'formik';
+import { useFormik } from 'formik';
 import Select from 'react-select';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import css from './ModalAddTransactions.module.css';
 // import { Select } from '@mui/material';
 // import * as Yup from 'yup';
+// import Datetime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
+// import moment from 'moment';
+// import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
+import {
+  StyledAddBtn,
+  StyledCalendarIcon,
+  StyledCancelBtn,
+  StyledDatetime,
+  StyledDatetimeWrap,
+  StyledForm,
+  StyledInputs,
+  StyledInputsWrapper,
+  StyledMinusBtn,
+  StyledPlusBtn,
+  StyledSwitch,
+  StyledSwitchWrapper,
+  StyledTitle,
+  styledSelectCategories,
+} from './ModalAddTransactions.styled';
+// import { BsPlusLg } from 'react-icons/bs';
+// import { HiOutlineMinus } from 'react-icons/hi';
 
 export const ModalAddTransaction = () => {
   const dispatch = useDispatch();
   // const tokenTrans = useSelector(selectToken);
   const allCategories = useSelector(selectCategories);
-  const [typeSelect, setTypeSelect] = useState(false);
-  const [categoryItem, setCategoryItem] = useState('');
 
-  // useEffect(() => {
-  //   dispatch(getTransCategoriesThunk(tokenTrans));
-  // }, [dispatch, tokenTrans]);
+  useEffect(() => {
+    dispatch(getTransCategoriesThunk(tokenTrans));
+  }, [dispatch, tokenTrans]);
 
-  // const income = allCategories?.find(category => category.type === 'INCOME');
-  // const expense = allCategories?.filter(category => category.type !== 'INCOME');
-
-  const options = allCategories.map(category => ({
-    // id: category.id,
-    // value: category.type,
-    // label: category.name,
-
+  const incomeCat = allCategories.find(category => category.type === 'INCOME');
+  const expenseCat = allCategories.filter(
+    category => category.type !== 'INCOME'
+  );
+  const options = expenseCat.map(category => ({
     value: category.id,
     label: category.name,
   }));
-
-  // console.log(options)
-  const initialValues = {
-    type: typeSelect ? 'INCOME' : 'EXPENSE',
-    categoryId: typeSelect ? '063f1132-ba5d-42b4-951d-44011ca46262' : '',
-    amount: '',
-    transactionDate: new Date().toISOString().slice(0, 10),
-    comment: '',
-  };
 
   // const validationSchema = Yup.object().shape({
   //   amount: Yup.number()
@@ -52,193 +59,140 @@ export const ModalAddTransaction = () => {
   //     .required('Required'),
   //   categoryId: Yup.string().required('Required'),
   // });
-
-  const handleSubmit = values => {
-    //evt.preventDefault();
-
-    // const logInUserData = values;
-    dispatch(addTransactionThunk(values));
-    // evt.currentTarget.reset();
-    dispatch(closeAddTrans());
-  };
-
-  // const handleSubmit = (value) => {
-  //   const data = {
-  //     ...value,
-  //     type: typeSelect ? 'INCOME' : 'EXPENSE',
-  //     amount: `${!typeSelect ? Number(value.amount) * -1 : Number(value.amount)}`,
-  //     categoryId: `${
-  //       !typeSelect
-  //         ? categoryItem?.id ?? '27eb4b75-9a42-4991-a802-4aefe21ac3ce'
-  //         : income[0].id
-  //     }`,
-  //   };
-  //   dispatch(addTransactionThunk(data));
-  //   // resetForm();
-  // };
-
   // ================GET CATEGORIES
 
-  // const handleGetCatigories = () => {
-  //   dispatch(getTransCategoriesThunk(tokenTrans));
-  // };
+  const handleGetCatigories = () => {
+    dispatch(getTransCategoriesThunk(tokenTrans));
+  };
 
   // ========== ADD TRANS
-  // const handleAddTrans = () => {
-  //   const data = {
-  //     transactionDate: '2023-01-23',
-  //     type: 'INCOME',
-  //     categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-  //     comment: 'string',
-  //     amount: 25,
-  //   };
+  const handleAddTrans = () => {
+    const data = {
+      transactionDate: '2023-01-23',
+      type: 'INCOME',
+      categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
+      comment: 'string',
+      amount: 25,
+    };
 
-  //   dispatch(addTransactionThunk(data));
-  // };
+    dispatch(addTransactionThunk(data));
+  };
 
   // =================CLOSE MODAL
   const handleClickBtnClose = () => {
     dispatch(closeAddTrans());
   };
 
+  const formik = useFormik({
+    initialValues: {
+      type: false,
+      categoryId: 'Income',
+      amount: '',
+      transactionDate: new Date(),
+      comment: '',
+    },
+
+    onSubmit: value => {
+      if (!formik.values.type) {
+        dispatch(
+          addTransactionThunk({
+            ...value,
+            type: 'EXPENSE',
+            amount: 0 - value.amount,
+            transactionDate: new Date().toISOString().substring(0, 10),
+          })
+        );
+      } else {
+        dispatch(
+          addTransactionThunk({
+            ...value,
+            type: 'INCOME',
+            categoryId: incomeCat?.id,
+            transactionDate: new Date().toISOString().substring(0, 10),
+          })
+        );
+      }
+    },
+  });
+
   return (
-    <>
-    <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-    <Formik
-      initialValues={initialValues}
-      // validationSchema={validationSchema}
-      onSubmit={values => handleSubmit(values)}
-      // initialValues={{
-      //   type: typeSelect ? 'INCOME' : 'EXPENSE',
-      //   categoryId: '',
-      //   amount: '',
-      //   transactionDate: new Date().toISOString().slice(0, 10),
-      //   comment: '',
-      // }}
-      // validationSchema={Yup.object().shape({
-      //   amount: Yup.number()
-      //     .typeError('Please enter a valid number')
-      //     .required('Required'),
-      //   categoryId: Yup.string().required('Required'),
-      // })}
-      // handleSubmit={(value, { resetForm }) => {
-      //   const data = {
-      //     ...value,
-      //     type: typeSelect ? 'INCOME' : 'EXPENSE',
-      //     amount: `${
-      //       !typeSelect ? Number(-value.amount) : Number(value.amount)
-      //     }`,
-      //     categoryId: `${
-      //       !typeSelect
-      //         ? categoryItem?.id ?? '27eb4b75-9a42-4991-a802-4aefe21ac3ce'
-      //         : income[0].id
-      //     }`,
-      //   };
-      //   dispatch(addTransactionThunk(data));
-      //   resetForm();
-      // }}
-    >
-      {formik => (
-        <div>
-          <h2>Add transaction</h2>
-          <div>
-            <p>Income</p>
-            <label>
-              <input
-                type="checkbox"
-                name="type"
-                value={formik.values.type}
-                onClick={formik.handleChange}
-              />
-              <span>
-                <span>
-                  {!typeSelect ? (
-                    <span>
-                      <AiOutlineClose />
-                    </span>
-                  ) : (
-                    <span>
-                      <AiOutlineClose />
-                    </span>
-                  )}
-                </span>
-              </span>
-            </label>
-            <p>Expense</p>
-          </div>
+    <div>
+      <StyledTitle>Add transaction</StyledTitle>
+      <StyledSwitchWrapper>
+        <p className={formik.values.type ? css.income : css.text}>Income</p>
+        <StyledSwitch>
+          <input
+            type="checkbox"
+            name="type"
+            className={css.switchInput}
+            value={formik.values.type}
+            onClick={formik.handleChange}
+          />
 
-          <form onSubmit={formik.handleSubmit}>
-            {!typeSelect && (
-              <Select
-                placeholder="Select a category"
-                options={options}
-                value={formik.values.value}
-                name={formik.values.label}
-                type="text"
-                onChange={({ value }) =>
-                  formik.setFieldValue('categoryId', value)
-                }
-                // onBlur={formik.handleBlur}
-                // onClick = {handleGetCatigories}
-              />
-            )}
-            <div>
-              <input
-                type="number"
-                name="amount"
-                value={formik.values.amount}
-                placeholder="0.00"
-                onChange={formik.handleChange}
-              />
-              {/* <Flatpickr
-                options={{
-                  dateFormat: 'd.m.Y',
-                  disableMobile: 'true',
-                  allowInput: false,
-                }}
-                type="date"
-                name="transactionDate"
-                value={transactionDate}
-                id="date"
-                placeholder="YYYY.MM.DD"
-                className={css.input}
-                onChange={val => {
-                  formik.setFieldValue('transactionDate', val[0]);
-                }}
-              /> */}
+          <span className={css.slider}>
+            <span
+              className={`${css.btnSwitch} ${
+                formik.values.type ? css.btnSwitchPlus : css.btnSwitchMinus
+              }`}
+            >
+              {!formik.values.type ? <StyledMinusBtn /> : <StyledPlusBtn />}
+            </span>
+          </span>
+        </StyledSwitch>
+        <p className={!formik.values.type ? css.expense : css.text}>Expense</p>
+      </StyledSwitchWrapper>
 
-              {/* <span>
-SVG
-              </span> */}
-            </div>
-            <input
-              type="text"
-              name="comment"
-              value={formik.values.comment}
-              placeholder="Comment"
-              onChange={formik.handleChange}
+      <StyledForm onSubmit={formik.handleSubmit}>
+        {!formik.values.type && (
+          <Select
+            type="text"
+            name={formik.values.label}
+            value={formik.values.value}
+            options={options}
+            styles={styledSelectCategories}
+            placeholder="Select a category"
+            onChange={({ value }) => formik.setFieldValue('categoryId', value)}
+            onBlur={formik.handleBlur}
+          />
+        )}
+
+        <StyledInputsWrapper>
+          <StyledInputs
+            type="number"
+            name="amount"
+            value={formik.values.amount}
+            placeholder="0.00"
+            autoComplete="off"
+            onChange={formik.handleChange}
+          />
+
+          <StyledDatetimeWrap>
+            <StyledDatetime
+              value={formik.values.transactionDate}
+              onChange={value =>
+                formik.setFieldValue('transactionDate', value[0])
+              }
+              closeOnSelect={true}
+              timeFormat={false}
+              dateFormat="DD.MM.yyyy"
+              isValidDate={formik.valid}
             />
-            <button type="submit">Add</button>
-          </form>
-          <button type="button" onClick={handleClickBtnClose}>
-            Cancel
-          </button>
-        </div>
-      )}
-    </Formik>
-    </>
+
+            <StyledCalendarIcon color={'rgba(115, 74, 239, 1)'} />
+          </StyledDatetimeWrap>
+        </StyledInputsWrapper>
+        <StyledInputs
+          type="text"
+          name="comment"
+          value={formik.values.comment}
+          placeholder="Comment"
+          onChange={formik.handleChange}
+        />
+        <StyledAddBtn type="submit">Add</StyledAddBtn>
+      </StyledForm>
+      <StyledCancelBtn type="button" onClick={handleClickBtnClose}>
+        Cancel
+      </StyledCancelBtn>
+    </div>
   );
 };
-
-// onClick={handleAddTrans}

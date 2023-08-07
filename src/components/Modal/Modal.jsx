@@ -68,7 +68,7 @@ export default function Modal() {
           <AiOutlineClose size={16} fill="white"/>
         </StyledCloseBtn>}
         {/* {children} */}
-        <ModalAddTransaction />
+        {isAddTransOpen && <ModalAddTransaction />}
 
 
       </StyledModal>
