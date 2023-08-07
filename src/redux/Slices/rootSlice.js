@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { notifyRegisterApiError } from 'components/Toastify/Toastify';
+//import { notifyTest } from 'components/Toastify/Toastify';
 import { initialRootState } from 'redux/initialState';
 
 export function handlePending(state) {
@@ -6,9 +8,11 @@ export function handlePending(state) {
   state.error = null;
 }
 
-export function handleRejected(state, { error }) {
+export function handleRejected(state, { error }) {  
   state.isLoading = false;
   state.error = error.message;
+  notifyRegisterApiError(error.message)
+  // notifyTest();
 }
 
 export function handleFulfilled(state) {
