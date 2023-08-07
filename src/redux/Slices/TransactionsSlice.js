@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   addTransactionThunk,
   editTransactionThunk,
-  fetchTransactionsThunk,
+  // fetchTransactionsThunk,
   getTransCategoriesThunk,
   getTransactionsThunk,
 } from 'redux/Thunks/TransactionsThunk';
@@ -59,8 +59,7 @@ const transactionsSlice = createSlice({
       // -------- Add transactions --------
       .addCase(addTransactionThunk.fulfilled, (state, { payload }) => {
         // state.isLoading = false;
-        state.transactions.items.push(payload);
-        state.register.user.balance = payload.balanceAfter;
+        state.transactions.push(payload);
       })
 
       // -------- Edit transactions --------
