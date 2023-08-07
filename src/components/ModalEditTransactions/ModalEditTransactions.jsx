@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { editTransactionThunk } from "redux/Thunks/TransactionsThunk";
+import { toggleShowModal } from "redux/modal/modalSlice";
 import { selectToken } from "redux/selectors";
 
 
@@ -7,13 +8,19 @@ import { selectToken } from "redux/selectors";
 
 
 
-export const ModalAddTransaction = () => {
+export const ModalEditTransaction = () => {
     const dispatch = useDispatch();
     const tokenTrans = useSelector(selectToken);
 
 
 
 
+
+
+    const handleClickBtnClose = () => {
+      dispatch(toggleShowModal(''));
+     };
+     
 // ========== EDIT TRANS
 const handleClickUpdate = () => {
 
@@ -42,6 +49,10 @@ const handleClickUpdate = () => {
 
     <button type="button" onClick={handleClickUpdate}>
       Update
+    </button>
+
+    <button type="button" onClick={handleClickBtnClose}>
+      Cancel
     </button>
     </>
   )

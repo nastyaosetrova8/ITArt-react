@@ -21,11 +21,16 @@ export const TransactionsList = () => {
   const tokenTrans = useSelector(selectToken);
   const dispatch = useDispatch();
   const transactions = useSelector(selectTransactions);
+  
 
   // const handleOnClick = evt => {
 
   //   dispatch(editTransactionThunk());
   // };
+
+  const handleOnClick = e => {
+      dispatch(toggleShowModal(e.currentTarget.name));
+  };
 
   // ==========DELETE TRANS
   const handleClickDelete = transactionId => {
@@ -124,7 +129,7 @@ export const TransactionsList = () => {
                             borderBottom: 'none',
                           }}
                         >
-                          <BtnEdit type="button">
+                          <BtnEdit type="button" name='edit' onClick={handleOnClick}>
                             <BtnIcon sx={{ fontSize: 18 }} />
                           </BtnEdit>
                           {/* <ModalEditTransactions /> */}

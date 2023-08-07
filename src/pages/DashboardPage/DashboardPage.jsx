@@ -23,6 +23,7 @@ function DashboardPage() {
     dispatch(getTransCategoriesThunk(token));
   }, [dispatch, token, isAuth]);
 
+
   return (
     isAuth && (
       <StyledContainer>
