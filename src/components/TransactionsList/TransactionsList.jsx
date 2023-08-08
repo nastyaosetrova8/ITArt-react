@@ -71,6 +71,7 @@ export const TransactionsList = () => {
                     sx={{
                       borderBottom: 'none',
                       fontWeight: 600,
+                      fontSize: '16px',
                     }}
                   >
                     {column.name}
@@ -88,10 +89,6 @@ export const TransactionsList = () => {
                       return idx === columns.length - 1 ? (
                         <BtnCont
                           key={column.id}
-                          align={column.align}
-                          sx={{
-                            borderBottom: 'none',
-                          }}
                         >
                           <BtnEdit
                             id={row.id}
@@ -101,7 +98,6 @@ export const TransactionsList = () => {
                           >
                             <BtnIcon sx={{ fontSize: 18 }} />
                           </BtnEdit>
-                          {/* <ModalEditTransactions /> */}
                           <BtnDelete
                             id={row.id}
                             type="button"

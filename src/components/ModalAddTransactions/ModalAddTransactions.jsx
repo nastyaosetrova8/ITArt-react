@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addTransactionThunk,
@@ -39,6 +39,7 @@ export const ModalAddTransaction = () => {
   const dispatch = useDispatch();
   const tokenTrans = useSelector(selectToken);
   const allCategories = useSelector(selectCategories);
+  const [typeSelect, setTypeSelect] = useState(false);
 
   useEffect(() => {
     dispatch(getTransCategoriesThunk(tokenTrans));
@@ -116,8 +117,11 @@ export const ModalAddTransaction = () => {
           })
         );
       }
+      handleClickBtnClose()
     },
   });
+
+  
 
   return (
     <div>
@@ -190,6 +194,7 @@ export const ModalAddTransaction = () => {
           name="comment"
           value={formik.values.comment}
           placeholder="Comment"
+          autoComplete="off"
           onChange={formik.handleChange}
         />
         <StyledAddBtn type="submit">Add</StyledAddBtn>

@@ -5,11 +5,14 @@ import {
   selectIsShowModal,
 } from 'redux/modal/modalSelectors';
 import { openAddTrans, toggleShowModal } from 'redux/modal/modalSlice';
+import { BtnPlus, BtnStyled } from './StyledButtonAddTransacaction';
 
 export const ButtonAddTransactions = () => {
   const isShowModal = useSelector(selectIsShowModal);
   // const isAddTransOpen = useSelector(selectIsAddTransOpen);
   const dispatch = useDispatch();
+
+  //console.log(isShowModal)
 
   // ==============OPEN MODAL
   // const handleOpenModal = () => {
@@ -22,9 +25,9 @@ export const ButtonAddTransactions = () => {
 
   return (
     <>
-      <button type="button" name="addBtn" onClick={handleOpenModal}>
-        Open Modal
-      </button>
+      <BtnStyled type="button" name="addTrans" onClick={handleOpenModal}>
+        <BtnPlus />
+      </BtnStyled>
       {isShowModal && <Modal />}
     </>
   );

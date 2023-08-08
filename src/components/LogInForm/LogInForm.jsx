@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
-import { ButtonsBox } from 'pages/LoginPage/LoginPageStyled';
+import { ButtonActive, ButtonWhite, ButtonsBox } from 'pages/LoginPage/LoginPageStyled';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useState } from 'react';
 
@@ -100,25 +100,20 @@ export const LogInForm = () => {
               />
             
               <ButtonsBox style={{ margin: '52px auto 0' }}>
-                <Button
-                  sx={{
-                    backgroundImage:
-                      'linear-gradient(120deg, rgba(255, 199, 39, 1), rgba(158, 64, 186, 1) 80%, rgba(112, 0, 256))',
-                  }}
+                <ButtonActive                  
                   variant="contained"
                   type="submit"
                 >
                   Log in
-                </Button>
+                </ButtonActive>
 
                 <Link to="/register">
-                  <Button
-                    sx={{ backgroundColor: 'rgba(252, 252, 252, 1)' }}
+                  <ButtonWhite                    
                     variant="contained"
                     type="submit"
                   >
                     Register
-                  </Button>
+                  </ButtonWhite>
                 </Link>
               </ButtonsBox>
             </Stack>

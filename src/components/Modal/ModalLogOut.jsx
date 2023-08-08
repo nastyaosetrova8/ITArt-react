@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { logOutUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Button } from '@mui/material';
-import { ButtonsBox } from 'pages/LoginPage/LoginPageStyled';
-import { LogoStyle } from './ModalLogOutStyled';
+// import { ButtonsBox } from 'pages/LoginPage/LoginPageStyled';
+import { ButtonActive, ButtonWhite, ButtonsBox, LogoStyle, ModalWrap } from './ModalLogOutStyled';
 import Logo from '../../assets/images/logo.svg';
 import { toggleShowModal } from 'redux/modal/modalSlice';
 
@@ -19,33 +19,30 @@ export const LogOutForm = () => {
   };
 
   return (
-    <>
+    <ModalWrap>
       <LogoStyle>
         <img src={Logo} alt="Logo Wallet" width="36px" height="36px" />
-        <h3>Are you sure you want to log out?</h3>
+        <h3>MoneyGuard</h3>
+        <h4>Are you sure you want to log out?</h4>
       </LogoStyle>
-      <ButtonsBox style={{ margin: '52px auto 0' }}>
-        <Button
-          sx={{
-            backgroundImage:
-              'linear-gradient(120deg, rgba(255, 199, 39, 1), rgba(158, 64, 186, 1) 80%, rgba(112, 0, 256))',
-          }}
+      <ButtonsBox >
+        <ButtonActive         
           variant="contained"
           type="button"
           onClick={handleLogOut}
         >
           Log Out
-        </Button>
+        </ButtonActive>
 
-        <Button
-          sx={{ backgroundColor: 'rgba(252, 252, 252, 1)' }}
+        <ButtonWhite
+          // sx={{ backgroundColor: 'rgba(252, 252, 252, 1)' }}
           variant="contained"
           type="button"
           onClick={handleOnClick}
         >
           Cancel
-        </Button>
+        </ButtonWhite>
       </ButtonsBox>
-    </>
+    </ModalWrap>
   );
 };

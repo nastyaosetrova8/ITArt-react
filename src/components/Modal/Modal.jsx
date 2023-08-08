@@ -44,7 +44,7 @@ export default function Modal() {
   // const modal = useSelector(selectShowModal);
 
   const dispatch = useDispatch();
-  const isAddTransOpen = useSelector(selectIsAddTransOpen);
+  // const isAddTransOpen = useSelector(selectIsAddTransOpen);
   const isOpenLogout = useSelector(selectIsLogoutOpen);
   const isModalClose = useSelector(selectIsModalClose);
   const isAuth = useSelector(selectIsAuth);
@@ -104,9 +104,9 @@ export default function Modal() {
         )}
 
         {/* {children} */}
-        {isShowModal && modalName === 'addBtn' && <ModalAddTransaction />}
-        {isShowModal && modalName === 'logout' && <LogOutForm />}
-        {isShowModal && modalName === 'edit' && <ModalEditTransaction />}
+        {modalName === 'addTrans' && isShowModal && <ModalAddTransaction />}
+        {modalName === 'logout' && isShowModal && <LogOutForm />}
+        {modalName === 'edit' && isShowModal && <ModalEditTransaction />}
       </StyledModal>
     </StyledOverlay>,
     modalRoot

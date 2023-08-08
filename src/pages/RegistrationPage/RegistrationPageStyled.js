@@ -31,12 +31,16 @@ export const Container = styled(Card)`
     font-size: 28px;
     /* font-style: normal; */
     font-weight: 400;
-    line-height: normal;
+    line-height: 40px;
+  }
+  @media (max-width: 780px) {
+    padding: 23px 20px;
+    //width: 533px;
   }
 `;
 export const LogoStyle = styled.div`
   /* outline: 1px solid black; */
-  width: 182px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -55,10 +59,32 @@ export const ButtonsBox = styled.div`
     width: 300px;
     height: 50px;
     border-radius: 20px;
-    color: rgba(98, 63, 139, 1);
+    font-size: 18px;
+    text-transform: uppercase;
+    transition: font-weight 250ms ease-in;
+    border: transparent;
+
     &:hover {
-      background-color: rgba(252, 252, 252, 1);
       border: 1px solid rgba(74, 86, 226, 1);
+      font-weight: bold;
     }
   }
+  @media (max-width: 780px){
+    button{
+      width: 280px;
+    }
+  }
+`;
+export const ButtonActive = styled.button`
+  color: white;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 199, 39, 1),
+    rgba(158, 64, 186, 1) 80%,
+    rgba(112, 0, 256)
+  );
+`;
+export const ButtonWhite = styled.button`
+  color: rgba(98, 63, 139, 1);
+  background-color: rgba(252, 252, 252, 1);
 `;

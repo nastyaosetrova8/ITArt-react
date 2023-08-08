@@ -4,6 +4,7 @@ import { useCategoriesType } from 'hooks/selectedCategories';
 import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import { selectBalance, selectSummary } from 'redux/selectors';
+import { ChartWrapper, StyledSpan } from './StyledChart';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 //example
@@ -60,12 +61,9 @@ export const Chart = () => {
   };
 
   return (
-    <div>
-      <span>Element Chart</span>
-      <div>
-        <Doughnut data={data} options={options}></Doughnut>
-        <p>₴ {balance}</p>
-      </div>
-    </div>
+    <ChartWrapper>
+      <Doughnut data={data} options={options}></Doughnut>
+      <StyledSpan>₴ {balance.toFixed(2)}</StyledSpan>
+    </ChartWrapper>
   );
 };

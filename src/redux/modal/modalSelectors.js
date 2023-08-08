@@ -1,9 +1,9 @@
 
 
-export const selectIsAddTransOpen = state => state.modal.isAddTransOpen;
-export const selectIsEditTransOpen = state => state.modal.isEditTransOpen;
+export const selectIsEditTrans = state => state.modal.isEditTrans;
+// export const selectIsAddTransOpen = state => state.modal.isAddTransOpen;
+// export const selectIsEditTransOpen = state => state.modal.isEditTransOpen;
 export const selectIsLogoutOpen = state => state.modal.isLogoutOpen;
-
 
 
 export const selectIsModalClose = state => state.modal.isModalClose;
