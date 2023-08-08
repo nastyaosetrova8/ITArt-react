@@ -13,6 +13,16 @@ export const handleCurrency = data => {
   return currency;
 };
 
+// const makerFormatDate = date => {
+//   const partsDate = date.split('-');
+//   const formattedDate = `${partsDate[2]}.${
+//     partsDate[1]
+//   }.${partsDate[0].substring(2, 4)}`;
+//   return formattedDate;
+// };
+
+// export const makerDashboardTab = ({ transactions, categories }) => {
+
 function formatDate(date) {
   const dateObj = new Date(date);
   const day = String(dateObj.getDate()).padStart(2, '0');
@@ -21,7 +31,7 @@ function formatDate(date) {
   return `${day}.${month}.${year}`;
 }
 
-export const makerDasboardTab = ({ transactions, categories }) => {
+export const makerDashboardTab = ({ transactions, categories }) => {
   if (!transactions) return;
   else {
     const dataTable = {
@@ -30,6 +40,15 @@ export const makerDasboardTab = ({ transactions, categories }) => {
         const matchedNameCategory = categories.find(
           e => e.id === item.categoryId
         );
+        //  return {
+        //   ...item,
+        //   category: matchedNameCategory
+        //     ? matchedNameCategory.name
+        //     : item.categoryId,
+        //   date: makerFormatDate(item.transactionDate),
+        //   type: item.type === 'INCOME' ? '+' : '-',
+        //   sum: item.amount,
+        // };
         const isIncome = item.type === 'INCOME';
 
         const sumStyle = isIncome
