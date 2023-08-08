@@ -12,7 +12,7 @@ export const TableHeadSt = styled.thead`
 `;
 export const HeadRow = styled.tr`
   display: grid;
-  grid-template-columns: 1.11fr 0.5fr 1fr 1.4fr 0.7fr 0.68fr;
+  grid-template-columns: 0.72fr 0.5fr 1.05fr 1.5fr 0.7fr 0.6fr 0.1fr;
   width: 100%;
   color: #fbfbfb;
   border-radius: 8px;
@@ -38,20 +38,11 @@ export const TableRowStyled = styled.tr`
   position: relative;
   margin: 0;
   display: grid;
-  grid-template-columns: 1.4fr 0.6fr 1.2fr 1.7fr 0.7fr 0.4fr 0.1fr;
+  grid-template-columns: 0.8fr 0.6fr 1.2fr 1.7fr 0.7fr 0.4fr 0.1fr;
   width: 100%;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-
-  &:after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    content: '';
-    width: 100%;
-    height: 1px;
-  }
 `;
 export const TableInfo = styled.td``;
 export const BtnCont = styled.td`
@@ -89,11 +80,11 @@ export const BtnDelete = styled.button`
   width: 100%;
   height: 100%;
   padding: 5px 12px;
-  background: linear-gradient(
-    167deg,
-    #ffc727 0%,
-    #9e40ba 61.46%,
-    #7000ff 90.54%
+  background-image: linear-gradient(
+    96.76deg,
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
   );
   box-shadow: 1px 9px 15px rgba(0, 0, 0, 0.2);
   border: none;
@@ -107,7 +98,7 @@ export const BtnDelete = styled.button`
   &:focus,
   &:hover {
     cursor: pointer;
-    background: linear-gradient(97deg, #ffc727 0%, #9e40ba 61%, #7000ff 91%);
+    background: linear-gradient(97deg, #deac1e 0%, #9e40ba 61%, #7c3dcb 91%);
     box-shadow: 1px 5px 8px 0px rgba(0, 0, 0, 0.5);
     transition: 250ms;
     transform: scale(1.03);

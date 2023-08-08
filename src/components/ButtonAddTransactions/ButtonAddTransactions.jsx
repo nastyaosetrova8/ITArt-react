@@ -2,6 +2,7 @@ import Modal from 'components/Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAddTransOpen, selectIsShowModal } from 'redux/modal/modalSelectors';
 import { openAddTrans, toggleShowModal } from 'redux/modal/modalSlice';
+import { BtnPlus, BtnStyled } from './StyledButtonAddTransacaction';
 
 
 export const ButtonAddTransactions = () => {
@@ -10,7 +11,7 @@ export const ButtonAddTransactions = () => {
   // const isAddTransOpen = useSelector(selectIsAddTransOpen);
   const dispatch = useDispatch();
 
-  console.log(isShowModal)
+  //console.log(isShowModal)
   
   // ==============OPEN MODAL
   // const handleOpenModal = () => {

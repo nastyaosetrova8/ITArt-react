@@ -5,7 +5,7 @@ import {
   getTransCategoriesThunk,
 } from 'redux/Thunks/TransactionsThunk';
 import { selectCategories, selectToken } from 'redux/selectors';
-import { closeAddTrans, toggleShowModal } from 'redux/modal/modalSlice';
+import { toggleShowModal } from 'redux/modal/modalSlice';
 import { useFormik } from 'formik';
 import Select from 'react-select';
 import css from './ModalAddTransactions.module.css';

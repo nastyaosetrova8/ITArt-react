@@ -13,39 +13,13 @@ export const handleCurrency = data => {
   return currency;
 };
 
-// =====================================================
-
-// export const makerDasboardTab = ({ transactions, categories }) => {
-//   // const newArr = arr2.map(item => {
-//   //   const matchedItem = arr1.find(e => e.id === item.idx);
-//   //   if (matchedItem) {
-//   //     return {
-//   //       ...item,
-//   //       cat: matchedItem.name,
-//   //     };
-//   //   } else {
-//   //     return item;
-//   //   }
-//   // });
-
-//   const dataTable = {
-//     columns: columnsDashboardTab,
-//     rows: transactions.map(
-//       ({ transactionDate, type, categoryId, comment, amount, id }) => {
-//         return {
-//           date: transactionDate,
-//           type: type === 'INCOME' ? '+' : '-',
-//           category: categoryId,
-//           comment,
-//           sum: amount,
-//           id,
-//         };
-//       }
-//     ),
-//   };
-
-//   return dataTable;
-// };
+function formatDate(date) {
+  const dateObj = new Date(date);
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const year = String(dateObj.getFullYear()).slice(-2);
+  return `${day}.${month}.${year}`;
+}
 
 export const makerDasboardTab = ({ transactions, categories }) => {
   if (!transactions) return;
@@ -56,38 +30,30 @@ export const makerDasboardTab = ({ transactions, categories }) => {
         const matchedNameCategory = categories.find(
           e => e.id === item.categoryId
         );
+        const isIncome = item.type === 'INCOME';
+
+        const sumStyle = isIncome
+          ? { color: '#FFB627', fontWeight: 600 }
+          : { color: '#FF868D', fontWeight: 600 };
+
+        const formattedAmount = isIncome
+          ? item.amount
+          : Math.abs(item.amount.toFixed(2));
         return matchedNameCategory
           ? {
               ...item,
               category: matchedNameCategory.name,
-              date: item.transactionDate,
+              date: formatDate(item.transactionDate),
               type: item.type === 'INCOME' ? '+' : '-',
-              sum: item.amount,
+              sum: <span style={sumStyle}>{formattedAmount}</span>,
             }
           : {
               ...item,
               category: item.categoryId,
-              date: item.transactionDate,
+              date: formatDate(item.transactionDate),
               type: item.type === 'INCOME' ? '+' : '-',
-              sum: item.amount,
+              sum: <span style={sumStyle}>{formattedAmount}</span>,
             };
-        // if (matchedNameCategory) {
-        //   return {
-        //     ...item,
-        //     category: matchedNameCategory.name,
-        //     date: item.transactionDate,
-        //     type: item.type === 'INCOME' ? '+' : '-',
-        //     sum: item.amount,
-        //   };
-        // } else {
-        //   return {
-        //     ...item,
-        //     category: item.categoryId,
-        //     date: item.transactionDate,
-        //     type: item.type === 'INCOME' ? '+' : '-',
-        //     sum: item.amount,
-        //   };
-        // }
       }),
     };
 
