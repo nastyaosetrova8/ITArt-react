@@ -10,6 +10,7 @@ import { selectToken } from 'redux/selectors';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../index.css';
+
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const SummaryPage = lazy(() => import('pages/SummaryPage/SummaryPage'));

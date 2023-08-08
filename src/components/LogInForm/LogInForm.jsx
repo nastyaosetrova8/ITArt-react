@@ -54,7 +54,7 @@ export const LogInForm = () => {
                     </InputAdornment>
                   ),
                 }}
-                style={{ width: '100%' }}
+                style={{ maxWidth: '100%' }}
                 variant="standard"
                 label="Email"
                 name="email"
@@ -85,7 +85,7 @@ export const LogInForm = () => {
                     </InputAdornment>
                   ),
                 }}
-                style={{ width: '100%' }}
+                style={{ maxWidth: '100%' }}
                 variant="standard"
                 label="Password"
                 name="password"
