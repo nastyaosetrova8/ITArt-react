@@ -89,11 +89,11 @@ export const BtnDelete = styled.button`
   width: 100%;
   height: 100%;
   padding: 5px 12px;
-  background: linear-gradient(
-    167deg,
-    #ffc727 0%,
-    #9e40ba 61.46%,
-    #7000ff 90.54%
+  background-image: linear-gradient(
+    96.76deg,
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
   );
   box-shadow: 1px 9px 15px rgba(0, 0, 0, 0.2);
   border: none;
@@ -107,7 +107,7 @@ export const BtnDelete = styled.button`
   &:focus,
   &:hover {
     cursor: pointer;
-    background: linear-gradient(97deg, #ffc727 0%, #9e40ba 61%, #7000ff 91%);
+    background: linear-gradient(97deg, #deac1e 0%, #9e40ba 61%, #7c3dcb 91%);
     box-shadow: 1px 5px 8px 0px rgba(0, 0, 0, 0.5);
     transition: 250ms;
     transform: scale(1.03);
