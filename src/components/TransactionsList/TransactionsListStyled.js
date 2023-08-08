@@ -12,7 +12,7 @@ export const TableHeadSt = styled.thead`
 `;
 export const HeadRow = styled.tr`
   display: grid;
-  grid-template-columns: 1.11fr 0.5fr 1fr 1.4fr 0.7fr 0.68fr;
+  grid-template-columns: 0.72fr 0.5fr 1.05fr 1.5fr 0.7fr 0.6fr 0.1fr;
   width: 100%;
   color: #fbfbfb;
   border-radius: 8px;
@@ -38,20 +38,11 @@ export const TableRowStyled = styled.tr`
   position: relative;
   margin: 0;
   display: grid;
-  grid-template-columns: 1.4fr 0.6fr 1.2fr 1.7fr 0.7fr 0.4fr 0.1fr;
+  grid-template-columns: 0.8fr 0.6fr 1.2fr 1.7fr 0.7fr 0.4fr 0.1fr;
   width: 100%;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-
-  &:after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    content: '';
-    width: 100%;
-    height: 1px;
-  }
 `;
 export const TableInfo = styled.td``;
 export const BtnCont = styled.td`
