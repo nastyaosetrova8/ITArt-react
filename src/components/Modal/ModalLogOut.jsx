@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { logOutUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Button } from '@mui/material';
-import { ButtonsBox } from 'pages/LoginPage/LoginPageStyled';
-import { LogoStyle } from './ModalLogOutStyled';
+// import { ButtonsBox } from 'pages/LoginPage/LoginPageStyled';
+import { ButtonsBox, LogoStyle, ModalWrap } from './ModalLogOutStyled';
 import Logo from '../../assets/images/logo.svg';
 import { toggleShowModal } from 'redux/modal/modalSlice';
 
@@ -19,12 +19,13 @@ export const LogOutForm = () => {
   };
 
   return (
-    <>
+    <ModalWrap>
       <LogoStyle>
         <img src={Logo} alt="Logo Wallet" width="36px" height="36px" />
-        <h3>Are you sure you want to log out?</h3>
+        <h3>MoneyGuard</h3>
+        <h4>Are you sure you want to log out?</h4>
       </LogoStyle>
-      <ButtonsBox style={{ margin: '52px auto 0' }}>
+      <ButtonsBox >
         <Button
           sx={{
             backgroundImage:
@@ -46,6 +47,6 @@ export const LogOutForm = () => {
           Cancel
         </Button>
       </ButtonsBox>
-    </>
+    </ModalWrap>
   );
 };
