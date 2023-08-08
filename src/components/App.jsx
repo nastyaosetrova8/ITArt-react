@@ -3,11 +3,15 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Layout } from './Layout/Layout';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { PrivateRoute } from 'redux/Guard/PrivateRoute';
 import { PublicRoute } from 'redux/Guard/PublicRoute';
 import Loader from './Loader/Loader';
+import { selectToken } from 'redux/selectors';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '../index.css';
 
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -18,50 +22,66 @@ const RegistrationPage = lazy(() =>
 
 export const App = () => {
   const dispatch = useDispatch();
+  const token = useSelector(selectToken);
 
   useEffect(() => {
+    if (!token) return;
     dispatch(getCurrentUserThunk());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   return (
-    <Suspense fallback={<Loader />}>
-      <Routes>
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <RegistrationPage />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <LoginPage />
-            </PublicRoute>
-          }
-        />
-        <Route path="/" element={<Layout />}>
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <Suspense fallback={<Loader />}>
+        <Routes>
           <Route
-            path="home"
+            path="/register"
             element={
-              <PrivateRoute>
-                <DashboardPage />
-              </PrivateRoute>
+              <PublicRoute>
+                <RegistrationPage />
+              </PublicRoute>
             }
           />
           <Route
-            path="statistic"
+            path="/login"
             element={
-              <PrivateRoute>
-                <SummaryPage />
-              </PrivateRoute>
+              <PublicRoute>
+                <LoginPage />
+              </PublicRoute>
             }
           />
-        </Route>
-        <Route path="*" element={<Navigate to="/register" replace />}></Route>
-      </Routes>
-    </Suspense>
+          <Route path="/" element={<Layout />}>
+            <Route
+              path="home"
+              element={
+                <PrivateRoute>
+                  <DashboardPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="statistic"
+              element={
+                <PrivateRoute>
+                  <SummaryPage />
+                </PrivateRoute>
+              }
+            />
+          </Route>
+          <Route path="*" element={<Navigate to="/register" replace />}></Route>
+        </Routes>
+      </Suspense>
+    </>
   );
 };
