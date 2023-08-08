@@ -39,14 +39,14 @@ export const Container = styled(Card)`
   }
 
   @media (max-width: 780px) {
-    width: 533px;
+    //width: 533px;
   }
   @media (max-width: 370px) {
   }
 `;
 export const LogoStyle = styled.div`
   /* outline: 1px solid black; */
-  width: 182px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
