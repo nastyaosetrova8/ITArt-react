@@ -11,11 +11,10 @@ export const addTransaction = async transaction => {
 
   return data;
 };
-export const deleteTransaction = async ({ dataEdit, tokenTrans }) => {
-  const transId = dataEdit.id;
-  token.set(tokenTrans);
-  const { data } = await instance.delete(`/api/transactions/${transId}`);
-  console.log(data);
+export const deleteTransaction = async idTransaction => {
+  console.log('idTransaction: ', idTransaction);
+  const { data } = await instance.delete(`/api/transactions/${idTransaction}`);
+
   return data;
 };
 
