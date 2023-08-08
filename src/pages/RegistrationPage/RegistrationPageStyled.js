@@ -30,8 +30,8 @@ export const Container = styled(Card)`
     color: var(--white, #fbfbfb); /*  */
     font-size: 28px;
     /* font-style: normal; */
-    font-weight: 400;
-    line-height: normal;
+    font-weight: 400;    
+    line-height: 40px;
   }
 `;
 export const LogoStyle = styled.div`
@@ -56,6 +56,7 @@ export const ButtonsBox = styled.div`
     height: 50px;
     border-radius: 20px;
     color: rgba(98, 63, 139, 1);
+    font-size: 18px;
     &:hover {
       background-color: rgba(252, 252, 252, 1);
       border: 1px solid rgba(74, 86, 226, 1);
