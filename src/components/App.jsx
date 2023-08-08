@@ -11,6 +11,7 @@ import Loader from './Loader/Loader';
 import { selectToken } from 'redux/selectors';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 import '../index.css';
 
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
@@ -22,16 +23,19 @@ const RegistrationPage = lazy(() =>
 
 export const App = () => {
   const dispatch = useDispatch();
-  const token = useSelector(selectToken);
+
+  const token = useSelector(selectToken)
 
   useEffect(() => {
-    if (!token) return;
+    if(!token)return
+
     dispatch(getCurrentUserThunk());
   }, [dispatch, token]);
 
   return (
     <>
-      <ToastContainer
+
+    <ToastContainer
         position="top-right"
         autoClose={1200}
         hideProgressBar={false}
@@ -43,8 +47,25 @@ export const App = () => {
         pauseOnHover
         theme="light"
       />
-      <Suspense fallback={<Loader />}>
-        <Routes>
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <RegistrationPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
+        <Route path="/" element={<Layout />}>
           <Route
             path="/register"
             element={

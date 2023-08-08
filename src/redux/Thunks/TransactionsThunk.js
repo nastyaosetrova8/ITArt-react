@@ -3,57 +3,46 @@ import { token } from 'Api/authApi';
 import {
   addTransaction,
   deleteTransaction,
-  getAllTransactions,
+  getTransactions,
   getTransCategories,
   updateTransaction,
   // updateTransaction,
 } from 'Api/transactionsApi';
+import { updateBalance } from 'redux/Slices/AuthUserSlice';
+import { getCurrentUserThunk } from './AuthUserThunk';
+
 // import { useSelector } from 'react-redux';
 // import { selectToken } from 'redux/selectors';
 
-
-export const fetchTransactionsThunk = createAsyncThunk(
-  'transactions/fetchAll',
-  async (tokenTrans, thunkAPI) => {
-    
-    try {
-
-//       console.log(tokenTrans)
-// token.set(tokenTrans);
-// // console.log(tokenTrans)
-
-
-      const data = await getAllTransactions();
-
-      // token.set(data.token)
-
-      // console.log(data)
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+export const getTransactionsThunk = createAsyncThunk(
+  'transactions/getTransactions',
+  async () => {
+    const data = await getTransactions();
+    return data;
   }
 );
+
 export const addTransactionThunk = createAsyncThunk(
   'transactions/addTransaction',
   async (transactions, thunkAPI) => {
     try {
       const data = await addTransaction(transactions);
+      thunkAPI.dispatch(updateBalance(data));
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+      //return thunkAPI.rejectWithValue(error);
     }
   }
 );
+
 export const deleteTransactionThunk = createAsyncThunk(
   'transactions/deleteTransaction',
-  async (dataEdit, thunkAPI) => {
-    try {
-      const data = await deleteTransaction(dataEdit);
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+  async (idTransaction, thunkAPI) => {
+    const data = await deleteTransaction(idTransaction);
+    thunkAPI.dispatch(getTransactionsThunk());
+    thunkAPI.dispatch(getCurrentUserThunk());
+    return data;
   }
 );
 
@@ -65,19 +54,17 @@ export const deleteTransactionThunk = createAsyncThunk(
 //   }
 // );
 
-
 export const editTransactionThunk = createAsyncThunk(
   'transactions/editTransaction',
   async (dataEdit, thunkAPI) => {
+    console.log(dataEdit);
 
-  console.log(dataEdit)
-
-  // const transId = dataEdit.data.id;
-  // // const data = data.data;
-  // const token = dataEdit.token;
+    // const transId = dataEdit.data.id;
+    // // const data = data.data;
+    // const token = dataEdit.token;
 
     try {
-      console.log(345)
+      console.log(345);
 
       // token.set(tokenTrans);
 
@@ -93,13 +80,8 @@ export const getTransCategoriesThunk = createAsyncThunk(
   'transactions/getTransCategories',
   async (tokenTrans, thunkAPI) => {
     try {
-
       token.set(tokenTrans);
-
-      // console.log(tokenTrans)
-
       const data = await getTransCategories();
-      console.log(data)
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

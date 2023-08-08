@@ -1,96 +1,132 @@
-import { useDispatch, useSelector } from "react-redux";
-import { deleteTransactionThunk } from "redux/Thunks/TransactionsThunk";
-import { editTransactionThunk } from "redux/modalTransRedux/modalTransThunks";
-import { selectToken, selectTransactions } from "redux/selectors";
+import { useDispatch, useSelector } from 'react-redux';
 
-export const TransactionsList = ({ transactions }) => {
+import { selectToken, selectTransactions } from 'redux/selectors';
 
-const dispatch = useDispatch();
-const tokenTrans = useSelector(selectToken);
+import { makerDashboardTab } from 'helpers/helpers';
 
-const trans = useSelector(selectTransactions);
-console.log(trans)
+import { Paper, Table, TableCell, TableContainer } from '@mui/material';
+import {
+  deleteTransactionThunk,
+  getTransactionsThunk,
+} from 'redux/Thunks/TransactionsThunk';
+import {
+  BtnCont,
+  BtnDelete,
+  BtnEdit,
+  BtnIcon,
+  HeadRow,
+  TableBodySt,
+  TableHeadSt,
+  TableRowStyled,
+} from './TransactionsListStyled';
 
-   const handleOnClick = (evt) => {
-    console.log(evt)
-    // const id = evt.CurrentTarget
-dispatch(editTransactionThunk())
-   }
-  
-   // ==========DELETE TRANS
-  const handleClickDElete = () => {
- 
-    const dataEdit = {
-      id: 'f2103647-98f1-4278-96b7-3b33112ef5e7',
-      transactionDate: '2023-01-23',
-      type: 'INCOME',
-      categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-      comment: 'string',
-      amount: 25,
-    };
+import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
+import { useEffect, useState } from 'react';
 
-    // const dataEx = {
-    //   transactionDate: "2023-01-23",
-    // type: "EXPENSE",
-    // categoryId: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
-    // comment: "string",
-    // amount: -5}
-    
-    dispatch(deleteTransactionThunk({ dataEdit, tokenTrans }));
+export const TransactionsList = () => {
+  // const tokenTransaction = useSelector(selectToken);
+  const dispatch = useDispatch();
+  const transactions = useSelector(selectTransactions);
+
+  const handleClickEdit = e => {
+    dispatch(saveIdTransaction(e.currentTarget.id));
+    dispatch(toggleShowModal(e.currentTarget.name));
   };
 
+  const handleClickDelete = e => {
+    const idTransaction = e.currentTarget.id;
+    dispatch(deleteTransactionThunk(idTransaction));
+    // .unwrap()
+    // .then(() => dispatch(getTransactionsThunk()));
+  };
+
+  const rows = makerDashboardTab(transactions).rows;
+  const columns = makerDashboardTab(transactions).columns;
 
   return (
     <>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Category</th>
-            <th>Comment</th>
-            <th>Sum</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* {transactions.map(
-          ({ id, transactionDate, type, categoryId, comment, amount }) => {
-            return (
-            //   <tr key={id}>
-            //     <td>{transactionDate}</td>
-            //     <td>{type === 'INCOME' ? '+' : '-'}</td>
-            //     <td>{categoryId}</td>
-            //     <td>{comment}</td>
-            //     <td>{amount}</td>
-            //     <td>
-            //       <button>
-            //         <Link to={`/api/transactions/${id}`}>Update</Link>
-            //       </button>
+      <Paper
+        sx={{
+          width: '100%',
+          maxWidth: '715px',
+          overflow: 'hidden',
+          background: 'transparent',
+        }}
+      >
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table
+            stickyHeader
+            aria-label="sticky table"
+            sx={{
+              background: 'transparent',
+            }}
+          >
+            <TableHeadSt>
+              <HeadRow>
+                {columns.map(column => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ maxWidth: column.maxWidth }}
+                    sx={{
+                      borderBottom: 'none',
+                      fontWeight: 600,
+                      fontSize: '16px',
+                    }}
+                  >
+                    {column.name}
+                  </TableCell>
+                ))}
+              </HeadRow>
+            </TableHeadSt>
+            <TableBodySt>
+              {rows.map(row => {
+                return (
+                  <TableRowStyled role="checkbox" tabIndex={-1} key={row.id}>
+                    {columns.map((column, idx) => {
+                      const value = row[column.id];
 
-            //       <button>Delete</button>
-            //     </td>
-            //     </tr> */}
-          <tr>
-            <td>11.09.20023</td>
-            <td>-</td>
-            <td>car</td>
-            <td>my comment</td>
-            <td>12222</td>
-            <td>
-              <button onClick={handleOnClick}>
-                {/* <Link to={`/api/transactions/${id}`}>Update</Link> */}
-                update
-              </button>
-
-              <button type="button"  onClick={handleClickDElete}>Delete</button>
-            </td>
-          </tr>
-          {/* );
-          }
-        )} */}
-        </tbody>
-      </table>
+                      return idx === columns.length - 1 ? (
+                        <BtnCont
+                          key={column.id}
+                        >
+                          <BtnEdit
+                            id={row.id}
+                            type="button"
+                            name="edit"
+                            onClick={handleClickEdit}
+                          >
+                            <BtnIcon sx={{ fontSize: 18 }} />
+                          </BtnEdit>
+                          <BtnDelete
+                            id={row.id}
+                            type="button"
+                            onClick={handleClickDelete}
+                          >
+                            Delete
+                          </BtnDelete>
+                        </BtnCont>
+                      ) : (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          sx={{
+                            borderBottom: 'none',
+                          }}
+                        >
+                          {column.format && typeof value === 'number'
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRowStyled>
+                );
+              })}
+            </TableBodySt>
+          </Table>
+        </TableContainer>
+      </Paper>
     </>
   );
 };

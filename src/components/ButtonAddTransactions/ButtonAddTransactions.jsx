@@ -1,28 +1,34 @@
-//import Modal from 'components/Modal/Modal';
 import Modal from 'components/Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsAddTransOpen } from 'redux/modal/modalSelectors';
-import { openAddTrans } from 'redux/modal/modalSlice';
-
+import {
+  selectIsAddTransOpen,
+  selectIsShowModal,
+} from 'redux/modal/modalSelectors';
+import { openAddTrans, toggleShowModal } from 'redux/modal/modalSlice';
+import { BtnPlus, BtnStyled } from './StyledButtonAddTransacaction';
 
 export const ButtonAddTransactions = () => {
-  // const tokenTrans = useSelector(selectToken);
-  const isAddTransOpen = useSelector(selectIsAddTransOpen);
+  const isShowModal = useSelector(selectIsShowModal);
+  // const isAddTransOpen = useSelector(selectIsAddTransOpen);
   const dispatch = useDispatch();
 
-  
-  // ==============OPEN MODAL
-  const handleOpenModal = () => {
-    dispatch(openAddTrans());
-  };
+  //console.log(isShowModal)
 
+  // ==============OPEN MODAL
+  // const handleOpenModal = () => {
+  //   dispatch(openAddTrans());
+  // };
+
+  const handleOpenModal = e => {
+    dispatch(toggleShowModal(e.currentTarget.name));
+  };
 
   return (
     <>
-      <button type="button" onClick={handleOpenModal}>
-        Open Modal
-      </button>
-      {isAddTransOpen && <Modal />}
+      <BtnStyled type="button" name="addTrans" onClick={handleOpenModal}>
+        <BtnPlus />
+      </BtnStyled>
+      {isShowModal && <Modal />}
     </>
   );
 };

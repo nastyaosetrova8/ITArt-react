@@ -2,19 +2,37 @@ import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAd
 import StyledContainer from 'components/Container/StyledContainer';
 import SideBar from 'components/SideBar/SideBar';
 import { TransactionsList } from 'components/TransactionsList/TransactionsList';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectIsAuth } from 'redux/selectors';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getTransCategoriesThunk,
+  getTransactionsThunk,
+} from 'redux/Thunks/TransactionsThunk';
+import { selectIsAuth, selectToken } from 'redux/selectors';
+import { StyledWrapperList } from './StyledWrapperList';
 
 function DashboardPage() {
   const isAuth = useSelector(selectIsAuth);
+  const token = useSelector(selectToken);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!isAuth) return;
+    dispatch(getTransactionsThunk());
+    dispatch(getTransCategoriesThunk(token));
+  }, [dispatch, token, isAuth]);
+
+
   return (
     isAuth && (
       <StyledContainer>
         <SideBar />
-        <TransactionsList />
-        <ButtonAddTransactions />
-      </StyledContainer>
+        <StyledWrapperList>
+          <TransactionsList />
+          <ButtonAddTransactions />
+        </StyledWrapperList>
+      </StyledContainer>     
     )
   );
 }
