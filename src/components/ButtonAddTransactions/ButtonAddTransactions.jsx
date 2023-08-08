@@ -11,7 +11,7 @@ export const ButtonAddTransactions = () => {
   // const isAddTransOpen = useSelector(selectIsAddTransOpen);
   const dispatch = useDispatch();
 
-  console.log(isShowModal)
+  //console.log(isShowModal)
   
   // ==============OPEN MODAL
   // const handleOpenModal = () => {
