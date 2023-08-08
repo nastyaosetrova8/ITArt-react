@@ -21,8 +21,6 @@ export const handleCurrency = data => {
 //   return formattedDate;
 // };
 
-// export const makerDashboardTab = ({ transactions, categories }) => {
-
 function formatDate(date) {
   const dateObj = new Date(date);
   const day = String(dateObj.getDate()).padStart(2, '0');
@@ -58,21 +56,15 @@ export const makerDashboardTab = ({ transactions, categories }) => {
         const formattedAmount = isIncome
           ? item.amount
           : Math.abs(item.amount.toFixed(2));
-        return matchedNameCategory
-          ? {
-              ...item,
-              category: matchedNameCategory.name,
-              date: formatDate(item.transactionDate),
-              type: item.type === 'INCOME' ? '+' : '-',
-              sum: <span style={sumStyle}>{formattedAmount}</span>,
-            }
-          : {
-              ...item,
-              category: item.categoryId,
-              date: formatDate(item.transactionDate),
-              type: item.type === 'INCOME' ? '+' : '-',
-              sum: <span style={sumStyle}>{formattedAmount}</span>,
-            };
+        return {
+          ...item,
+          category: matchedNameCategory
+            ? matchedNameCategory.name
+            : item.categoryId,
+          date: formatDate(item.transactionDate),
+          type: item.type === 'INCOME' ? '+' : '-',
+          sum: <span style={sumStyle}>{formattedAmount}</span>,
+        };
       }),
     };
 
