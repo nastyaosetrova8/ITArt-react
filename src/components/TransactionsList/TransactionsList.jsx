@@ -100,6 +100,7 @@ export const TransactionsList = () => {
                     sx={{
                       borderBottom: 'none',
                       fontWeight: 600,
+                      fontSize: '16px',
                     }}
                   >
                     {column.name}
@@ -129,7 +130,6 @@ export const TransactionsList = () => {
                           >
                             <BtnIcon sx={{ fontSize: 18 }} />
                           </BtnEdit>
-                          {/* <ModalEditTransactions /> */}
                           <BtnDelete
                             id={row.id}
                             type="button"
