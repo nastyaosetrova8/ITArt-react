@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+//import button-gradient from '../../stylesheet/vars.css'
 //import { Card } from '@mui/material';
 //import loginPicture from '../../assets/images/login_desktop@1x.jpg';
 
@@ -54,12 +55,12 @@ export const ButtonsBox = styled.div`
     border-radius: 20px;
     font-size: 18px;
     text-transform: uppercase;    
-    transition: font-weight 250ms ease-in-out;    
+    transition: transform 300ms ease-in;    
     border: transparent;    
 
     &:hover {
-      border: 1px solid rgba(74, 86, 226, 1);
-      font-weight: bold;
+      border: 1px solid rgba(74, 86, 226, 1);      
+      transform: scale(1.02);      
     }
   }
   @media (max-width: 780px){
@@ -71,7 +72,11 @@ export const ButtonsBox = styled.div`
 
 export const ButtonActive = styled.button`
   color: white;
-  background-image: linear-gradient(
+  background-image:
+  // var(--button-gradient);
+  
+  linear-gradient(
+    
     120deg,
     rgba(255, 199, 39, 1),
     rgba(158, 64, 186, 1) 80%,

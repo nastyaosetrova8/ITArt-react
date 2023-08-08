@@ -13,9 +13,10 @@ import {
   selectIsEditTransOpen,
 } from 'redux/modal/modalSelectors';
 import css from './ModalEditTransactions.module.css';
-import { toggleShowModal } from 'redux/modal/modalSlice';
+import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
 import {
   selectCategories,
+  selectSavedId,
   selectToken,
   selectTransactions,
 } from 'redux/selectors';
@@ -38,10 +39,15 @@ export const ModalEditTransaction = () => {
     value: category.id,
     label: category.name,
   }));
+  const idTransaction = useSelector(selectSavedId);
+
+  // ========== EDIT TRANS
+
   // const transaction = allTransactions.find(trans => trans.id === IdTransaction);
 
   const handleClickBtnClose = () => {
     dispatch(toggleShowModal(''));
+    dispatch(saveIdTransaction('null'));
   };
 
   // const formik = useFormik({
@@ -77,7 +83,7 @@ export const ModalEditTransaction = () => {
   // ========== EDIT TRANS
   const handleClickUpdate = () => {
     const dataEdit = {
-      id: '2b3b84b1-97b5-49ed-9ed5-ebba5197b66b',
+      id: idTransaction,
       transactionDate: '2023-01-23',
       type: 'INCOME',
       categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
@@ -121,20 +127,20 @@ export const ModalEditTransaction = () => {
           Expense
         </button>
       </div>
-      <StyledForm 
+      <StyledForm
       // onSubmit={formik.handleSubmit}
       >
         {/* {!formik.values.type && ( */}
-          <Select
-            type="text"
-            // name={formik.values.label}
-            // value={formik.values.value}
-            options={options}
-            styles={styledSelectCategories}
-            placeholder="Select a category"
-            // onChange={({ value }) => formik.setFieldValue('categoryId', value)}
-            // onBlur={formik.handleBlur}
-          />
+        <Select
+          type="text"
+          // name={formik.values.label}
+          // value={formik.values.value}
+          options={options}
+          styles={styledSelectCategories}
+          placeholder="Select a category"
+          // onChange={({ value }) => formik.setFieldValue('categoryId', value)}
+          // onBlur={formik.handleBlur}
+        />
         {/* )} */}
         <div>
           <input

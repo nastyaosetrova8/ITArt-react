@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { logInUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import {
-  Button,
+import {  
   IconButton,  
   InputAdornment,  
   Stack,
@@ -100,16 +99,14 @@ export const LogInForm = () => {
               />
             
               <ButtonsBox style={{ margin: '52px auto 0' }}>
-                <ButtonActive                  
-                  variant="contained"
+                <ButtonActive                                    
                   type="submit"
                 >
                   Log in
                 </ButtonActive>
 
                 <Link to="/register">
-                  <ButtonWhite                    
-                    variant="contained"
+                  <ButtonWhite                                        
                     type="submit"
                   >
                     Register
