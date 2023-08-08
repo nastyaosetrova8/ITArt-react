@@ -19,14 +19,14 @@ const RegistrationPage = lazy(() =>
 );
 export const App = () => {
   const dispatch = useDispatch();
-  const token = useSelector(selectToken)
+  const token = useSelector(selectToken);
   useEffect(() => {
-    if(!token)return
+    if (!token) return;
     dispatch(getCurrentUserThunk());
   }, [dispatch, token]);
   return (
     <>
-    <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={1200}
         hideProgressBar={false}
@@ -38,45 +38,46 @@ export const App = () => {
         pauseOnHover
         theme="light"
       />
-    <Suspense fallback={<Loader />}>
-      <Routes>
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <RegistrationPage />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <LoginPage />
-            </PublicRoute>
-          }
-        />
-        <Route path="/" element={<Layout />}>
+      <Suspense fallback={<Loader />}>
+        <Routes>
           <Route
-            path="home"
+            path="/register"
             element={
-              <PrivateRoute>
-                <DashboardPage />
-              </PrivateRoute>
+              <PublicRoute>
+                <RegistrationPage />
+              </PublicRoute>
             }
           />
           <Route
-            path="statistic"
+            path="/login"
             element={
-              <PrivateRoute>
-                <SummaryPage />
-              </PrivateRoute>
+              <PublicRoute>
+                <LoginPage />
+              </PublicRoute>
             }
           />
-        </Route>
-        <Route path="*" element={<Navigate to="/register" replace />}></Route>
-      </Routes>
-    </Suspense>
+          <Route path="/" element={<Layout />}>
+            <Route
+              path="home"
+              element={
+                <PrivateRoute>
+                  <DashboardPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="statistic"
+              element={
+                <PrivateRoute>
+                  <SummaryPage />
+                </PrivateRoute>
+              }
+            />
+          </Route>
+          <Route path="*" element={<Navigate to="/register" replace />}></Route>
+        </Routes>
+      </Suspense>
     </>
   );
 };
+console.log(LoginPage);
