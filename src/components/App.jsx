@@ -1,8 +1,6 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-
 import { Layout } from './Layout/Layout';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { PrivateRoute } from 'redux/Guard/PrivateRoute';
@@ -11,7 +9,6 @@ import Loader from './Loader/Loader';
 import { selectToken } from 'redux/selectors';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import '../index.css';
 
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
@@ -20,21 +17,15 @@ const SummaryPage = lazy(() => import('pages/SummaryPage/SummaryPage'));
 const RegistrationPage = lazy(() =>
   import('pages/RegistrationPage/RegistrationPage')
 );
-
 export const App = () => {
   const dispatch = useDispatch();
-
   const token = useSelector(selectToken)
-
   useEffect(() => {
     if(!token)return
-
     dispatch(getCurrentUserThunk());
   }, [dispatch, token]);
-
   return (
     <>
-
     <ToastContainer
         position="top-right"
         autoClose={1200}
@@ -67,42 +58,25 @@ export const App = () => {
         />
         <Route path="/" element={<Layout />}>
           <Route
-            path="/register"
+            path="home"
             element={
-              <PublicRoute>
-                <RegistrationPage />
-              </PublicRoute>
+              <PrivateRoute>
+                <DashboardPage />
+              </PrivateRoute>
             }
           />
           <Route
-            path="/login"
+            path="statistic"
             element={
-              <PublicRoute>
-                <LoginPage />
-              </PublicRoute>
+              <PrivateRoute>
+                <SummaryPage />
+              </PrivateRoute>
             }
           />
-          <Route path="/" element={<Layout />}>
-            <Route
-              path="home"
-              element={
-                <PrivateRoute>
-                  <DashboardPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="statistic"
-              element={
-                <PrivateRoute>
-                  <SummaryPage />
-                </PrivateRoute>
-              }
-            />
-          </Route>
-          <Route path="*" element={<Navigate to="/register" replace />}></Route>
-        </Routes>
-      </Suspense>
+        </Route>
+        <Route path="*" element={<Navigate to="/register" replace />}></Route>
+      </Routes>
+    </Suspense>
     </>
   );
 };
