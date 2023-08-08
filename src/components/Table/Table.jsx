@@ -1,5 +1,5 @@
 //import { datas } from 'components/Chart/Chart';
-import { DiagramSelect } from 'components/DiagramSelect/DiagramSelect';
+//import { DiagramSelect } from 'components/DiagramSelect/DiagramSelect';
 import { useCategoriesType } from 'hooks/selectedCategories';
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -9,6 +9,19 @@ import {
   selectIncomeSummary,
   selectSummary,
 } from 'redux/selectors';
+import {
+  StyledIcon,
+  StyledP,
+  StyledSpanExpenses,
+  StyledSpanIncome,
+  StyledSum,
+  StyledTbody,
+  StyledText,
+  StyledThead,
+  StyledTotalWrapper,
+  StyledTr,
+  WrapperTable,
+} from './StyledTable';
 
 export const colors = [
   'rgb(0, 173, 132)',
@@ -45,39 +58,41 @@ export const Table = () => {
         pauseOnHover
         theme="light"
       />
-      Table statistic
-      <DiagramSelect></DiagramSelect>
-      <table>
-        <thead>
-          <tr>
+      <WrapperTable>
+        <StyledThead>
+          <StyledTr>
             <th>Category</th>
             <th>Sum</th>
-          </tr>
-        </thead>
-        <tbody>
+          </StyledTr>
+        </StyledThead>
+        <StyledTbody>
           {expenseCategories.map((el, idx) => (
             <tr key={el.name}>
-              <td
+              <StyledIcon
                 style={{
                   backgroundColor: colors[idx % colors.length],
                 }}
-              ></td>
-              <td>{el.name}</td>
-              <td>{Number(el.total).toFixed(2) * 1}</td>
+              ></StyledIcon>
+              <StyledText>{el.name}</StyledText>
+              <StyledSum>{Number(el.total).toFixed(2) * 1}</StyledSum>
             </tr>
           ))}
-        </tbody>
-      </table>
-      <div>
-        <p>
+        </StyledTbody>
+      </WrapperTable>
+      <StyledTotalWrapper>
+        <StyledP>
           Expenses:
-          <span>{Number(expenseSummary).toFixed(2) * 1}</span>
-        </p>
-        <p>
+          <StyledSpanExpenses>
+            {Number(expenseSummary).toFixed(2) * 1}
+          </StyledSpanExpenses>
+        </StyledP>
+        <StyledP>
           Income:
-          <span>{Number(incomeSummary).toFixed(2) * 1}</span>
-        </p>
-      </div>
+          <StyledSpanIncome>
+            {Number(incomeSummary).toFixed(2) * 1}
+          </StyledSpanIncome>
+        </StyledP>
+      </StyledTotalWrapper>
     </div>
   );
 };
