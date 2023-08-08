@@ -6,9 +6,7 @@ export const columnsDashboardTab = [
   {
     id: 'sum',
     name: 'Sum',
-  
     align: 'left',
-    format: value => value.toFixed(2),
   },
   { id: 'actions', name: '', align: 'center' },
 ];

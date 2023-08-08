@@ -118,10 +118,6 @@ export const TransactionsList = () => {
                       return idx === columns.length - 1 ? (
                         <BtnCont
                           key={column.id}
-                          align={column.align}
-                          sx={{
-                            borderBottom: 'none',
-                          }}
                         >
                           <BtnEdit
                             type="button"
