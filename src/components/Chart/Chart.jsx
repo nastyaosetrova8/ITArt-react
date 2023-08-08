@@ -63,7 +63,7 @@ export const Chart = () => {
   return (
     <ChartWrapper>
       <Doughnut data={data} options={options}></Doughnut>
-      <StyledSpan>₴ {balance}</StyledSpan>
+      <StyledSpan>₴ {balance.toFixed(2)}</StyledSpan>
     </ChartWrapper>
   );
 };
