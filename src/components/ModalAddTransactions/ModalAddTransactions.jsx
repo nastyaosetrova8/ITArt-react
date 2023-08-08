@@ -30,6 +30,7 @@ import {
   StyledSwitch,
   StyledSwitchWrapper,
   StyledTitle,
+  TitleWrapper,
   styledSelectCategories,
 } from './ModalAddTransactions.styled';
 // import { BsPlusLg } from 'react-icons/bs';
@@ -125,7 +126,9 @@ export const ModalAddTransaction = () => {
 
   return (
     <div>
+      <TitleWrapper>
       <StyledTitle>Add transaction</StyledTitle>
+      </TitleWrapper>
       <StyledSwitchWrapper>
         <p className={formik.values.type ? css.income : css.text}>Income</p>
         <StyledSwitch>
