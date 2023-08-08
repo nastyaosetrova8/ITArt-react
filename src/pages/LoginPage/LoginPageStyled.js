@@ -31,8 +31,7 @@ export const Container = styled(Card)`
   h3 {
     margin: 0 auto;
     color: var(--white, #fbfbfb);    
-    font-size: 28px;
-    /* font-style: normal; */
+    font-size: 28px;    
     font-weight: 400;    
     line-height: 40px;
   }
@@ -44,8 +43,7 @@ export const Container = styled(Card)`
   @media (max-width: 370px) {
   }
 `;
-export const LogoStyle = styled.div`
-  /* outline: 1px solid black; */
+export const LogoStyle = styled.div`  
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -65,12 +63,13 @@ export const ButtonsBox = styled.div`
     border-radius: 20px;
     font-size: 18px;
     text-transform: uppercase;    
-    transition: font-weight 250ms ease-in-out;    
+    transition: transform 300ms ease-in;    
     border: transparent;    
 
     &:hover {
       border: 1px solid rgba(74, 86, 226, 1);
-      font-weight: bold;
+      transform: scale(1.02)
+      
     }
   }
   @media (max-width: 780px){

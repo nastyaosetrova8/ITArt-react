@@ -1,7 +1,5 @@
 import { useDispatch } from 'react-redux';
 import { logOutUserThunk } from 'redux/Thunks/AuthUserThunk';
-import { Button } from '@mui/material';
-// import { ButtonsBox } from 'pages/LoginPage/LoginPageStyled';
 import { ButtonActive, ButtonWhite, ButtonsBox, LogoStyle, ModalWrap } from './ModalLogOutStyled';
 import Logo from '../../assets/images/logo.svg';
 import { toggleShowModal } from 'redux/modal/modalSlice';
@@ -26,8 +24,7 @@ export const LogOutForm = () => {
         <h4>Are you sure you want to log out?</h4>
       </LogoStyle>
       <ButtonsBox >
-        <ButtonActive         
-          variant="contained"
+        <ButtonActive
           type="button"
           onClick={handleLogOut}
         >
@@ -35,8 +32,6 @@ export const LogOutForm = () => {
         </ButtonActive>
 
         <ButtonWhite
-          // sx={{ backgroundColor: 'rgba(252, 252, 252, 1)' }}
-          variant="contained"
           type="button"
           onClick={handleOnClick}
         >
