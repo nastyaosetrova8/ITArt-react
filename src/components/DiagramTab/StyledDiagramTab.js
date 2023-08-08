@@ -19,8 +19,9 @@ export const Wrapper = styled.div`
 
   @media screen and (min-width: 1280px) {
     justify-content: flex-start;
-    padding-left: 70px;
-    padding-right: 28px;
+    //padding-top: 100px;
+    //padding-left: 70px;
+    //padding-right: 28px;
   }
 `;
 
@@ -45,6 +46,6 @@ export const StyledTitle = styled.h1`
 
   @media only screen and (min-width: 768px) {
     margin-top: 32px;
-    margin-left: 85px;
+    //margin-left: 85px;
   }
 `;
