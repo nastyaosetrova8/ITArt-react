@@ -31,7 +31,7 @@ function formatDate(date) {
   return `${day}.${month}.${year}`;
 }
 
-export const makerDasboardTab = ({ transactions, categories }) => {
+export const makerDashboardTab = ({ transactions, categories }) => {
   if (!transactions) return;
   else {
     const dataTable = {
