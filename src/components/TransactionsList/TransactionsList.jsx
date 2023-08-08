@@ -16,6 +16,7 @@ import {
   TableHeadSt,
   TableRowStyled,
 } from './TransactionsListStyled';
+import { toggleShowModal } from 'redux/modal/modalSlice';
 
 export const TransactionsList = () => {
   const tokenTrans = useSelector(selectToken);

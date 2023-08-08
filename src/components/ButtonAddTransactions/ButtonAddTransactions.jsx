@@ -25,7 +25,7 @@ export const ButtonAddTransactions = () => {
 
   return (
     <>
-      <button type="button" name='addBtn' onClick={handleOpenModal}>
+      <button type="button" name='addTrans' onClick={handleOpenModal}>
         Open Modal
       </button>
       {isShowModal && <Modal />}

@@ -32,7 +32,7 @@ export default function Modal() {
   // const modal = useSelector(selectShowModal);
 
   const dispatch = useDispatch();
-  const isAddTransOpen = useSelector(selectIsAddTransOpen);
+  // const isAddTransOpen = useSelector(selectIsAddTransOpen);
   const isOpenLogout = useSelector(selectIsLogoutOpen);
   const isModalClose = useSelector(selectIsModalClose);
 
@@ -88,7 +88,7 @@ const handleClickOverlay = e => {
         </StyledCloseBtn>}
 
         {/* {children} */}
-        {isShowModal && modalName === 'addBtn' && <ModalAddTransaction />}
+        {isShowModal && modalName === 'addTrans' && <ModalAddTransaction />}
         {isShowModal &&  modalName === 'logout' && <LogOutForm />}
         {isShowModal &&  modalName === 'edit' && <ModalEditTransaction />}
 
