@@ -1,11 +1,25 @@
 import { Chart } from 'components/Chart/Chart';
+import { DiagramSelect } from 'components/DiagramSelect/DiagramSelect';
 import { Table } from 'components/Table/Table';
+import {
+  StyledTitle,
+  StyledWrapperLeft,
+  StyledWrapperRight,
+  Wrapper,
+} from './StyledDiagramTab';
 
 function DiagramTab() {
   return (
     <>
-      <Chart />
-      <Table />
+      <Wrapper>
+        <StyledWrapperLeft>
+          <Chart />
+        </StyledWrapperLeft>
+        <StyledWrapperRight>
+          <DiagramSelect></DiagramSelect>
+          <Table />
+        </StyledWrapperRight>
+      </Wrapper>
     </>
   );
 }
