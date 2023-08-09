@@ -19,6 +19,9 @@ export const StyledHeader = styled.div`
     padding: 6px 12px;
     border: none;
     border-left: 1px solid var(--white-60);
+    display: flex;
+    gap: 8px;
+    align-items: center;
   }
 
   .btn-exit-text {
