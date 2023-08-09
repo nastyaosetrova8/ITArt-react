@@ -55,6 +55,7 @@ export const ButtonsBox = styled.div`
     border-radius: 20px;
     font-size: 18px;
     text-transform: uppercase;
+    box-shadow: var(--button-shadow);
     transition: transform 300ms ease-in;
     border: transparent;
 
@@ -71,10 +72,10 @@ export const ButtonsBox = styled.div`
 `;
 
 export const ButtonActive = styled.button`
-  color: white;
-  background-image: var(--button-gradient); // var(--button-gradient);
+  color: var(--white);
+  background-image: var(--button-gradient);
 `;
 export const ButtonWhite = styled.button`
-  color: rgba(98, 63, 139, 1);
-  background-color: rgba(252, 252, 252, 1);
+  color: var(--white-button-text);
+  background-color: var(--white-button-bg);
 `;

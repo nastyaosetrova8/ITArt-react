@@ -6,12 +6,14 @@ import Logo from '../../assets/images/logo.svg';
 function LoginPage() {
   return (
     <LoginPageStyle>
-      <Container sx={{ backgroundColor: 'rgba(255, 255, 255, 0.25)' }}>
+      <Container>
         {/* <Stack> */}
+        <div>
         <LogoStyle>
           <img src={Logo} alt="Logo Wallet" width="36px" height="36px" />
           <h3>MoneyGuard</h3>
         </LogoStyle>
+        </div>
         {/* </Stack> */}
         <LogInForm />
       </Container>

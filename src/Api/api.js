@@ -13,6 +13,5 @@ export const instance = axios.create({
 
 export const requestCurrency = async () => {
   const { data } = await instance_currency.get('/bank/currency');
-
   return data;
 };

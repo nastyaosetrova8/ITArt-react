@@ -3,26 +3,27 @@ import { SlArrowDown } from 'react-icons/sl';
 
 const breakpoints = {
     tablet: `@media only screen and (min-width: 768px)`,
-    desktop: `@media only screen and (min-width: 1280px)`,
+    desktop: `@media only screen and (min-width: 1279px)`,
 };
 
 export const StyledSelectWrapper = styled.div`
-  width: 280px;
+width: 100%;
+  max-width: 280px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin-top: 32px;
 
   @media only screen and (min-width: 768px) {
-    width: 336px;
+    max-width: 336px;
     flex-direction: row;
     justify-content: space-between;
     gap: 16px;
     margin-top: 0;
   }
 
-  @media only screen and (min-width: 1280px) {
-    width: 395px;
+  @media only screen and (min-width: 1279px) {
+    max-width: 395px;
     flex-direction: row;
   }
 `;
@@ -34,9 +35,9 @@ export const selectStyles = {
         height: '50px',
         padding: '12px 20px',
         fontSize: '16px',
-        color: '#FBFBFB',
+        color: 'var(--white)',
         backgroundColor: 'rgba(74, 86, 226, 0.10)',
-        border: '1px solid rgba(255, 255, 255, 0.60)',
+        border: '1px solid var(--white-60)',
         borderRadius: '8px',
         cursor: 'pointer',
         [breakpoints.tablet]: {
@@ -54,21 +55,16 @@ export const selectStyles = {
         transition: 'transform 250ms cubic-bezier(0.4, 0, 0.2, 1)',
         transform: state.selectProps.menuIsOpen ? 'rotate(180deg)' : null,
     }),
-    singleValue: styles => ({ ...styles, margin: '0', color: '#FBFBFB' }),
+    singleValue: styles => ({ ...styles, margin: '0', color: 'var(--white)' }),
     input: styles => ({ ...styles, padding: '0', margin: '0' }),
     menu: styles => ({
         ...styles,
         top: '90%',
-        width: '280px',
+        width: '100%',
+        maxWidth: '280px',
         height: '157px',
         borderRadius: '8px',
-        background: `linear-gradient(
-      360deg,
-      rgba(83, 61, 186, 0.7) 0%,
-      rgba(80, 48, 154, 0.7) 35.94%,
-      rgba(106, 70, 165, 0.52) 61.04%,
-      rgba(133, 93, 175, 0.13) 100%
-    )`,
+        background: 'var(--small-form-color)',
         backdropFilter: `blur(50px)`,
         overflow: 'auto',
         [breakpoints.tablet]: {
@@ -80,13 +76,14 @@ export const selectStyles = {
     }),
     menuList: styles => ({
         ...styles,
-        width: '280px',
+        width: '100%',
+        maxWidth: '280px',
         height: '157px',
         [breakpoints.tablet]: {
-            width: '160px',
+            maxWidth: '160px',
         },
         [breakpoints.desktop]: {
-            width: '182px',
+            maxWidth: '182px',
         },
         '::-webkit-scrollbar': {
             width: '7px',
@@ -94,23 +91,23 @@ export const selectStyles = {
             borderRadius: '8px',
         },
         '::-webkit-scrollbar-track': {
-            backgroundColor: 'rgba(255, 255, 255, 0.10)',
+            backgroundColor: 'var(--form-color)',
         },
         '::-webkit-scrollbar-thumb': {
-            backgroundColor: '#734AEF',
+            backgroundColor: 'var(--violet)',
         },
         '::-webkit-scrollbar-thumb:hover': {
-            backgroundColor: '#623F8B',
+            backgroundColor: 'var(--white-button-text)',
         },
     }),
     option: (styles, state) => ({
         ...styles,
         cursor: 'pointer',
-        color: state.isSelected ? '#FF868D' : null,
-        backgroundColor: state.isSelected ? 'rgba(255, 255, 255, 0.10)' : null,
+        color: state.isSelected ? 'var(--dashboard-out-text)' : null,
+        backgroundColor: state.isSelected ? 'var(--form-color)' : null,
         ':hover': {
-            color: '#FF868D',
-            backgroundColor: 'rgba(255, 255, 255, 0.10)',
+            color: 'var(--dashboard-out-text)',
+            backgroundColor: 'var(--form-color)',
         },
     }),
 };

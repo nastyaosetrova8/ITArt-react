@@ -1,5 +1,4 @@
 import {
-  TableContainer,
   TableHead,
   Paper,
   TableCell,
@@ -8,6 +7,7 @@ import {
   TableRow,
 } from '@mui/material';
 import PropTypes from 'prop-types';
+import { StyledTableContainer } from './StyledTable';
 
 export const CurrencyTable = ({ dataCurrency }) => {
   const nameCurrencies = { USD: 840, EUR: 978 };
@@ -21,26 +21,39 @@ export const CurrencyTable = ({ dataCurrency }) => {
   }));
 
   return (
-    <TableContainer component={Paper} sx={{ background: 'transparent' }}>
+    <StyledTableContainer
+      component={Paper}
+      sx={{ background: 'transparent', boxShadow: 'none' }}
+    >
       <Table sx={{ width: '100%' }}>
-        <TableHead sx={{ background: 'rgba(255, 255, 255, 0.2)' }}>
+        <TableHead>
           <TableRow>
-            <TableCell align="center">Currency</TableCell>
-            <TableCell align="center">Purchase</TableCell>
-            <TableCell align="center">Sale</TableCell>
+            <TableCell className="th-currency" align="center">
+              Currency
+            </TableCell>
+            <TableCell className="th-purshase" align="center">
+              Purchase
+            </TableCell>
+            <TableCell className="td-sell" align="left">
+              Sale
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {tableRows.map(row => (
             <TableRow key={row.currency}>
               <TableCell align="center">{row.currency}</TableCell>
-              <TableCell align="center">{row.purchase}</TableCell>
-              <TableCell align="center">{row.sale}</TableCell>
+              <TableCell align="center" className="td-purshase">
+                {row.purchase}
+              </TableCell>
+              <TableCell align="left" className="td-sell">
+                {row.sale}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </StyledTableContainer>
   );
 };
 

@@ -2,18 +2,19 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledSideBar = styled.div`
-  border-right: 1px solid grey;
+  box-sizing: border-box;
+  border-right: 1px solid var(--white-60);
   color: #fbfbfb;
 
   width: 100%;
   max-width: 480px;
   height: 100vh;
 
-  background: linear-gradient(
+  /* background: linear-gradient(
     220deg,
     rgba(109, 84, 235, 0.6) 3.47%,
     rgba(101, 35, 146, 0.6) 90.06%
-  );
+  ); */
 
   nav {
     display: flex;
@@ -27,7 +28,7 @@ export const StyledSideBar = styled.div`
 
 export const StyledLink = styled(NavLink)`
   text-decoration: none;
-  color: #fbfbfb;
+  color: var(--white);
 
   &.active {
     font-weight: bold;

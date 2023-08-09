@@ -14,10 +14,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { editTransactionThunk } from 'redux/Thunks/TransactionsThunk';
 import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
-import {
-  selectSavedId,
-  selectTransactions,
-} from 'redux/selectors';
+import { selectSavedId, selectTransactions } from 'redux/selectors';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Datetime from 'react-datetime';
@@ -35,7 +32,6 @@ export const ModalEditTransaction = () => {
   const dispatch = useDispatch();
   const idTransaction = useSelector(selectSavedId);
   const allTransactions = useSelector(selectTransactions);
-
   const currentTransaction = allTransactions.transactions.find(
     item => idTransaction === item.id
   );
@@ -85,7 +81,7 @@ export const ModalEditTransaction = () => {
             currentTransaction.type === 'INCOME'
               ? Number(value.amount)
               : Number(-value.amount),
-              comment: value.comment,
+          comment: value.comment,
         },
         id: idTransaction,
       };
@@ -147,7 +143,7 @@ export const ModalEditTransaction = () => {
         <InputCommentStyled
           type="text"
           name="comment"
-value={formik.values.comment}
+          value={formik.values.comment}
           // placeholder="Comment"
           autoComplete="off"
           onChange={formik.handleChange}
