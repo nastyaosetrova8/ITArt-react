@@ -18,19 +18,19 @@ export const deleteTransaction = async idTransaction => {
   return data;
 };
 
-export const updateTransaction = async ({ dataEdit, tokenTrans }) => {
-  const transId = dataEdit.id;
-  const transDat = {
-    transactionDate: dataEdit.transactionDate,
-    type: dataEdit.type,
-    categoryId: dataEdit.categoryId,
-    comment: dataEdit.comment,
-    amount: dataEdit.amount,
-  };
-  token.set(tokenTrans);
+export const updateTransaction = async ({transData, id}) => {
+  const transId = id;
+  // const transDat = {
+  //   transactionDate: dataEdit.transactionDate,
+  //   type: dataEdit.type,
+  //   categoryId: dataEdit.categoryId,
+  //   comment: dataEdit.comment,
+  //   amount: dataEdit.amount,
+  // };
+  // token.set(tokenTrans);
   const { data } = await instance.patch(
     `/api/transactions/${transId}`,
-    transDat
+    transData
   );
   console.log(data);
   return data;
