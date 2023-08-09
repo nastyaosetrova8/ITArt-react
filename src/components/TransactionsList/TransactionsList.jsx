@@ -24,7 +24,6 @@ import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
 import { useEffect, useState } from 'react';
 
 export const TransactionsList = () => {
-  // const tokenTransaction = useSelector(selectToken);
   const dispatch = useDispatch();
   const transactions = useSelector(selectTransactions);
 
@@ -87,9 +86,7 @@ export const TransactionsList = () => {
                       const value = row[column.id];
 
                       return idx === columns.length - 1 ? (
-                        <BtnCont
-                          key={column.id}
-                        >
+                        <BtnCont key={column.id}>
                           <BtnEdit
                             id={row.id}
                             type="button"
