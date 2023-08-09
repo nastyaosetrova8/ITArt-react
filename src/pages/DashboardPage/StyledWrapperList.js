@@ -13,9 +13,7 @@ export const StyledWrapperList = styled.div`
     max-width: 704px;
     padding: 0 32px;
     padding-top: 20px;
-    justify-content: center;
     align-items: center;
-    margin: auto;
   }
   @media (max-width: 768px) {
     width: auto;
