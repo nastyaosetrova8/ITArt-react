@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { notifyRegisterApiError } from 'components/Toastify/Toastify';
-//import { notifyTest } from 'components/Toastify/Toastify';
 import { initialRootState } from 'redux/initialState';
 
 export function handlePending(state) {

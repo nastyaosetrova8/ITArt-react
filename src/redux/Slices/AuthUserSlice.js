@@ -1,5 +1,3 @@
-//import { notifyRegisterSuccess } from 'components/Toastify/Toastify';
-
 import { notifyRegisterSuccess } from 'components/Toastify/Toastify';
 
 const { createSlice } = require('@reduxjs/toolkit');
@@ -16,12 +14,10 @@ const fulfilledRegistration = (state, { payload }) => {
   notifyRegisterSuccess(payload.user.username);  
   state.user = payload.user;
   state.token = payload.token;
-  state.isAuth = true;
-  // notifyRegisterSuccess();
+  state.isAuth = true;  
 };
 
-const fulfilledLogIn = (state, { payload }) => {
-  console.log(payload);
+const fulfilledLogIn = (state, { payload }) => {  
   notifyRegisterSuccess(payload.user.username);
   state.user = payload.user;
   state.token = payload.token;
@@ -39,8 +35,7 @@ const fulfilledLogOut = state => {
   state.isAuth = false;
 };
 
-const fulfilledCurrentUser = (state, { payload }) => {
-  // console.log(payload);
+const fulfilledCurrentUser = (state, { payload }) => {  
   state.user = payload;
   state.isAuth = true;  
 };

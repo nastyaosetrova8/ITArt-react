@@ -12,10 +12,10 @@ export const RegistrationPageStyle = styled.div`
   border-radius: 0px;
 `;
 
-// export const Container = styled(Card)`
 export const Container = styled.div`
   margin: 0 auto;
-  width: 533px;
+  width: 100%;
+  max-width: 533px;
   height: 613px;
   /* padding: 80px 62px; */  
   border-radius: 14px;
@@ -35,12 +35,10 @@ export const Container = styled.div`
   }
   @media (max-width: 780px) {
     padding: 23px 20px;
-    width: 280px;
+    max-width: 280px;
     //width: 533px;
   }
-  @media (max-width: 780px){
-    /* width: 280px; */
-  }
+  
 `;
 export const LogoStyle = styled.div`
   width: 100%;
