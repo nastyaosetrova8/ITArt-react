@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const InputBtnWrap = styled.div`
+width: 100%;
 max-width: 410px;
 margin: 0 auto;
 `
@@ -17,14 +18,15 @@ div{
 
 export const ButtonsBox = styled.div`
   margin: 0 auto;
-
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 
   button {
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     height: 50px;
     border-radius: 20px;
     font-size: 18px;
@@ -40,7 +42,7 @@ export const ButtonsBox = styled.div`
   }
   @media (max-width: 780px) {
     button {
-      width: 280px;
+      max-width: 280px;
     }
   }
 `;

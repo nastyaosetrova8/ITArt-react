@@ -9,13 +9,13 @@ export const LoginPageStyle = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 0px;  
+  border-radius: 0px;
 `;
 
-// export const Container = styled(Card)`
 export const Container = styled.div`
   margin: 0 auto;
-  width: 533px;
+  width: 100%;
+  max-width: 533px;
   height: 570px;
   /* padding: 80px 62px; */
   border-radius: 14px;
@@ -23,8 +23,7 @@ export const Container = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var( --form-color);
-  
+  background-color: var(--form-color);
 
   h3 {
     margin: 0 auto;
@@ -36,11 +35,7 @@ export const Container = styled.div`
 
   @media (max-width: 780px) {
     padding: 23px 20px;
-    width: 280px;
-    //width: 533px;
-  }
-  @media (max-width: 780px) {
-    /* width: 280px; */
+    max-width: 280px;    
   }
 `;
 export const LogoStyle = styled.div`
@@ -50,4 +45,3 @@ export const LogoStyle = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
