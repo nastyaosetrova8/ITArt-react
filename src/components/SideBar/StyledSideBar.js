@@ -2,7 +2,8 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledSideBar = styled.div`
-  border-right: 1px solid var(--white);
+  box-sizing: border-box;
+  border-right: 1px solid var(--white-60);
   color: #fbfbfb;
 
   width: 100%;

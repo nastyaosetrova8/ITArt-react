@@ -6,9 +6,9 @@ const StyledContainer = styled.div`
   width: 100%;
   max-width: 1280px;
   justify-content: space-between;
-  @media (max-width: 1280px) {
+  /* @media (max-width: 1280px) {
     display: block;
-  }
+  } */
 `;
 
 export default StyledContainer;
