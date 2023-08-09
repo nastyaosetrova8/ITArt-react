@@ -116,7 +116,7 @@ export const TransactionsList = () => {
                       <BtnEditTransaction
                         type="button"
                         name="edit"
-                        onClick={handleOnClick}
+                        onClick={handleClickEdit}
                       >
                         {<BtnIcon />} Edit
                       </BtnEditTransaction>
