@@ -7,9 +7,11 @@ import {
   TableRow,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import { StyledTableContainer } from './StyledTable';
+import { StyledTableContainer, StyledWrapperDiagramm } from './StyledTable';
 
 export const CurrencyTable = ({ dataCurrency }) => {
+  console.log('dataCurrency: ', dataCurrency);
+
   const nameCurrencies = { USD: 840, EUR: 978 };
 
   const tableRows = dataCurrency.map(currency => ({
@@ -20,40 +22,49 @@ export const CurrencyTable = ({ dataCurrency }) => {
     sale: currency.rateSell.toFixed(2),
   }));
 
+  const usdCurr = dataCurrency.find(item => item.currencyCodeA === 840);
+  const eurCurr = dataCurrency.find(item => item.currencyCodeA === 978);
+
   return (
-    <StyledTableContainer
-      component={Paper}
-      sx={{ background: 'transparent', boxShadow: 'none' }}
-    >
-      <Table sx={{ width: '100%' }}>
-        <TableHead>
-          <TableRow>
-            <TableCell className="th-currency" align="center">
-              Currency
-            </TableCell>
-            <TableCell className="th-purshase" align="center">
-              Purchase
-            </TableCell>
-            <TableCell className="td-sell" align="left">
-              Sale
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {tableRows.map(row => (
-            <TableRow key={row.currency}>
-              <TableCell align="center">{row.currency}</TableCell>
-              <TableCell align="center" className="td-purshase">
-                {row.purchase}
+    <>
+      <StyledTableContainer
+        component={Paper}
+        sx={{ background: 'transparent', boxShadow: 'none' }}
+      >
+        <Table sx={{ width: '100%' }}>
+          <TableHead>
+            <TableRow>
+              <TableCell className="th-currency" align="center">
+                Currency
               </TableCell>
-              <TableCell align="left" className="td-sell">
-                {row.sale}
+              <TableCell className="th-purshase" align="center">
+                Purchase
+              </TableCell>
+              <TableCell className="td-sell" align="left">
+                Sale
               </TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </StyledTableContainer>
+          </TableHead>
+          <TableBody>
+            {tableRows.map(row => (
+              <TableRow key={row.currency}>
+                <TableCell align="center">{row.currency}</TableCell>
+                <TableCell align="center" className="td-purshase">
+                  {row.purchase}
+                </TableCell>
+                <TableCell align="left" className="td-sell">
+                  {row.sale}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </StyledTableContainer>
+      <StyledWrapperDiagramm>
+        <p className="currencyUSD">{usdCurr.rateSell.toFixed(2)}</p>
+        <p className="currencyEUR">{eurCurr.rateSell.toFixed(2)}</p>
+      </StyledWrapperDiagramm>
+    </>
   );
 };
 
