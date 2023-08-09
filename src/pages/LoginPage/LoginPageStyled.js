@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Card } from '@mui/material';
 import loginPicture from '../../assets/images/login_desktop@1x.jpg';
 
-
 export const LoginPageStyle = styled.div`
   width: 100%;
   height: 100vh;
@@ -30,10 +29,9 @@ export const Container = styled(Card)`
 
   h3 {
     margin: 0 auto;
-    color: var(--white, #fbfbfb);    
+    color: var(--white);
     font-size: 28px;
-    /* font-style: normal; */
-    font-weight: 400;    
+    font-weight: 400;
     line-height: 40px;
   }
 
@@ -45,7 +43,6 @@ export const Container = styled(Card)`
   }
 `;
 export const LogoStyle = styled.div`
-  /* outline: 1px solid black; */
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -64,29 +61,24 @@ export const ButtonsBox = styled.div`
     height: 50px;
     border-radius: 20px;
     font-size: 18px;
-    text-transform: uppercase;    
-    transition: font-weight 250ms ease-in-out;    
-    border: transparent;    
+    text-transform: uppercase;
+    transition: transform 300ms ease-in;
+    border: transparent;
 
     &:hover {
       border: 1px solid rgba(74, 86, 226, 1);
-      font-weight: bold;
+      transform: scale(1.02);
     }
   }
-  @media (max-width: 780px){
-    button{
+  @media (max-width: 780px) {
+    button {
       width: 280px;
     }
   }
 `;
 export const ButtonActive = styled.button`
   color: white;
-  background-image: linear-gradient(
-    120deg,
-    rgba(255, 199, 39, 1),
-    rgba(158, 64, 186, 1) 80%,
-    rgba(112, 0, 256)
-  );
+  background-image: var(--button-gradient);
 `;
 export const ButtonWhite = styled.button`
   color: rgba(98, 63, 139, 1);

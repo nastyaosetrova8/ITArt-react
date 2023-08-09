@@ -6,10 +6,13 @@ import {
   selectTransactions,
 } from 'redux/selectors';
 
-import { makerDasboardTab } from 'helpers/helpers';
+import { makerDashboardTab } from 'helpers/helpers';
 
 import { Paper, Table, TableCell, TableContainer } from '@mui/material';
-import { deleteTransactionThunk } from 'redux/Thunks/TransactionsThunk';
+import {
+  deleteTransactionThunk,
+  getTransactionsThunk,
+} from 'redux/Thunks/TransactionsThunk';
 import {
   BtnCont,
   BtnDelete,
@@ -25,49 +28,32 @@ import {
   TransactionList,
   TransactionTitle,
 } from './TransactionsListStyled';
-import { toggleShowModal } from 'redux/modal/modalSlice';
 import MediaQuery from 'react-responsive';
 import { nanoid } from '@reduxjs/toolkit';
-
+import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
+import { useEffect, useState } from 'react';
 export const TransactionsList = () => {
-  const token = useSelector(selectToken);
+  // const tokenTransaction = useSelector(selectToken);
   const dispatch = useDispatch();
   const transactions = useSelector(selectTransactions);
   const categories = useSelector(selectCategories);
 
-  const handleOnClick = e => {
+  const handleClickEdit = e => {
+    dispatch(saveIdTransaction(e.currentTarget.id));
     dispatch(toggleShowModal(e.currentTarget.name));
   };
 
-  // ==========DELETE TRANS
-  const handleClickDelete = () => {
-    const dataEdit = {
-      id: 'f2103647-98f1-4278-96b7-3b33112ef5e7',
-      transactionDate: '2023-01-23',
-      type: 'INCOME',
-      categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-      comment: 'string',
-      amount: 25,
-    };
-    dispatch(deleteTransactionThunk({ dataEdit, token }));
+  const handleClickDelete = e => {
+    const idTransaction = e.currentTarget.id;
+    dispatch(deleteTransactionThunk(idTransaction));
+    // .unwrap()
+    // .then(() => dispatch(getTransactionsThunk()));
   };
 
-  const rows = makerDasboardTab(transactions).rows;
-  const columns = makerDasboardTab(transactions).columns;
-  // const rows = transactions.transactions?.map(
-  //   ({ transactionDate, type, categoryId, comment, amount, id }) => {
-  //     return {
-  //       date: transactionDate,
-  //       type: type === 'INCOME' ? '+' : '-',
-  //       category: categoryId,
-  //       comment,
-  //       sum: amount,
-  //       id,
-  //     };
-  //   }
-  // );
+  const rows = makerDashboardTab(transactions).rows;
+  const columns = makerDashboardTab(transactions).columns;
 
-  let findCategory = '';
+ let findCategory = '';
   
   function formatDate(date) {
     const dateObj = new Date(date);
@@ -76,7 +62,6 @@ export const TransactionsList = () => {
     const year = String(dateObj.getFullYear()).slice(-2);
     return `${day}.${month}.${year}`;
   }
-  
   return (
     <>
       <MediaQuery maxWidth={768}>
@@ -192,14 +177,14 @@ export const TransactionsList = () => {
                             <BtnEdit
                               type="button"
                               name="edit"
-                              onClick={handleOnClick}
+                              onClick={handleClickEdit}
                             >
                               <BtnIcon sx={{ fontSize: 18 }} />
                             </BtnEdit>
                             <BtnDelete
                               id={row.id}
                               type="button"
-                              onClick={() => handleClickDelete(row.id)}
+                              onClick={() => handleClickDelete}
                             >
                               Delete
                             </BtnDelete>

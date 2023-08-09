@@ -24,11 +24,11 @@ transform: translate(-50%, -50%);
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  // max-width: 100vw;
-  // max-height: 100vh;
+  /* max-width: 100vw;
+  max-height: 100vh; */
     max-width: 540px;
-  max-height: 511px;
-  padding: 40px 72px;
+  /* max-height: 511px; */
+  padding: 40px 80px;
   border-radius: 8px;
   background: radial-gradient(
     circle,

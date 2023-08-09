@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addTransactionThunk,
@@ -7,16 +7,14 @@ import {
 import { selectCategories, selectToken } from 'redux/selectors';
 import { toggleShowModal } from 'redux/modal/modalSlice';
 import { useFormik } from 'formik';
+import * as yup from 'yup';
 import Select from 'react-select';
 import css from './ModalAddTransactions.module.css';
-// import { Select } from '@mui/material';
-// import * as Yup from 'yup';
-// import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
-// import moment from 'moment';
-// import { toast } from 'react-toastify';
-// import { toast } from 'react-toastify';
 import {
+  InputAmountStyled,
+  InputCommentStyled,
+  SelectStyle,
   StyledAddBtn,
   StyledCalendarIcon,
   StyledCancelBtn,
@@ -30,16 +28,14 @@ import {
   StyledSwitch,
   StyledSwitchWrapper,
   StyledTitle,
+  TitleWrapper,
   styledSelectCategories,
 } from './ModalAddTransactions.styled';
-// import { BsPlusLg } from 'react-icons/bs';
-// import { HiOutlineMinus } from 'react-icons/hi';
 
 export const ModalAddTransaction = () => {
   const dispatch = useDispatch();
   const tokenTrans = useSelector(selectToken);
   const allCategories = useSelector(selectCategories);
-  const [typeSelect, setTypeSelect] = useState(false);
 
   useEffect(() => {
     dispatch(getTransCategoriesThunk(tokenTrans));
@@ -54,36 +50,6 @@ export const ModalAddTransaction = () => {
     label: category.name,
   }));
 
-  // const validationSchema = Yup.object().shape({
-  //   amount: Yup.number()
-  //     .typeError('Please enter a valid number')
-  //     .required('Required'),
-  //   categoryId: Yup.string().required('Required'),
-  // });
-  // ================GET CATEGORIES
-
-  const handleGetCatigories = () => {
-    dispatch(getTransCategoriesThunk(tokenTrans));
-  };
-
-  // ========== ADD TRANS
-  const handleAddTrans = () => {
-    const data = {
-      transactionDate: '2023-01-23',
-      type: 'INCOME',
-      categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-      comment: 'string',
-      amount: 25,
-    };
-
-    dispatch(addTransactionThunk(data));
-  };
-
-  // =================CLOSE MODAL
-  // const handleClickBtnClose = () => {
-  //   dispatch(closeAddTrans());
-  // };
-
   const handleClickBtnClose = () => {
     dispatch(toggleShowModal(''));
   };
@@ -97,14 +63,30 @@ export const ModalAddTransaction = () => {
       comment: '',
     },
 
+    validationSchema: 
+    yup.object().shape({
+      amount: yup.number('Enter sum')
+        .positive('Invalid number')
+        .required('Required'),
+        transactionDate: yup.date().required('Required'),
+        comment: yup.string()
+      .max(15, 'Must be 15 characters or less'),
+    }),
+
     onSubmit: value => {
+      const date = new Date(value.transactionDate);
+      const formatYear = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const formattedDate = `${formatYear}-${month}-${day}`;
+
       if (!formik.values.type) {
         dispatch(
           addTransactionThunk({
             ...value,
             type: 'EXPENSE',
-            amount: 0 - value.amount,
-            transactionDate: new Date().toISOString().substring(0, 10),
+            amount: Number(-value.amount),
+            transactionDate: formattedDate,
           })
         );
       } else {
@@ -113,19 +95,20 @@ export const ModalAddTransaction = () => {
             ...value,
             type: 'INCOME',
             categoryId: incomeCat?.id,
-            transactionDate: new Date().toISOString().substring(0, 10),
+            amount: Number(value.amount),
+            transactionDate: formattedDate,
           })
         );
       }
-      handleClickBtnClose()
+      handleClickBtnClose();
     },
   });
 
-  
-
   return (
     <div>
-      <StyledTitle>Add transaction</StyledTitle>
+      <TitleWrapper>
+        <StyledTitle>Add transaction</StyledTitle>
+      </TitleWrapper>
       <StyledSwitchWrapper>
         <p className={formik.values.type ? css.income : css.text}>Income</p>
         <StyledSwitch>
@@ -152,7 +135,7 @@ export const ModalAddTransaction = () => {
 
       <StyledForm onSubmit={formik.handleSubmit}>
         {!formik.values.type && (
-          <Select
+          <SelectStyle
             type="text"
             name={formik.values.label}
             value={formik.values.value}
@@ -165,7 +148,7 @@ export const ModalAddTransaction = () => {
         )}
 
         <StyledInputsWrapper>
-          <StyledInputs
+          <InputAmountStyled
             type="number"
             name="amount"
             value={formik.values.amount}
@@ -178,18 +161,18 @@ export const ModalAddTransaction = () => {
             <StyledDatetime
               value={formik.values.transactionDate}
               onChange={value =>
-                formik.setFieldValue('transactionDate', value[0])
+                formik.setFieldValue('transactionDate', value._d)
               }
               closeOnSelect={true}
               timeFormat={false}
               dateFormat="DD.MM.yyyy"
-              isValidDate={formik.valid}
+              // isValidDate={formik.valid}
             />
 
             <StyledCalendarIcon color={'rgba(115, 74, 239, 1)'} />
           </StyledDatetimeWrap>
         </StyledInputsWrapper>
-        <StyledInputs
+        <InputCommentStyled
           type="text"
           name="comment"
           value={formik.values.comment}

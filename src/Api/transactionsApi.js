@@ -11,27 +11,26 @@ export const addTransaction = async transaction => {
 
   return data;
 };
-export const deleteTransaction = async ({ dataEdit, tokenTrans }) => {
-  const transId = dataEdit.id;
-  token.set(tokenTrans);
-  const { data } = await instance.delete(`/api/transactions/${transId}`);
-  console.log(data);
+export const deleteTransaction = async idTransaction => {
+  console.log('idTransaction: ', idTransaction);
+  const { data } = await instance.delete(`/api/transactions/${idTransaction}`);
+
   return data;
 };
 
-export const updateTransaction = async ({ dataEdit, tokenTrans }) => {
-  const transId = dataEdit.id;
-  const transDat = {
-    transactionDate: dataEdit.transactionDate,
-    type: dataEdit.type,
-    categoryId: dataEdit.categoryId,
-    comment: dataEdit.comment,
-    amount: dataEdit.amount,
-  };
-  token.set(tokenTrans);
+export const updateTransaction = async ({transData, id}) => {
+  const transId = id;
+  // const transDat = {
+  //   transactionDate: dataEdit.transactionDate,
+  //   type: dataEdit.type,
+  //   categoryId: dataEdit.categoryId,
+  //   comment: dataEdit.comment,
+  //   amount: dataEdit.amount,
+  // };
+  // token.set(tokenTrans);
   const { data } = await instance.patch(
     `/api/transactions/${transId}`,
-    transDat
+    transData
   );
   console.log(data);
   return data;

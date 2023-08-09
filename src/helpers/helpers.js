@@ -13,6 +13,14 @@ export const handleCurrency = data => {
   return currency;
 };
 
+// const makerFormatDate = date => {
+//   const partsDate = date.split('-');
+//   const formattedDate = `${partsDate[2]}.${
+//     partsDate[1]
+//   }.${partsDate[0].substring(2, 4)}`;
+//   return formattedDate;
+// };
+
 function formatDate(date) {
   const dateObj = new Date(date);
   const day = String(dateObj.getDate()).padStart(2, '0');
@@ -21,7 +29,7 @@ function formatDate(date) {
   return `${day}.${month}.${year}`;
 }
 
-export const makerDasboardTab = ({ transactions, categories }) => {
+export const makerDashboardTab = ({ transactions, categories }) => {
   if (!transactions) return;
   else {
     const dataTable = {
@@ -30,6 +38,7 @@ export const makerDasboardTab = ({ transactions, categories }) => {
         const matchedNameCategory = categories.find(
           e => e.id === item.categoryId
         );
+
         const isIncome = item.type === 'INCOME';
 
         const sumStyle = isIncome
@@ -39,21 +48,15 @@ export const makerDasboardTab = ({ transactions, categories }) => {
         const formattedAmount = isIncome
           ? item.amount
           : Math.abs(item.amount.toFixed(2));
-        return matchedNameCategory
-          ? {
-              ...item,
-              category: matchedNameCategory.name,
-              date: formatDate(item.transactionDate),
-              type: item.type === 'INCOME' ? '+' : '-',
-              sum: <span style={sumStyle}>{formattedAmount}</span>,
-            }
-          : {
-              ...item,
-              category: item.categoryId,
-              date: formatDate(item.transactionDate),
-              type: item.type === 'INCOME' ? '+' : '-',
-              sum: <span style={sumStyle}>{formattedAmount}</span>,
-            };
+        return {
+          ...item,
+          category: matchedNameCategory
+            ? matchedNameCategory.name
+            : item.categoryId,
+          date: formatDate(item.transactionDate),
+          type: item.type === 'INCOME' ? '+' : '-',
+          sum: <span style={sumStyle}>{formattedAmount}</span>,
+        };
       }),
     };
 
