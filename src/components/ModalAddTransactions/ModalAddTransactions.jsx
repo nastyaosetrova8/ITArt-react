@@ -7,7 +7,7 @@ import {
 import { selectCategories, selectToken } from 'redux/selectors';
 import { toggleShowModal } from 'redux/modal/modalSlice';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
+import * as Yup from 'yup';
 import Select from 'react-select';
 import css from './ModalAddTransactions.module.css';
 import 'react-datetime/css/react-datetime.css';
@@ -21,7 +21,6 @@ import {
   StyledDatetime,
   StyledDatetimeWrap,
   StyledForm,
-  StyledInputs,
   StyledInputsWrapper,
   StyledMinusBtn,
   StyledPlusBtn,
@@ -31,6 +30,9 @@ import {
   TitleWrapper,
   styledSelectCategories,
 } from './ModalAddTransactions.styled';
+import { notifyAmountInvalid, notifyAmountMissing, notifyCommentLength, notifyDataEdded } from 'components/Toastify/Toastify';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ModalAddTransaction = () => {
   const dispatch = useDispatch();
@@ -64,16 +66,27 @@ export const ModalAddTransaction = () => {
     },
 
     validationSchema: 
-    yup.object().shape({
-      amount: yup.number('Enter sum')
+    Yup.object().shape({
+      amount: Yup.number('Enter sum')
         .positive('Invalid number')
         .required('Required'),
-        transactionDate: yup.date().required('Required'),
-        comment: yup.string()
-      .max(15, 'Must be 15 characters or less'),
+        transactionDate: Yup.date().required('Required'),
+        comment: Yup.string()
+        .min(1)
+      .max(20, 'Must be 20 characters or less'),
     }),
 
     onSubmit: value => {
+      if (value.amount < 1) {
+        toast.error('Please enter a positive number');
+        return;
+      } else if (!value.amount) {
+        toast.error('Amount is missing');
+        return;
+      }else if (value.comment.length > 20) {
+        toast.error('Comment must be 20 characters or less');
+        return;
+      } 
       const date = new Date(value.transactionDate);
       const formatYear = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -88,7 +101,11 @@ export const ModalAddTransaction = () => {
             amount: Number(-value.amount),
             transactionDate: formattedDate,
           })
-        );
+        ).unwrap().then(({ data }) => {
+          if (data) {
+            notifyDataEdded()
+          }
+        });
       } else {
         dispatch(
           addTransactionThunk({
@@ -98,7 +115,12 @@ export const ModalAddTransaction = () => {
             amount: Number(value.amount),
             transactionDate: formattedDate,
           })
-        );
+        ).unwrap().then(({ data }) => {
+        if (data) {
+          toast.success('Transaction added successfully');
+          console.log("NOTIFICATION")
+        }
+      });
       }
       handleClickBtnClose();
     },
@@ -106,11 +128,20 @@ export const ModalAddTransaction = () => {
 
   return (
     <div>
-      <TitleWrapper>
         <StyledTitle>Add transaction</StyledTitle>
-      </TitleWrapper>
       <StyledSwitchWrapper>
+      {/* {formik.values.type === "INCOME" ? 
+      (<>
+      <IncomeActive>Income</IncomeActive>
+      <ExpensePassive>Expense</ExpensePassive> 
+      </>) : (
+        <>
+        <IncomePassive>Income</IncomePassive>
+            <ExpenseActive>Expense</ExpenseActive>
+        </>
+      )} */}
         <p className={formik.values.type ? css.income : css.text}>Income</p>
+
         <StyledSwitch>
           <input
             type="checkbox"
@@ -155,6 +186,13 @@ export const ModalAddTransaction = () => {
             placeholder="0.00"
             autoComplete="off"
             onChange={formik.handleChange}
+            min="1"
+
+            // error={Boolean(formik.errors.amount)}
+            //   helperText={
+            //     formik.errors.amount && 'Please enter'
+            //   }
+            
           />
 
           <StyledDatetimeWrap>
@@ -166,7 +204,6 @@ export const ModalAddTransaction = () => {
               closeOnSelect={true}
               timeFormat={false}
               dateFormat="DD.MM.yyyy"
-              // isValidDate={formik.valid}
             />
 
             <StyledCalendarIcon color={'rgba(115, 74, 239, 1)'} />
