@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { logInUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import {
-  Button,
+import {  
   IconButton,  
   InputAdornment,  
   Stack,
@@ -55,7 +54,7 @@ export const LogInForm = () => {
                     </InputAdornment>
                   ),
                 }}
-                style={{ width: '100%' }}
+                style={{ maxWidth: '100%' }}
                 variant="standard"
                 label="Email"
                 name="email"
@@ -86,7 +85,7 @@ export const LogInForm = () => {
                     </InputAdornment>
                   ),
                 }}
-                style={{ width: '100%' }}
+                style={{ maxWidth: '100%' }}
                 variant="standard"
                 label="Password"
                 name="password"
@@ -100,16 +99,14 @@ export const LogInForm = () => {
               />
             
               <ButtonsBox style={{ margin: '52px auto 0' }}>
-                <ButtonActive                  
-                  variant="contained"
+                <ButtonActive                                    
                   type="submit"
                 >
                   Log in
                 </ButtonActive>
 
                 <Link to="/register">
-                  <ButtonWhite                    
-                    variant="contained"
+                  <ButtonWhite                                        
                     type="submit"
                   >
                     Register

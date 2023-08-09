@@ -4,13 +4,18 @@ import { HiOutlineMinus } from 'react-icons/hi';
 import 'flatpickr/dist/themes/material_green.css';
 import 'flatpickr/dist/flatpickr.min.css';
 import { RiCalendar2Fill } from 'react-icons/ri';
-import Datetime from "react-datetime";
-import "react-datetime/css/react-datetime.css";
+import Datetime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
+
+export const TitleWrapper = styled.div`
+  margin: 0 auto;
+  max-width: 380px;
+`;
 
 export const StyledTitle = styled.h2`
   margin-bottom: 40px;
   color: rgba(251, 251, 251, 1);
-  font-size: 30px;
+  font-size: 36px;
   line-height: 1.5;
   font-weight: 400;
   text-align: center;
@@ -67,7 +72,7 @@ export const StyledPlusBtn = styled(BsPlusLg)`
 export const StyledMinusBtn = styled(HiOutlineMinus)`
   width: 30px;
   height: 30px;
-  color: var(--color-white);
+  color: rgba(251, 251, 251, 1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,46 +82,51 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-  width: 540px;
   gap: 40px;
 `;
 
 export const StyledInputsWrapper = styled.div`
-  position: relative;
   display: flex;
   flex-direction: row;
   gap: 40px;
 `;
 
 export const StyledInputs = styled.input`
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   outline: none;
   padding: 8px 20px;
   color: #fbfbfb;
   font-size: 18px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   transition: border-bottom 250ms linear;
 
   &:hover,
   &:focus {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.822);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
   }
 `;
 
 export const StyledDatetime = styled(Datetime)`
   & input {
-background: transparent;
-  border: none;
-  outline: none;
-  padding-left: 20px;
-  color: rgb(251, 251, 251);
-  font-size: 18px;
-  line-height: 1.5;
-  font-weight: 400;
-  width: 254px;
-  height: 32px;}
-  background: linear-gradient(0deg,rgba(83, 61, 186, 1) 0%,rgba(80, 48, 154, 1) 36%,rgba(106, 70, 165, 1) 61%,rgba(133, 93, 175, 1) 100%),
+    background: transparent;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    color: rgb(251, 251, 251);
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 400;
+    width: 254px;
+    height: 32px;
+  }
+  background: linear-gradient(
+    0deg,
+    rgba(83, 61, 186, 1) 0%,
+    rgba(80, 48, 154, 1) 36%,
+    rgba(106, 70, 165, 1) 61%,
+    rgba(133, 93, 175, 1) 100%
+  );
 `;
 
 export const StyledDatetimeWrap = styled.div`
@@ -134,43 +144,46 @@ export const StyledDatetimeWrap = styled.div`
 
 export const StyledCalendarIcon = styled(RiCalendar2Fill)`
   position: absolute;
-  bottom: 10px;
-  right: 15px;
+  /* bottom: 10px; */
   width: 24px;
   height: 24px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-left: 37px;
 `;
 
 export const StyledAddBtn = styled.button`
   border-radius: 20px;
-  padding: 13px 119px;
+  padding: 12px 128px;
   font-size: 18px;
   line-height: 1.5;
   color: rgba(255, 255, 255, 1);
-  background-image: linear-gradient(
-    96.76deg,
-    #ffc727 -16.42%,
-    #9e40ba 97.04%,
-    #7000ff 150.71%
-  );
+  border: none;
+  background-image: var(--button-gradient);
+  /* linear-gradient(
+    150deg,
+    rgba(255, 199, 39, 1),
+rgba(158, 64, 186, 1),
+rgba(112, 0, 255, 1)
+  ); */
   box-shadow: 1px 9px 15px rgba(0, 0, 0, 0.2);
   margin: 0 auto;
   text-transform: uppercase;
-  transition: scale 250ms linear, box-shadow 250ms linear;
+  transform: scale(1);
+  transition: transform 250ms linear, box-shadow 250ms linear;
 
   &:hover,
   &:focus {
-    scale: 0.99;
+    transform: scale(1.1);
     box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.5);
   }
 `;
 
 export const StyledCancelBtn = styled.button`
   display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 20px;
-  padding: 13px 110px;
+  padding: 12px 110px;
   margin: 0 auto;
   font-size: 18px;
   line-height: 1.5;
@@ -178,12 +191,13 @@ export const StyledCancelBtn = styled.button`
   color: rgba(98, 63, 139, 1);
   margin-left: auto;
   text-transform: uppercase;
-  width: 280px;
-  transition: scale 250ms linear, box-shadow 250ms linear;
+  border: none;
+  transform: scale(1);
+  transition: transform 250ms linear, box-shadow 250ms linear;
 
   &:hover,
   &:focus {
-    scale: 0.99;
+    transform: scale(1.1);
     box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.5);
   }
 `;
@@ -288,4 +302,3 @@ export const styledSelectCategories = {
 // export const StyledTitle = styled.h2`
 
 // `;
-

@@ -1,4 +1,6 @@
 @import-normalize; /* bring in normalize.css styles */
+@import './stylesheet/vars.css';
+@import './stylesheet/fonts.css';
 
 body {
   margin: 0;
@@ -12,7 +14,7 @@ body {
   color: #fbfbfb;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: rgb(86, 43, 134);
+  /* background: rgb(86, 43, 134); */
   background: linear-gradient(
     338deg,
     rgba(86, 43, 134, 1) 12%,

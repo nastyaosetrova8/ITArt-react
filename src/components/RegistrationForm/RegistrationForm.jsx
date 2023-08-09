@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { registerUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, IconButton, InputAdornment, Stack, TextField } from '@mui/material';
+import { IconButton, InputAdornment, Stack, TextField } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
@@ -158,16 +158,14 @@ export const RegistrationForm = () => {
                 />
 
                 <ButtonsBox style={{ margin: '52px auto 0' }}>
-                  <ButtonActive                    
-                    variant="contained"
+                  <ButtonActive                                        
                     type="submit"
                   >
                     Register
                   </ButtonActive>
 
                   <Link to="/login">
-                    <ButtonWhite                      
-                      variant="contained"
+                    <ButtonWhite                                            
                       type="submit"
                     >
                       Log in
