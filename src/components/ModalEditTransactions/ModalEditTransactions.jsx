@@ -1,23 +1,32 @@
 import {
+  InputAmountStyled,
+  InputCommentStyled,
   StyledAddBtn,
   StyledCalendarIcon,
   StyledCancelBtn,
+  StyledDatetime,
+  StyledDatetimeWrap,
   StyledForm,
+  StyledInputsWrapper,
+  StyledSwitchWrapper,
+  StyledTitle,
 } from 'components/ModalAddTransactions/ModalAddTransactions.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { editTransactionThunk } from 'redux/Thunks/TransactionsThunk';
 import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
 import { selectSavedId, selectTransactions } from 'redux/selectors';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
+import * as Yup from 'yup';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import {
+  CategoryNameStyled,
   ExpenseActive,
   ExpensePassive,
   IncomeActive,
   IncomePassive,
 } from './ModalEditStyled';
+import { notifyAmountInvalid, notifyAmountMissing } from 'components/Toastify/Toastify';
 
 export const ModalEditTransaction = () => {
   const dispatch = useDispatch();
@@ -35,22 +44,26 @@ export const ModalEditTransaction = () => {
     dispatch(saveIdTransaction('null'));
   };
 
+  const dateT = new Date(currentTransaction.transactionDate);
+
   const formik = useFormik({
     initialValues: {
-      transactionDate: currentTransaction.transactionDate,
+      transactionDate: dateT,
       amount: currentTransaction.amount,
       comment: currentTransaction.comment,
       categoryId: currentTransaction.categoryId,
       type: currentTransaction.type,
     },
 
-    validationSchema: yup.object().shape({
-      amount: yup
-        .number('Enter sum')
+    validationSchema: 
+    Yup.object().shape({
+      amount: Yup.number('Enter sum')
         .positive('Invalid number')
         .required('Required'),
-      transactionDate: yup.date().required('Required'),
-      comment: yup.string().min(1).max(15, 'Must be 15 characters or less'),
+        transactionDate: Yup.date().required('Required'),
+        comment: Yup.string()
+        .min(1)
+      .max(20, 'Must be 20 characters or less'),
     }),
 
     onSubmit: value => {
@@ -82,8 +95,8 @@ export const ModalEditTransaction = () => {
 
   return (
     <div>
-      <h2>Edit transaction</h2>
-      <div>
+      <StyledTitle>Edit transaction</StyledTitle>
+      <StyledSwitchWrapper>
         {currentTransaction.type === 'INCOME' ? (
           <>
             <IncomeActive>Income</IncomeActive>
@@ -97,12 +110,14 @@ export const ModalEditTransaction = () => {
             <ExpenseActive>Expense</ExpenseActive>
           </>
         )}
-      </div>
+      </StyledSwitchWrapper>
       <StyledForm onSubmit={formik.handleSubmit}>
+        <CategoryNameStyled>
         <p>{currentNameCategory.name}</p>
-
-        <div>
-          <input
+        </CategoryNameStyled>
+        
+        <StyledInputsWrapper>
+          <InputAmountStyled
             type="number"
             name="amount"
             value={correctAmount}
@@ -111,7 +126,8 @@ export const ModalEditTransaction = () => {
             min="1"
           />
 
-          <Datetime
+<StyledDatetimeWrap>
+          <StyledDatetime
             value={formik.values.transactionDate}
             onChange={value =>
               formik.setFieldValue('transactionDate', value._d)
@@ -121,8 +137,10 @@ export const ModalEditTransaction = () => {
             dateFormat="DD.MM.yyyy"
           />
           <StyledCalendarIcon color={'rgba(115, 74, 239, 1)'} />
-        </div>
-        <input
+
+          </StyledDatetimeWrap>
+        </StyledInputsWrapper>
+        <InputCommentStyled
           type="text"
           name="comment"
           value={formik.values.comment}
