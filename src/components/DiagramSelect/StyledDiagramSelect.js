@@ -3,26 +3,27 @@ import { SlArrowDown } from 'react-icons/sl';
 
 const breakpoints = {
     tablet: `@media only screen and (min-width: 768px)`,
-    desktop: `@media only screen and (min-width: 1280px)`,
+    desktop: `@media only screen and (min-width: 1279px)`,
 };
 
 export const StyledSelectWrapper = styled.div`
-  width: 280px;
+width: 100%;
+  max-width: 280px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin-top: 32px;
 
   @media only screen and (min-width: 768px) {
-    width: 336px;
+    max-width: 336px;
     flex-direction: row;
     justify-content: space-between;
     gap: 16px;
     margin-top: 0;
   }
 
-  @media only screen and (min-width: 1280px) {
-    width: 395px;
+  @media only screen and (min-width: 1279px) {
+    max-width: 395px;
     flex-direction: row;
   }
 `;
@@ -59,7 +60,8 @@ export const selectStyles = {
     menu: styles => ({
         ...styles,
         top: '90%',
-        width: '280px',
+        width: '100%',
+        maxWidth: '280px',
         height: '157px',
         borderRadius: '8px',
         background: 'var(--small-form-color)',
@@ -74,13 +76,14 @@ export const selectStyles = {
     }),
     menuList: styles => ({
         ...styles,
-        width: '280px',
+        width: '100%',
+        maxWidth: '280px',
         height: '157px',
         [breakpoints.tablet]: {
-            width: '160px',
+            maxWidth: '160px',
         },
         [breakpoints.desktop]: {
-            width: '182px',
+            maxWidth: '182px',
         },
         '::-webkit-scrollbar': {
             width: '7px',
