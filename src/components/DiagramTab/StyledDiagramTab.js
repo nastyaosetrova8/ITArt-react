@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
+  margin-left: auto;
 
   @media screen and (min-width: 768px) {
     display: flex;
@@ -17,16 +18,21 @@ export const Wrapper = styled.div`
     padding: 0 0 15px 0;
   }
 
-  @media screen and (min-width: 1280px) {
-    justify-content: flex-start;
-  }
 `;
 
-export const StyledWrapperLeft = styled.div``;
+export const StyledWrapperLeft = styled.div`
+width: 100%;
+  max-width: 280px;
+`;
 
 export const StyledWrapperRight = styled.div`
-  @media only screen and (min-width: 1280px) {
-    width: 395px;
+width: 100%;
+  max-width: 280px;
+  @media only screen and (min-width: 768px){
+    max-width: 336px;
+  }
+  @media only screen and (min-width: 1279px) {
+    max-width: 395px;
   }
 `;
 export const StyledTitle = styled.h1`
