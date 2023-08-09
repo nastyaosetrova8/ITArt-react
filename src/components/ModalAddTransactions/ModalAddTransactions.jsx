@@ -8,7 +8,6 @@ import { selectCategories, selectToken } from 'redux/selectors';
 import { toggleShowModal } from 'redux/modal/modalSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Select from 'react-select';
 import css from './ModalAddTransactions.module.css';
 import 'react-datetime/css/react-datetime.css';
 import {
@@ -26,12 +25,10 @@ import {
   StyledPlusBtn,
   StyledSwitch,
   StyledSwitchWrapper,
-  StyledTitle,
-  TitleWrapper,
+  StyledTitle,  
   styledSelectCategories,
 } from './ModalAddTransactions.styled';
-import { notifyAmountInvalid, notifyAmountMissing, notifyCommentLength, notifyDataEdded } from 'components/Toastify/Toastify';
-import { toast } from 'react-toastify';
+import {  notifyExpenseEdded, notifyIncomeEdded } from 'components/Toastify/Toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const ModalAddTransaction = () => {
@@ -77,16 +74,6 @@ export const ModalAddTransaction = () => {
     }),
 
     onSubmit: value => {
-      if (value.amount < 1) {
-        toast.error('Please enter a positive number');
-        return;
-      } else if (!value.amount) {
-        toast.error('Amount is missing');
-        return;
-      }else if (value.comment.length > 20) {
-        toast.error('Comment must be 20 characters or less');
-        return;
-      } 
       const date = new Date(value.transactionDate);
       const formatYear = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -101,11 +88,7 @@ export const ModalAddTransaction = () => {
             amount: Number(-value.amount),
             transactionDate: formattedDate,
           })
-        ).unwrap().then(({ data }) => {
-          if (data) {
-            notifyDataEdded()
-          }
-        });
+        ).unwrap().then(()=>notifyExpenseEdded())                
       } else {
         dispatch(
           addTransactionThunk({
@@ -115,12 +98,8 @@ export const ModalAddTransaction = () => {
             amount: Number(value.amount),
             transactionDate: formattedDate,
           })
-        ).unwrap().then(({ data }) => {
-        if (data) {
-          toast.success('Transaction added successfully');
-          console.log("NOTIFICATION")
-        }
-      });
+        ).unwrap().then(()=>notifyIncomeEdded())
+                
       }
       handleClickBtnClose();
     },
@@ -129,17 +108,7 @@ export const ModalAddTransaction = () => {
   return (
     <div>
         <StyledTitle>Add transaction</StyledTitle>
-      <StyledSwitchWrapper>
-      {/* {formik.values.type === "INCOME" ? 
-      (<>
-      <IncomeActive>Income</IncomeActive>
-      <ExpensePassive>Expense</ExpensePassive> 
-      </>) : (
-        <>
-        <IncomePassive>Income</IncomePassive>
-            <ExpenseActive>Expense</ExpenseActive>
-        </>
-      )} */}
+      <StyledSwitchWrapper>     
         <p className={formik.values.type ? css.income : css.text}>Income</p>
 
         <StyledSwitch>
@@ -187,12 +156,6 @@ export const ModalAddTransaction = () => {
             autoComplete="off"
             onChange={formik.handleChange}
             min="1"
-
-            // error={Boolean(formik.errors.amount)}
-            //   helperText={
-            //     formik.errors.amount && 'Please enter'
-            //   }
-            
           />
 
           <StyledDatetimeWrap>
