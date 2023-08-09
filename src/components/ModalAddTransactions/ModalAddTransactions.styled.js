@@ -4,8 +4,10 @@ import { HiOutlineMinus } from 'react-icons/hi';
 import 'flatpickr/dist/themes/material_green.css';
 import 'flatpickr/dist/flatpickr.min.css';
 import { RiCalendar2Fill } from 'react-icons/ri';
-import Datetime from 'react-datetime';
-import 'react-datetime/css/react-datetime.css';
+import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
+import Select from 'react-select';
+
 
 export const TitleWrapper = styled.div`
   margin: 0 auto;
@@ -96,6 +98,7 @@ export const StyledInputs = styled.input`
   padding: 8px 20px;
   color: #fbfbfb;
   font-size: 18px;
+  font-weight: 400px;
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
@@ -107,26 +110,36 @@ export const StyledInputs = styled.input`
   }
 `;
 
+export const InputAmountStyled = styled.input`
+  outline: none;
+  padding: 8px 20px;
+  color: #fbfbfb;
+  font-size: 18px;
+  font-weight: 400px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  transition: border-bottom 250ms linear;
+  width: 181px;
+
+  &:hover,
+  &:focus {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  }
+`;
+
 export const StyledDatetime = styled(Datetime)`
   & input {
-    background: transparent;
-    border: none;
-    outline: none;
-    padding-left: 20px;
-    color: rgb(251, 251, 251);
-    font-size: 18px;
-    line-height: 1.5;
-    font-weight: 400;
-    width: 254px;
-    height: 32px;
-  }
-  background: linear-gradient(
-    0deg,
-    rgba(83, 61, 186, 1) 0%,
-    rgba(80, 48, 154, 1) 36%,
-    rgba(106, 70, 165, 1) 61%,
-    rgba(133, 93, 175, 1) 100%
-  );
+background: transparent;
+  border: none;
+  outline: none;
+  padding-left: 20px;
+  color: rgb(251, 251, 251);
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 400;
+  width: 181px;}
+  background: linear-gradient(0deg,rgba(83, 61, 186, 1) 0%,rgba(80, 48, 154, 1) 36%,rgba(106, 70, 165, 1) 61%,rgba(133, 93, 175, 1) 100%),
 `;
 
 export const StyledDatetimeWrap = styled.div`
@@ -202,6 +215,13 @@ export const StyledCancelBtn = styled.button`
   }
 `;
 
+
+export const SelectStyle = styled(Select)`
+  display: inline-block;
+  margin: auto;
+  width: 394px;
+`;
+
 export const styledSelectCategories = {
   option: provided => {
     return {
@@ -212,7 +232,7 @@ export const styledSelectCategories = {
 
       fontSize: '18px',
       fontWeight: '400',
-      color: 'rgba(255, 255, 255, 0.8)',
+      color: 'rgba(255, 255, 255, 0.6)',
       backgroundColor: 'transparent',
       cursor: 'pointer',
       '&:hover': {
@@ -230,6 +250,8 @@ export const styledSelectCategories = {
     borderRadius: 0,
     boxShadow: 'none',
     backgroundColor: 'transparent',
+    maxWidth: '394px',
+    margin: 'auto',
   }),
 
   singleValue: (provided, state) => {
@@ -242,22 +264,29 @@ export const styledSelectCategories = {
       transition,
       right: 5,
       color: '#FBFBFB',
-      padding: '8px 20px',
+      display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      /* padding: '8px 20px', */
     };
   },
 
-  menu: (provided, state) => {
+  menu: (provided) => {
     return {
       ...provided,
       background:
         'linear-gradient(0deg,rgba(83, 61, 186, 1) 0%,rgba(80, 48, 154, 1) 36%,rgba(106, 70, 165, 1) 61%,rgba(133, 93, 175, 1) 100%)',
       borderRadius: '8px',
+      display: 'inline-block',
+      maxWidth: '394px',
+      marginLeft: 'auto',
+      marginRight: 'auto',
     };
   },
   menuList: base => ({
     ...base,
     '::-webkit-scrollbar': {
-      display: 'none',
+      /* display: 'none', */
     },
   }),
 
@@ -266,7 +295,7 @@ export const styledSelectCategories = {
       color: 'rgba(255, 255, 255, 0.5)',
       position: 'absolute',
       left: 10,
-      padding: '8px 20px',
+      /* padding: '8px 20px', */
     };
   },
   indicatorSeparator: () => ({}),
@@ -280,6 +309,7 @@ export const styledSelectCategories = {
   dropdownIndicator: provided => {
     return {
       ...provided,
+     size: '20px',
       color: 'rgba(255, 255, 255, 0.4)',
       '&:hover': {
         color: '#fbfbfb',
@@ -293,7 +323,6 @@ export const styledSelectCategories = {
       margin: '0px',
       color: '#FBFBFB',
       padding: '8px 20px',
-
       minWidth: '100%',
     };
   },

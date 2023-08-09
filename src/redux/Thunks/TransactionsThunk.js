@@ -64,11 +64,12 @@ export const editTransactionThunk = createAsyncThunk(
     // const token = dataEdit.token;
 
     try {
-      console.log(345);
 
       // token.set(tokenTrans);
-
       const newTrans = await updateTransaction(dataEdit);
+      thunkAPI.dispatch(getTransactionsThunk());
+      thunkAPI.dispatch(getCurrentUserThunk());
+
       return newTrans;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
