@@ -34,9 +34,9 @@ export const selectStyles = {
         height: '50px',
         padding: '12px 20px',
         fontSize: '16px',
-        color: '#FBFBFB',
+        color: 'var(--white)',
         backgroundColor: 'rgba(74, 86, 226, 0.10)',
-        border: '1px solid rgba(255, 255, 255, 0.60)',
+        border: '1px solid var(--white-60)',
         borderRadius: '8px',
         cursor: 'pointer',
         [breakpoints.tablet]: {
@@ -54,7 +54,7 @@ export const selectStyles = {
         transition: 'transform 250ms cubic-bezier(0.4, 0, 0.2, 1)',
         transform: state.selectProps.menuIsOpen ? 'rotate(180deg)' : null,
     }),
-    singleValue: styles => ({ ...styles, margin: '0', color: '#FBFBFB' }),
+    singleValue: styles => ({ ...styles, margin: '0', color: 'var(--white)' }),
     input: styles => ({ ...styles, padding: '0', margin: '0' }),
     menu: styles => ({
         ...styles,
@@ -62,13 +62,7 @@ export const selectStyles = {
         width: '280px',
         height: '157px',
         borderRadius: '8px',
-        background: `linear-gradient(
-      360deg,
-      rgba(83, 61, 186, 0.7) 0%,
-      rgba(80, 48, 154, 0.7) 35.94%,
-      rgba(106, 70, 165, 0.52) 61.04%,
-      rgba(133, 93, 175, 0.13) 100%
-    )`,
+        background: 'var(--small-form-color)',
         backdropFilter: `blur(50px)`,
         overflow: 'auto',
         [breakpoints.tablet]: {
@@ -94,23 +88,23 @@ export const selectStyles = {
             borderRadius: '8px',
         },
         '::-webkit-scrollbar-track': {
-            backgroundColor: 'rgba(255, 255, 255, 0.10)',
+            backgroundColor: 'var(--form-color)',
         },
         '::-webkit-scrollbar-thumb': {
-            backgroundColor: '#734AEF',
+            backgroundColor: 'var(--violet)',
         },
         '::-webkit-scrollbar-thumb:hover': {
-            backgroundColor: '#623F8B',
+            backgroundColor: 'var(--white-button-text)',
         },
     }),
     option: (styles, state) => ({
         ...styles,
         cursor: 'pointer',
-        color: state.isSelected ? '#FF868D' : null,
-        backgroundColor: state.isSelected ? 'rgba(255, 255, 255, 0.10)' : null,
+        color: state.isSelected ? 'var(--dashboard-out-text)' : null,
+        backgroundColor: state.isSelected ? 'var(--form-color)' : null,
         ':hover': {
-            color: '#FF868D',
-            backgroundColor: 'rgba(255, 255, 255, 0.10)',
+            color: 'var(--dashboard-out-text)',
+            backgroundColor: 'var(--form-color)',
         },
     }),
 };

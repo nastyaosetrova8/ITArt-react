@@ -1,6 +1,44 @@
 import { styled } from 'styled-components';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 
+export const TransactionContainer = styled.ul`
+  list-style: none;
+  height: 75vh;
+  overflow: auto;
+`;
+export const TransactionList = styled.ul`
+  max-width: 280px;
+  margin-top: 8px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  border-left: 5px solid
+    ${props => (props.type === 'INCOME' ? '#FFB627' : '#FF868D')};
+`;
+export const TransactionItem = styled.li`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-weight: 400;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 12px 15px;
+  font-size: 16px;
+
+  &:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+`;
+export const TransactionTitle = styled.p`
+  font-weight: 600;
+`;
+
 export const TableSt = styled.table`
   margin-top: 46px;
   width: 100%;
@@ -38,7 +76,7 @@ export const TableRowStyled = styled.tr`
   position: relative;
   margin: 0;
   display: grid;
-  grid-template-columns: 0.8fr 0.6fr 1.2fr 1.7fr 0.7fr 0.4fr 0.1fr;
+  grid-template-columns: 0.8fr 0.6fr 1.2fr 1.7fr 0.7fr 0.4fr 0.15fr;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -60,6 +98,23 @@ export const BtnEdit = styled.button`
   background-color: transparent;
   border: none;
 `;
+export const BtnEditTransaction = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  font-size: 16px;
+  padding: 4px 12px;
+  border-radius: 18px;
+  border: none;
+  width: 69px;
+  height: 29px;
+  color: #ffffff8f;
+  cursor: pointer;
+  transition: 250ms;
+  background-color: transparent;
+  border: none;
+`;
 export const BtnIcon = styled(ModeEditOutlineOutlinedIcon)`
   color: #ffffff8f;
   transition: 250ms;
@@ -77,7 +132,6 @@ export const BtnDelete = styled.button`
   color: #fbfbfb;
   font-size: 14px;
   font-weight: 400;
-  width: 100%;
   height: 100%;
   padding: 5px 12px;
   background-image: linear-gradient(

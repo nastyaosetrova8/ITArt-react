@@ -1,9 +1,9 @@
 import { notifyEmptySummary } from 'components/Toastify/Toastify';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { getTransSumThunk } from 'redux/Thunks/TransactionsSumThunk';
-import { selectSummary } from 'redux/selectors';
+//import { selectSummary } from 'redux/selectors';
 import { StyledSelectWrapper, selectStyles } from './StyledDiagramSelect';
 
 const optionsMonth = [
@@ -38,7 +38,7 @@ const optionsYear = [
 ];
 
 export const DiagramSelect = () => {
-  const summary = useSelector(selectSummary);
+  //const summary = useSelector(selectSummary);
   const dispatch = useDispatch();
   const date = new Date();
   let options = { month: 'long' };
@@ -58,42 +58,21 @@ export const DiagramSelect = () => {
     dispatch(getTransSumThunk({ month: Number(month), year: Number(year) }))
       .unwrap()
       .then(({ categoriesSummary }) => {
-
         if (!categoriesSummary?.length) {
-          notifyEmptySummary()
-          console.log("NOTIFICATION")
-        };
+          notifyEmptySummary();
+          console.log('NOTIFICATION');
+        }
       });
   }, [dispatch, month, year]);
 
-  // useEffect(() => {
-  //   if (summary?.length) return;
-
-    // if (!summary?.length) {
-    //   console.log('i dollar');
-    // }
-  // }, [summary]);
-
-  // if (!summary[0]?.name) {
-  //   notifyEmptySummary();
-  // }
-
-  //console.log(summary.length);
-  //console.log(summary[0].name);
-
   const handleSelectMonth = event => {
-    //console.log(1);
     setMonth(event.value);
   };
 
   const handleSelectYear = event => {
-    //console.log(2);
     setYear(event.value);
   };
 
-  // if (!summary?.length) {
-  //   notifyEmptySummary();
-  // }
   return (
     <StyledSelectWrapper>
       <Select

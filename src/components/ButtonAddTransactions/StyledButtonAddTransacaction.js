@@ -31,6 +31,14 @@ export const BtnStyled = styled.button`
     box-shadow: 1px 5px 8px 0px rgba(0, 0, 0, 0.5);
     transition: 250ms;
   }
+  @media (max-width: 1280px) {
+    bottom: -600px;
+    right: 40px;
+  }
+  @media (max-width: 768px) {
+    bottom: -550px;
+    right: 20px;
+  }
 `;
 export const BtnPlus = styled(BsPlusLg)`
   width: 28px;
