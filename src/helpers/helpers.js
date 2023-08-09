@@ -38,15 +38,7 @@ export const makerDashboardTab = ({ transactions, categories }) => {
         const matchedNameCategory = categories.find(
           e => e.id === item.categoryId
         );
-        //  return {
-        //   ...item,
-        //   category: matchedNameCategory
-        //     ? matchedNameCategory.name
-        //     : item.categoryId,
-        //   date: makerFormatDate(item.transactionDate),
-        //   type: item.type === 'INCOME' ? '+' : '-',
-        //   sum: item.amount,
-        // };
+
         const isIncome = item.type === 'INCOME';
 
         const sumStyle = isIncome

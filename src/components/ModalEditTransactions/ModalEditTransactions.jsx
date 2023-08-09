@@ -29,8 +29,9 @@ export const ModalEditTransaction = () => {
   const dispatch = useDispatch();
   const tokenTrans = useSelector(selectToken);
   const allCategories = useSelector(selectCategories);
-  // const IdTransaction = useSelector(selectIsEditTrans);
-  // const allTransactions = useSelector(selectTransactions);
+  const IdTransaction = useSelector(selectIsEditTrans);
+  const allTransactions = useSelector(selectTransactions);
+  console.log('allTransactions: ', allTransactions);
 
   const expenseCat = allCategories.filter(
     category => category.type !== 'INCOME'

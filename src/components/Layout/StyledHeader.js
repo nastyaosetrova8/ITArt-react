@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyledHeader = styled.div`
+export const StyledHeader = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid grey;
@@ -10,4 +11,6 @@ const StyledHeader = styled.div`
   }
 `;
 
-export default StyledHeader;
+export const StyledLink = styled(Link)`
+  color: var(--yellow);
+`;
