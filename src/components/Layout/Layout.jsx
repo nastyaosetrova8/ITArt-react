@@ -8,6 +8,7 @@ import { selectIsShowModal } from 'redux/modal/modalSelectors';
 import { StyledHeader, StyledLink } from './StyledHeader';
 import Modal from 'components/Modal/Modal';
 import Logo from '../../assets/images/logo.svg';
+import ExitIcon from './ExitIcon';
 
 export const Layout = () => {
   const dispatch = useDispatch();
@@ -27,9 +28,10 @@ export const Layout = () => {
           <p>Money Guard</p>
         </StyledLink>
 
-        <p>Hello, {userName}</p>
+        <p className="user-name">{userName}</p>
         <button type="button" name="logout" onClick={handleOpenModal}>
-          Log out
+          <ExitIcon />
+          <span className="btn-exit-text">Exit</span>
         </button>
         {isShowModal && <Modal />}
       </StyledHeader>
