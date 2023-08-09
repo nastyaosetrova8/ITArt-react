@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectToken, selectTransactions } from 'redux/selectors';
+import {
+  selectCategories,
+  selectToken,
+  selectTransactions,
+} from 'redux/selectors';
 
 import { makerDasboardTab } from 'helpers/helpers';
 
@@ -10,23 +14,26 @@ import {
   BtnCont,
   BtnDelete,
   BtnEdit,
+  BtnEditTransaction,
   BtnIcon,
   HeadRow,
   TableBodySt,
   TableHeadSt,
   TableRowStyled,
+  TransactionContainer,
+  TransactionItem,
+  TransactionList,
+  TransactionTitle,
 } from './TransactionsListStyled';
 import { toggleShowModal } from 'redux/modal/modalSlice';
+import MediaQuery from 'react-responsive';
+import { nanoid } from '@reduxjs/toolkit';
 
 export const TransactionsList = () => {
   const token = useSelector(selectToken);
   const dispatch = useDispatch();
   const transactions = useSelector(selectTransactions);
-
-  // const handleOnClick = evt => {
-
-  //   dispatch(editTransactionThunk());
-  // };
+  const categories = useSelector(selectCategories);
 
   const handleOnClick = e => {
     dispatch(toggleShowModal(e.currentTarget.name));
@@ -42,18 +49,8 @@ export const TransactionsList = () => {
       comment: 'string',
       amount: 25,
     };
-
-    //   // const dataEx = {
-    //   //   transactionDate: "2023-01-23",
-    //   // type: "EXPENSE",
-    //   // categoryId: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
-    //   // comment: "string",
-    //   // amount: -5}
-
     dispatch(deleteTransactionThunk({ dataEdit, token }));
   };
-
-  // ============================ TABLE+++++++++++
 
   const rows = makerDasboardTab(transactions).rows;
   const columns = makerDasboardTab(transactions).columns;
@@ -70,91 +67,165 @@ export const TransactionsList = () => {
   //   }
   // );
 
-  // const columns = columnsDashboardTab;
-
+  let findCategory = '';
+  
+  function formatDate(date) {
+    const dateObj = new Date(date);
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const year = String(dateObj.getFullYear()).slice(-2);
+    return `${day}.${month}.${year}`;
+  }
+  
   return (
     <>
-      <Paper
-        sx={{
-          width: '100%',
-          maxWidth: '715px',
-          overflow: 'hidden',
-          background: 'transparent',
-        }}
-      >
-        <TableContainer sx={{ maxHeight: 440 }}>
-          <Table
-            stickyHeader
-            aria-label="sticky table"
-            sx={{
-              background: 'transparent',
-            }}
-          >
-            <TableHeadSt>
-              <HeadRow>
-                {columns.map(column => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ maxWidth: column.maxWidth }}
-                    sx={{
-                      borderBottom: 'none',
-                      fontWeight: 600,
-                      fontSize: '16px',
-                    }}
-                  >
-                    {column.name}
-                  </TableCell>
-                ))}
-              </HeadRow>
-            </TableHeadSt>
-            <TableBodySt>
-              {rows.map(row => {
-                return (
-                  <TableRowStyled role="checkbox" tabIndex={-1} key={row.id}>
-                    {columns.map((column, idx) => {
-                      const value = row[column.id];
+      <MediaQuery maxWidth={768}>
+        <TransactionContainer>
+          {transactions.transactions?.map(
+            ({ transactionDate, type, categoryId, comment, amount, id }) => {
+              findCategory = categories.find(
+                category => category.id === categoryId
+              );
+              return (
+                <li key={nanoid()}>
+                  <TransactionList type={type}>
+                    <TransactionItem>
+                      <TransactionTitle>Date</TransactionTitle>
+                      <span> {formatDate(transactionDate)}</span>
+                    </TransactionItem>
+                    <TransactionItem>
+                      <TransactionTitle>Type</TransactionTitle>
+                      <span> {type === 'INCOME' ? '+' : '-'}</span>
+                    </TransactionItem>
+                    <TransactionItem>
+                      <TransactionTitle>Category</TransactionTitle>
+                      <span>
+                        {findCategory && findCategory.name
+                          ? findCategory.name
+                          : categoryId}
+                      </span>
+                    </TransactionItem>
+                    <TransactionItem>
+                      <TransactionTitle>Comment</TransactionTitle>
+                      <span> {comment}</span>
+                    </TransactionItem>
+                    <TransactionItem>
+                      <TransactionTitle>Sum</TransactionTitle>
+                      <span
+                        style={{
+                          color: type === 'INCOME' ? '#FFB627' : '#FF868D',
+                          fontWeight: 600,
+                        }}
+                      >
+                        {amount > 0 ? amount : Math.abs(amount.toFixed(2))}
+                      </span>
+                    </TransactionItem>
+                    <TransactionItem>
+                      <BtnDelete
+                        id={id}
+                        type="button"
+                        onClick={() => handleClickDelete(id)}
+                      >
+                        Delete
+                      </BtnDelete>
+                      <BtnEditTransaction
+                        type="button"
+                        name="edit"
+                        onClick={handleOnClick}
+                      >
+                        {<BtnIcon />} Edit
+                      </BtnEditTransaction>
+                    </TransactionItem>
+                  </TransactionList>
+                </li>
+              );
+            }
+          )}
+        </TransactionContainer>
+      </MediaQuery>
 
-                      return idx === columns.length - 1 ? (
-                        <BtnCont
-                          key={column.id}
-                        >
-                          <BtnEdit
-                            type="button"
-                            name="edit"
-                            onClick={handleOnClick}
+      <MediaQuery minWidth={769}>
+        <Paper
+          sx={{
+            width: '100%',
+            maxWidth: '715px',
+            overflow: 'hidden',
+            background: 'transparent',
+            borderRadius: '8px',
+          }}
+        >
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table
+              stickyHeader
+              aria-label="sticky table"
+              sx={{
+                background: 'transparent',
+              }}
+            >
+              <TableHeadSt>
+                <HeadRow>
+                  {columns.map(column => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ maxWidth: column.maxWidth }}
+                      sx={{
+                        borderBottom: 'none',
+                        fontWeight: 600,
+                        fontSize: '16px',
+                      }}
+                    >
+                      {column.name}
+                    </TableCell>
+                  ))}
+                </HeadRow>
+              </TableHeadSt>
+              <TableBodySt>
+                {rows.map(row => {
+                  return (
+                    <TableRowStyled role="checkbox" tabIndex={-1} key={row.id}>
+                      {columns.map((column, idx) => {
+                        const value = row[column.id];
+
+                        return idx === columns.length - 1 ? (
+                          <BtnCont key={column.id}>
+                            <BtnEdit
+                              type="button"
+                              name="edit"
+                              onClick={handleOnClick}
+                            >
+                              <BtnIcon sx={{ fontSize: 18 }} />
+                            </BtnEdit>
+                            <BtnDelete
+                              id={row.id}
+                              type="button"
+                              onClick={() => handleClickDelete(row.id)}
+                            >
+                              Delete
+                            </BtnDelete>
+                          </BtnCont>
+                        ) : (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            sx={{
+                              borderBottom: 'none',
+                            }}
                           >
-                            <BtnIcon sx={{ fontSize: 18 }} />
-                          </BtnEdit>
-                          <BtnDelete
-                            id={row.id}
-                            type="button"
-                            onClick={() => handleClickDelete(row.id)}
-                          >
-                            Delete
-                          </BtnDelete>
-                        </BtnCont>
-                      ) : (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          sx={{
-                            borderBottom: 'none',
-                          }}
-                        >
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRowStyled>
-                );
-              })}
-            </TableBodySt>
-          </Table>
-        </TableContainer>
-      </Paper>
+                            {column.format && typeof value === 'number'
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRowStyled>
+                  );
+                })}
+              </TableBodySt>
+            </Table>
+          </TableContainer>
+        </Paper>
+      </MediaQuery>
     </>
   );
 };
