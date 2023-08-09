@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
 export const WrapperTable = styled.table`
-  width: 280px;
+  width:100%;
+  max-width: 280px;
   display: flex;
   flex-direction: column;
 
   margin-top: 20px;
   @media only screen and (min-width: 768px) {
-    width: 336px;
+    max-width: 336px;
   }
-  @media only screen and (min-width: 1280px) {
-    width: 395px;
+  @media only screen and (min-width: 1279px) {
+    max-width: 395px;
   }
 `;
 
@@ -21,8 +22,8 @@ export const StyledThead = styled.thead`
     align-items: center;
     padding-top: 16px;
   }
-
-  width: 280px;
+width: 100%;
+  max-width: 280px;
   height: 56px;
 
   background: var(--balance-bg);
@@ -32,10 +33,10 @@ export const StyledThead = styled.thead`
   border-radius: 8px;
 
   @media only screen and (min-width: 768px) {
-    width: 336px;
+    max-width: 336px;
   }
-  @media only screen and (min-width: 1280px) {
-    width: 395px;
+  @media only screen and (min-width: 1279px) {
+    max-width: 395px;
   }
 `;
 
@@ -62,7 +63,8 @@ export const StyledTbody = styled.tbody`
 `;
 
 export const StyledIcon = styled.td`
-  width: 24px;
+
+ width: 24px;
   height: 24px;
   border-radius: 2px;
   margin-left: 16px;
