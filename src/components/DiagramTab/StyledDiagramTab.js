@@ -12,16 +12,13 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: center;
     gap: 32px;
     padding: 0 0 15px 0;
   }
 
   @media screen and (min-width: 1280px) {
     justify-content: flex-start;
-    //padding-top: 100px;
-    //padding-left: 70px;
-    //padding-right: 28px;
   }
 `;
 
@@ -46,6 +43,5 @@ export const StyledTitle = styled.h1`
 
   @media only screen and (min-width: 768px) {
     margin-top: 32px;
-    //margin-left: 85px;
   }
 `;

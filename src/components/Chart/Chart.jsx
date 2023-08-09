@@ -7,34 +7,10 @@ import { selectBalance, selectSummary } from 'redux/selectors';
 import { ChartWrapper, StyledSpan } from './StyledChart';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-//example
-// export const datas = [
-//   {
-//     name: 'cash',
-//     type: 'INCOME',
-//     total: 1300,
-//   },
-//   {
-//     name: 'car',
-//     type: 'EXPENSE',
-//     total: 700,
-//   },
-//   {
-//     name: 'house',
-//     type: 'EXPENSE',
-//     total: 400,
-//   },
-//   {
-//     name: 'denaro',
-//     type: 'EXPENSE',
-//     total: 3000,
-//   },
-// ];
-
 export const Chart = () => {
   const balance = useSelector(selectBalance);
   const summary = useSelector(selectSummary);
-  const [expenseCategories] = useCategoriesType(summary); //example
+  const [expenseCategories] = useCategoriesType(summary);
 
   const data = {
     labels: [],
