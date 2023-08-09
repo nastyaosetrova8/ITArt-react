@@ -4,9 +4,9 @@ import styled from 'styled-components';
 export const StyledHeader = styled.div`
   display: flex;
   align-items: center;
-  border-bottom: 1px solid grey;
   padding: 16px;
   background: var(--header-background);
+  box-shadow: var(--header-shadow);
 
   .user-name {
     margin: 0 12px 0 auto;
