@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  selectCategories,
-  selectToken,
+  selectCategories,  
   selectTransactions,
 } from 'redux/selectors';
 
@@ -10,8 +9,7 @@ import { makerDashboardTab } from 'helpers/helpers';
 
 import { Paper, Table, TableCell, TableContainer } from '@mui/material';
 import {
-  deleteTransactionThunk,
-  getTransactionsThunk,
+  deleteTransactionThunk,  
 } from 'redux/Thunks/TransactionsThunk';
 import {
   BtnCont,
@@ -31,7 +29,7 @@ import {
 import MediaQuery from 'react-responsive';
 import { nanoid } from '@reduxjs/toolkit';
 import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
-import { useEffect, useState } from 'react';
+import { notifyDeleted } from 'components/Toastify/Toastify';
 
 export const TransactionsList = () => {
   const dispatch = useDispatch();
@@ -40,15 +38,12 @@ export const TransactionsList = () => {
 
   const handleClickEdit = e => {
     dispatch(saveIdTransaction(e.currentTarget.id));
-    dispatch(toggleShowModal(e.currentTarget.name));
+    dispatch(toggleShowModal(e.currentTarget.name));    
   };
 
-  const handleClickDelete = e => {
-    console.log(e.currentTarget.id);
+  const handleClickDelete = e => {    
     const idTransaction = e.currentTarget.id;
-    dispatch(deleteTransactionThunk(idTransaction));
-    // .unwrap()
-    // .then(() => dispatch(getTransactionsThunk()));
+    dispatch(deleteTransactionThunk(idTransaction)).unwrap().then(()=>notifyDeleted());    
   };
 
   const rows = makerDashboardTab(transactions).rows;
@@ -141,6 +136,7 @@ export const TransactionsList = () => {
             overflow: 'hidden',
             background: 'transparent',
             borderRadius: '8px',
+            marginLeft: 'auto',
           }}
         >
           <TableContainer sx={{ maxHeight: 440 }}>

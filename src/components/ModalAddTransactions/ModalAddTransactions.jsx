@@ -7,8 +7,7 @@ import {
 import { selectCategories, selectToken } from 'redux/selectors';
 import { toggleShowModal } from 'redux/modal/modalSlice';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
-import Select from 'react-select';
+import * as Yup from 'yup';
 import css from './ModalAddTransactions.module.css';
 import 'react-datetime/css/react-datetime.css';
 import {
@@ -21,16 +20,16 @@ import {
   StyledDatetime,
   StyledDatetimeWrap,
   StyledForm,
-  StyledInputs,
   StyledInputsWrapper,
   StyledMinusBtn,
   StyledPlusBtn,
   StyledSwitch,
   StyledSwitchWrapper,
-  StyledTitle,
-  TitleWrapper,
+  StyledTitle,  
   styledSelectCategories,
 } from './ModalAddTransactions.styled';
+import {  notifyExpenseEdded, notifyIncomeEdded } from 'components/Toastify/Toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ModalAddTransaction = () => {
   const dispatch = useDispatch();
@@ -64,13 +63,14 @@ export const ModalAddTransaction = () => {
     },
 
     validationSchema: 
-    yup.object().shape({
-      amount: yup.number('Enter sum')
+    Yup.object().shape({
+      amount: Yup.number('Enter sum')
         .positive('Invalid number')
         .required('Required'),
-        transactionDate: yup.date().required('Required'),
-        comment: yup.string()
-      .max(15, 'Must be 15 characters or less'),
+        transactionDate: Yup.date().required('Required'),
+        comment: Yup.string()
+        .min(1)
+      .max(20, 'Must be 20 characters or less'),
     }),
 
     onSubmit: value => {
@@ -88,7 +88,7 @@ export const ModalAddTransaction = () => {
             amount: Number(-value.amount),
             transactionDate: formattedDate,
           })
-        );
+        ).unwrap().then(()=>notifyExpenseEdded())                
       } else {
         dispatch(
           addTransactionThunk({
@@ -98,7 +98,8 @@ export const ModalAddTransaction = () => {
             amount: Number(value.amount),
             transactionDate: formattedDate,
           })
-        );
+        ).unwrap().then(()=>notifyIncomeEdded())
+                
       }
       handleClickBtnClose();
     },
@@ -106,11 +107,10 @@ export const ModalAddTransaction = () => {
 
   return (
     <div>
-      <TitleWrapper>
         <StyledTitle>Add transaction</StyledTitle>
-      </TitleWrapper>
-      <StyledSwitchWrapper>
+      <StyledSwitchWrapper>     
         <p className={formik.values.type ? css.income : css.text}>Income</p>
+
         <StyledSwitch>
           <input
             type="checkbox"
@@ -155,6 +155,7 @@ export const ModalAddTransaction = () => {
             placeholder="0.00"
             autoComplete="off"
             onChange={formik.handleChange}
+            min="1"
           />
 
           <StyledDatetimeWrap>
@@ -166,7 +167,6 @@ export const ModalAddTransaction = () => {
               closeOnSelect={true}
               timeFormat={false}
               dateFormat="DD.MM.yyyy"
-              // isValidDate={formik.valid}
             />
 
             <StyledCalendarIcon color={'rgba(115, 74, 239, 1)'} />

@@ -7,7 +7,8 @@ export const TransactionContainer = styled.ul`
   overflow: auto;
 `;
 export const TransactionList = styled.ul`
-  max-width: 280px;
+  width: 100%;
+  width: 280px;
   margin-top: 8px;
   border-radius: 10px;
   overflow: hidden;

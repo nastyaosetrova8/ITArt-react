@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
     align-items: flex-start;
     justify-content: center;
     gap: 32px;
-    padding: 0 0 15px 0;
+    padding: 0 0 45px 0;
   }
 
 `;
