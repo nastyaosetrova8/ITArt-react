@@ -13,6 +13,7 @@ import css from './ModalAddTransactions.module.css';
 import 'react-datetime/css/react-datetime.css';
 import {
   InputAmountStyled,
+  InputCommentStyled,
   SelectStyle,
   StyledAddBtn,
   StyledCalendarIcon,
@@ -159,9 +160,6 @@ export const ModalAddTransaction = () => {
           <StyledDatetimeWrap>
             <StyledDatetime
               value={formik.values.transactionDate}
-              // onChange={value =>
-              //   formik.setFieldValue('transactionDate', value[0])
-              // }
               onChange={value =>
                 formik.setFieldValue('transactionDate', value._d)
               }
@@ -174,7 +172,7 @@ export const ModalAddTransaction = () => {
             <StyledCalendarIcon color={'rgba(115, 74, 239, 1)'} />
           </StyledDatetimeWrap>
         </StyledInputsWrapper>
-        <StyledInputs
+        <InputCommentStyled
           type="text"
           name="comment"
           value={formik.values.comment}
