@@ -1,184 +1,143 @@
-import { Select } from '@mui/material';
 import {
   StyledAddBtn,
+  StyledCalendarIcon,
   StyledCancelBtn,
   StyledForm,
-  styledSelectCategories,
 } from 'components/ModalAddTransactions/ModalAddTransactions.styled';
-// import { useFormik } from "formik";
 import { useDispatch, useSelector } from 'react-redux';
 import { editTransactionThunk } from 'redux/Thunks/TransactionsThunk';
-import {
-  selectIsEditTrans,
-  selectIsEditTransOpen,
-} from 'redux/modal/modalSelectors';
-import css from './ModalEditTransactions.module.css';
 import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
 import {
-  selectCategories,
   selectSavedId,
-  selectToken,
   selectTransactions,
 } from 'redux/selectors';
-import { Formik, useFormik } from 'formik';
-import { Form } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
+import {
+  ExpenseActive,
+  ExpensePassive,
+  IncomeActive,
+  IncomePassive,
+} from './ModalEditStyled';
 
 export const ModalEditTransaction = () => {
   const dispatch = useDispatch();
-  const tokenTrans = useSelector(selectToken);
-  const allCategories = useSelector(selectCategories);
-  const IdTransaction = useSelector(selectIsEditTrans);
-  const allTransactions = useSelector(selectTransactions);
-  console.log('allTransactions: ', allTransactions);
-
-  const expenseCat = allCategories.filter(
-    category => category.type !== 'INCOME'
-  );
-  const options = expenseCat.map(category => ({
-    value: category.id,
-    label: category.name,
-  }));
   const idTransaction = useSelector(selectSavedId);
+  const allTransactions = useSelector(selectTransactions);
 
-  // ========== EDIT TRANS
-
-  // const transaction = allTransactions.find(trans => trans.id === IdTransaction);
+  const currentTransaction = allTransactions.transactions.find(
+    item => idTransaction === item.id
+  );
+  const currentNameCategory = allTransactions.categories.find(
+    item => item.id === currentTransaction.categoryId
+  );
 
   const handleClickBtnClose = () => {
     dispatch(toggleShowModal(''));
     dispatch(saveIdTransaction('null'));
   };
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     type: transaction.type === 'INCOME' ? true : false,
-  //     categoryId: transaction.categoryId,
-  //     amount: `${
-  //       transaction.type === 'EXPENSE'
-  //         ? transaction.amount * -1
-  //         : transaction.amount
-  //     }`,
-  //     transactionDate: new Date(),
-  //     comment: transaction.coment,
-  //     id: transaction.id,
-  //   },
+  const formik = useFormik({
+    initialValues: {
+      transactionDate: currentTransaction.transactionDate,
+      amount: currentTransaction.amount,
+      comment: currentTransaction.comment,
+      categoryId: currentTransaction.categoryId,
+      type: currentTransaction.type,
+    },
 
-  //   onSubmit: value => {
-  //     dispatch(
-  //       editTransactionThunk({
-  //         ...value,
-  //         type: value.type ? 'INCOME' : 'EXPENSE',
-  //         categoryId: value.categoryId,
-  //         amount:
-  //           transaction.type === 'EXPENSE'
-  //             ? Number(value.amount * -1)
-  //             : Number(value.amount),
-  //       })
-  //     );
-  //     handleClickBtnClose();
-  //   },
-  // });
+    validationSchema: 
+    yup.object().shape({
+      amount: yup.number('Enter sum')
+        .positive('Invalid number')
+        .required('Required'),
+        transactionDate: yup.date().required('Required'),
+        comment: yup.string()
+        .min(1)
+      .max(15, 'Must be 15 characters or less'),
+    }),
 
-  // ========== EDIT TRANS
-  const handleClickUpdate = () => {
-    const dataEdit = {
-      id: idTransaction,
-      transactionDate: '2023-01-23',
-      type: 'INCOME',
-      categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-      comment: 'string',
-      amount: 4,
-    };
+    onSubmit: value => {
+      const date = new Date(value.transactionDate);
+      const formatYear = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
 
-    // const dataEx = {
-    //   transactionDate: "2023-01-23",
-    // type: "EXPENSE",
-    // categoryId: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
-    // comment: "string",
-    // amount: -5}
+      const formattedDate = `${formatYear}-${month}-${day}`;
+      const dataEdit = {
+        transData: {
+          ...value,
+          transactionDate: formattedDate,
+          amount:
+            currentTransaction.type === 'INCOME'
+              ? Number(value.amount)
+              : Number(-value.amount),
+              comment: value.comment,
+        },
+        id: idTransaction,
+      };
+      dispatch(editTransactionThunk(dataEdit));
+      handleClickBtnClose();
+    },
+  });
 
-    dispatch(editTransactionThunk({ dataEdit, tokenTrans }));
-  };
+  const test = formik.values.amount;
+  const correctAmount = Math.abs(test);
 
   return (
     <div>
       <h2>Edit transaction</h2>
       <div>
-        <button
-          // className={formik.values.type ? css.income : css.text}
-          type="button"
-          onClick={() => {
-            // formik.setFieldValue('type', true);
-          }}
-        >
-          Income
-        </button>
-
-        <span>SVG</span>
-
-        <button
-          // className={!formik.values.type ? css.expense : css.text}
-          type="button"
-          onClick={() => {
-            // formik.setFieldValue('type', false);
-          }}
-        >
-          Expense
-        </button>
+        {currentTransaction.type === 'INCOME' ? (
+          <>
+            <IncomeActive>Income</IncomeActive>
+            <span> / </span>
+            <ExpensePassive>Expense</ExpensePassive>
+          </>
+        ) : (
+          <>
+            <IncomePassive>Income</IncomePassive>
+            <span> / </span>
+            <ExpenseActive>Expense</ExpenseActive>
+          </>
+        )}
       </div>
-      <StyledForm
-      // onSubmit={formik.handleSubmit}
-      >
-        {/* {!formik.values.type && ( */}
-        <Select
-          type="text"
-          // name={formik.values.label}
-          // value={formik.values.value}
-          options={options}
-          styles={styledSelectCategories}
-          placeholder="Select a category"
-          // onChange={({ value }) => formik.setFieldValue('categoryId', value)}
-          // onBlur={formik.handleBlur}
-        />
-        {/* )} */}
+      <StyledForm onSubmit={formik.handleSubmit}>
+        <p>{currentNameCategory.name}</p>
+
         <div>
           <input
             type="number"
             name="amount"
-            // value={formik.values.amount}
-            placeholder="0.00"
+            value={correctAmount}
             autoComplete="off"
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
+            min="1"
           />
 
           <Datetime
-            // value={formik.values.transactionDate}
-            // onChange={value =>
-            //   formik.setFieldValue('transactionDate', value[0])
-            // }
+            value={formik.values.transactionDate}
+            onChange={value =>
+              formik.setFieldValue('transactionDate', value._d)
+            }
             closeOnSelect={true}
             timeFormat={false}
             dateFormat="DD.MM.yyyy"
-            // isValidDate={formik.valid}
           />
-          {/* <span>
-SVG
-              </span> */}
+          <StyledCalendarIcon color={'rgba(115, 74, 239, 1)'} />
         </div>
         <input
           type="text"
           name="comment"
-          // value={formik.values.comment}
-          placeholder="Comment"
+value={formik.values.comment}
+          // placeholder="Comment"
           autoComplete="off"
-          // onChange={formik.handleChange}
+          onChange={formik.handleChange}
         />
 
-        <StyledAddBtn type="submit" onClick={handleClickUpdate}>
-          Save
-        </StyledAddBtn>
+        <StyledAddBtn type="submit">Save</StyledAddBtn>
       </StyledForm>
 
       <StyledCancelBtn type="button" onClick={handleClickBtnClose}>
