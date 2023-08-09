@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import { logInUserThunk } from 'redux/Thunks/AuthUserThunk';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import {  
-  IconButton,  
-  InputAdornment,  
-  Stack,
-  TextField,
-} from '@mui/material';
+import { IconButton, InputAdornment, TextField } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
-import { ButtonActive, ButtonWhite, ButtonsBox } from 'pages/LoginPage/LoginPageStyled';
+import {
+  ButtonActive,
+  ButtonWhite,
+  ButtonsBox,
+  InputBtnWrap,
+  InputsWrap,
+} from './LoginFormStyled';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useState } from 'react';
 
@@ -33,7 +34,7 @@ export const LogInForm = () => {
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email address').required('Required'),
     password: Yup.string().required('Required'),
-  }); 
+  });
 
   return (
     <Formik
@@ -41,16 +42,15 @@ export const LogInForm = () => {
       onSubmit={values => handlerOnSubmit(values)}
       validationSchema={validationSchema}
     >
-      {formik => (
-        <Stack sx={{ margin: '75px auto' }}>
-          <Form>
-            <Stack spacing={4}>
-              
+      {formik => (        
+        <Form>          
+          <InputBtnWrap>
+            <InputsWrap>
               <TextField
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <EmailIcon />
+                      <EmailIcon sx={{color: 'var(--white-40)'}}/>
                     </InputAdornment>
                   ),
                 }}
@@ -64,58 +64,49 @@ export const LogInForm = () => {
                 helperText={
                   formik.errors.email && 'Please enter a valid email address'
                 }
-              />             
+              />
 
               <TextField
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <HttpsIcon />
+                      <HttpsIcon sx={{color: 'var(--white-40)'}} />
                     </InputAdornment>
                   ),
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
+                        sx={{color: 'var(--white-40)'}}
                         aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
                         onMouseDown={handleMouseDownPassword}
-                      >                        
+                      >
                         {showPassword ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>
                   ),
-                }}
+                }}                
                 style={{ maxWidth: '100%' }}
                 variant="standard"
                 label="Password"
                 name="password"
                 type={showPassword ? 'text' : 'password'}
-                //type="password"
                 onChange={formik.handleChange}
                 error={Boolean(formik.errors.password)}
                 helperText={
                   formik.errors.password && 'Please enter your valid password'
                 }
               />
-            
-              <ButtonsBox style={{ margin: '52px auto 0' }}>
-                <ButtonActive                                    
-                  type="submit"
-                >
-                  Log in
-                </ButtonActive>
+            </InputsWrap>
+            <ButtonsBox style={{ margin: '52px auto 0' }}>
+              <ButtonActive type="submit">Log in</ButtonActive>
 
-                <Link to="/register">
-                  <ButtonWhite                                        
-                    type="submit"
-                  >
-                    Register
-                  </ButtonWhite>
-                </Link>
-              </ButtonsBox>
-            </Stack>
-          </Form>
-        </Stack>
+              <Link to="/register">
+                <ButtonWhite type="submit">Register</ButtonWhite>
+              </Link>
+            </ButtonsBox>            
+          </InputBtnWrap>
+        </Form>        
       )}
     </Formik>
   );
