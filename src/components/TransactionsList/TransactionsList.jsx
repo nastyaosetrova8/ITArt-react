@@ -34,7 +34,6 @@ import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
 import { useEffect, useState } from 'react';
 
 export const TransactionsList = () => {
-  // const tokenTransaction = useSelector(selectToken);
   const dispatch = useDispatch();
   const transactions = useSelector(selectTransactions);
   const categories = useSelector(selectCategories);
