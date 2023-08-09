@@ -74,6 +74,7 @@ export const ModalEditTransaction = () => {
             currentTransaction.type === 'INCOME'
               ? Number(value.amount)
               : Number(-value.amount),
+              comment: value.comment,
         },
         id: idTransaction,
       };
@@ -130,8 +131,10 @@ export const ModalEditTransaction = () => {
         <input
           type="text"
           name="comment"
-          placeholder="Comment"
+value={formik.values.comment}
+          // placeholder="Comment"
           autoComplete="off"
+          onChange={formik.handleChange}
         />
 
         <StyledAddBtn type="submit">Save</StyledAddBtn>

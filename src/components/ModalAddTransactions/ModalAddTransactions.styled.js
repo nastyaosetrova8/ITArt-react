@@ -93,26 +93,10 @@ export const StyledInputsWrapper = styled.div`
   gap: 40px;
 `;
 
-export const StyledInputs = styled.input`
-  outline: none;
-  padding: 8px 20px;
-  color: #fbfbfb;
-  font-size: 18px;
-  font-weight: 400px;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  transition: border-bottom 250ms linear;
-
-  &:hover,
-  &:focus {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-  }
-`;
-
 export const InputAmountStyled = styled.input`
+ width: 181px;
   outline: none;
-  padding: 8px 20px;
+  padding: 8px;
   color: #fbfbfb;
   font-size: 18px;
   font-weight: 400px;
@@ -120,13 +104,13 @@ export const InputAmountStyled = styled.input`
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   transition: border-bottom 250ms linear;
-  width: 181px;
 
   &:hover,
   &:focus {
     border-bottom: 1px solid rgba(255, 255, 255, 0.8);
   }
 `;
+
 
 export const StyledDatetime = styled(Datetime)`
   & input {
@@ -152,6 +136,31 @@ export const StyledDatetimeWrap = styled.div`
   &:hover,
   &:focus {
     border-bottom: 1px solid rgba(255, 255, 255, 0.822);
+  }
+`;
+
+export const InputCommentStyled = styled.input`
+  outline: none;
+  padding: 8px;
+  width: 394px;
+  margin: auto;
+  color: #fbfbfb;
+  font-size: 18px;
+  font-weight: 400px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  transition: border-bottom 250ms linear;
+
+  &::placeholder {
+    padding-left: 8px;
+  font-size: 19px;
+  font-weight: 400px;
+  line-height: 1.5px;
+  }
+  &:hover,
+  &:focus {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
   }
 `;
 
