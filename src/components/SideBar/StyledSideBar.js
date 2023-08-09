@@ -29,8 +29,33 @@ export const StyledSideBar = styled.div`
 export const StyledLink = styled(NavLink)`
   text-decoration: none;
   color: var(--white);
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+
+  .wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+  }
+
+  .icon-home {
+    fill: rgba(255, 255, 255, 0.4);
+  }
+  .icon-diag {
+    fill: rgba(255, 255, 255, 0.4);
+  }
 
   &.active {
     font-weight: bold;
+  }
+
+  &.active .wrap {
+    background: #734aef;
+
+    filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
   }
 `;
