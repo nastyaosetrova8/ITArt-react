@@ -32,6 +32,7 @@ import MediaQuery from 'react-responsive';
 import { nanoid } from '@reduxjs/toolkit';
 import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
 import { useEffect, useState } from 'react';
+
 export const TransactionsList = () => {
   const dispatch = useDispatch();
   const transactions = useSelector(selectTransactions);
@@ -43,6 +44,7 @@ export const TransactionsList = () => {
   };
 
   const handleClickDelete = e => {
+    console.log(e.currentTarget.id);
     const idTransaction = e.currentTarget.id;
     dispatch(deleteTransactionThunk(idTransaction));
     // .unwrap()
@@ -61,6 +63,7 @@ export const TransactionsList = () => {
     const year = String(dateObj.getFullYear()).slice(-2);
     return `${day}.${month}.${year}`;
   }
+
   return (
     <>
       <MediaQuery maxWidth={768}>
@@ -70,6 +73,8 @@ export const TransactionsList = () => {
               findCategory = categories.find(
                 category => category.id === categoryId
               );
+              console.log(id);
+
               return (
                 <li key={nanoid()}>
                   <TransactionList type={type}>
@@ -108,11 +113,12 @@ export const TransactionsList = () => {
                       <BtnDelete
                         id={id}
                         type="button"
-                        onClick={() => handleClickDelete(id)}
+                        onClick={handleClickDelete}
                       >
                         Delete
                       </BtnDelete>
                       <BtnEditTransaction
+                        id={id}
                         type="button"
                         name="edit"
                         onClick={handleClickEdit}
@@ -176,6 +182,7 @@ export const TransactionsList = () => {
                             <BtnEdit
                               type="button"
                               name="edit"
+                              id={row.id}
                               onClick={handleClickEdit}
                             >
                               <BtnIcon sx={{ fontSize: 18 }} />
@@ -183,7 +190,7 @@ export const TransactionsList = () => {
                             <BtnDelete
                               id={row.id}
                               type="button"
-                              onClick={() => handleClickDelete}
+                              onClick={handleClickDelete}
                             >
                               Delete
                             </BtnDelete>

@@ -7,10 +7,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { editTransactionThunk } from 'redux/Thunks/TransactionsThunk';
 import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
-import {
-  selectSavedId,
-  selectTransactions,
-} from 'redux/selectors';
+import { selectSavedId, selectTransactions } from 'redux/selectors';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Datetime from 'react-datetime';
@@ -26,10 +23,11 @@ export const ModalEditTransaction = () => {
   const dispatch = useDispatch();
   const idTransaction = useSelector(selectSavedId);
   const allTransactions = useSelector(selectTransactions);
-
+  console.log(idTransaction);
   const currentTransaction = allTransactions.transactions.find(
     item => idTransaction === item.id
   );
+  console.log(currentTransaction);
   const currentNameCategory = allTransactions.categories.find(
     item => item.id === currentTransaction.categoryId
   );
@@ -48,15 +46,13 @@ export const ModalEditTransaction = () => {
       type: currentTransaction.type,
     },
 
-    validationSchema: 
-    yup.object().shape({
-      amount: yup.number('Enter sum')
+    validationSchema: yup.object().shape({
+      amount: yup
+        .number('Enter sum')
         .positive('Invalid number')
         .required('Required'),
-        transactionDate: yup.date().required('Required'),
-        comment: yup.string()
-        .min(1)
-      .max(15, 'Must be 15 characters or less'),
+      transactionDate: yup.date().required('Required'),
+      comment: yup.string().min(1).max(15, 'Must be 15 characters or less'),
     }),
 
     onSubmit: value => {
@@ -74,7 +70,7 @@ export const ModalEditTransaction = () => {
             currentTransaction.type === 'INCOME'
               ? Number(value.amount)
               : Number(-value.amount),
-              comment: value.comment,
+          comment: value.comment,
         },
         id: idTransaction,
       };
@@ -131,7 +127,7 @@ export const ModalEditTransaction = () => {
         <input
           type="text"
           name="comment"
-value={formik.values.comment}
+          value={formik.values.comment}
           // placeholder="Comment"
           autoComplete="off"
           onChange={formik.handleChange}
