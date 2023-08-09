@@ -7,29 +7,32 @@ export const Wrapper = styled.div`
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
+  margin-left: auto;
 
   @media screen and (min-width: 768px) {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: center;
     gap: 32px;
     padding: 0 0 15px 0;
   }
 
-  @media screen and (min-width: 1280px) {
-    justify-content: flex-start;
-    //padding-top: 100px;
-    //padding-left: 70px;
-    //padding-right: 28px;
-  }
 `;
 
-export const StyledWrapperLeft = styled.div``;
+export const StyledWrapperLeft = styled.div`
+width: 100%;
+  max-width: 280px;
+`;
 
 export const StyledWrapperRight = styled.div`
-  @media only screen and (min-width: 1280px) {
-    width: 395px;
+width: 100%;
+  max-width: 280px;
+  @media only screen and (min-width: 768px){
+    max-width: 336px;
+  }
+  @media only screen and (min-width: 1279px) {
+    max-width: 395px;
   }
 `;
 export const StyledTitle = styled.h1`
@@ -46,6 +49,5 @@ export const StyledTitle = styled.h1`
 
   @media only screen and (min-width: 768px) {
     margin-top: 32px;
-    //margin-left: 85px;
   }
 `;

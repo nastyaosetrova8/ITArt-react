@@ -1,5 +1,3 @@
-//import { datas } from 'components/Chart/Chart';
-//import { DiagramSelect } from 'components/DiagramSelect/DiagramSelect';
 import { useCategoriesType } from 'hooks/selectedCategories';
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -39,8 +37,7 @@ export const colors = [
 
 export const Table = () => {
   const summary = useSelector(selectSummary);
-  //const summary = datas; //examle
-  const [expenseCategories] = useCategoriesType(summary); //example
+  const [expenseCategories] = useCategoriesType(summary);
   const incomeSummary = useSelector(selectIncomeSummary);
   const expenseSummary = useSelector(selectExpenseSummary);
 

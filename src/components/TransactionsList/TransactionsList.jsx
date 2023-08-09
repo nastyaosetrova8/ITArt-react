@@ -73,7 +73,6 @@ export const TransactionsList = () => {
               findCategory = categories.find(
                 category => category.id === categoryId
               );
-              console.log(id);
 
               return (
                 <li key={nanoid()}>

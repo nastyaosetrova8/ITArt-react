@@ -23,11 +23,9 @@ export const ModalEditTransaction = () => {
   const dispatch = useDispatch();
   const idTransaction = useSelector(selectSavedId);
   const allTransactions = useSelector(selectTransactions);
-  console.log(idTransaction);
   const currentTransaction = allTransactions.transactions.find(
     item => idTransaction === item.id
   );
-  console.log(currentTransaction);
   const currentNameCategory = allTransactions.categories.find(
     item => item.id === currentTransaction.categoryId
   );

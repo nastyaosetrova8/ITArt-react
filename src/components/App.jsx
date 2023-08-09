@@ -9,6 +9,7 @@ import Loader from './Loader/Loader';
 import { selectToken } from 'redux/selectors';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import 'node_modules/modern-normalize/modern-normalize.css';
 import '../index.css';
 
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
