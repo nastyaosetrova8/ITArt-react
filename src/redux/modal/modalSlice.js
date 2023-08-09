@@ -33,7 +33,6 @@ export const modalSlice = createSlice({
     },
     saveIdTransaction: (state, { payload }) => {
       state.savedId = payload;
-      console.log(payload);
     },
 
     // openAddTrans: state => {
