@@ -136,6 +136,7 @@ export const TransactionsList = () => {
             overflow: 'hidden',
             background: 'transparent',
             borderRadius: '8px',
+            marginLeft: 'auto',
           }}
         >
           <TableContainer sx={{ maxHeight: 440 }}>
