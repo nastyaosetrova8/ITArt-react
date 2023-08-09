@@ -1,25 +1,19 @@
-import { Link, Navigate, Outlet } from 'react-router-dom';
-
-import StyledHeader from './StyledHeader';
+import { Navigate, Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { toggleShowModal } from 'redux/modal/modalSlice';
 import { selectIsAuth, selectUserName } from 'redux/selectors';
-import {
-  selectIsLogoutOpen,
-  selectIsShowModal,
-} from 'redux/modal/modalSelectors';
-import { openLogout, toggleShowModal } from 'redux/modal/modalSlice';
+import { selectIsShowModal } from 'redux/modal/modalSelectors';
+
+import { StyledHeader, StyledLink } from './StyledHeader';
 import Modal from 'components/Modal/Modal';
-// import { logOutUserThunk } from 'redux/Thunks/AuthUserThunk';
+import Logo from '../../assets/images/logo.svg';
 
 export const Layout = () => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const isAuth = useSelector(selectIsAuth);
   const isShowModal = useSelector(selectIsShowModal);
-
-  // const handleOnClick = () => {
-  //   dispatch(logOutUserThunk());
-  // };
 
   const handleOpenModal = evt => {
     dispatch(toggleShowModal(evt.currentTarget.name));
@@ -28,14 +22,13 @@ export const Layout = () => {
   return isAuth ? (
     <>
       <StyledHeader>
-        <Link to="/home">LOGO link to HOME</Link>
+        <StyledLink to="/home">
+          <img src={Logo} alt="Logo Wallet" width="23px" height="23px" />
+          <p>Money Guard</p>
+        </StyledLink>
+
         <p>Hello, {userName}</p>
-        <button
-          type="button"
-          name="logout"
-          // onClick={handleOnClick}
-          onClick={handleOpenModal}
-        >
+        <button type="button" name="logout" onClick={handleOpenModal}>
           Log out
         </button>
         {isShowModal && <Modal />}

@@ -10,8 +10,8 @@ import Select from 'react-select';
 
 
 export const TitleWrapper = styled.div`
-margin: 0 auto;
-max-width: 380px;
+  margin: 0 auto;
+  max-width: 380px;
 `;
 
 export const StyledTitle = styled.h2`
@@ -171,12 +171,13 @@ export const StyledAddBtn = styled.button`
   line-height: 1.5;
   color: rgba(255, 255, 255, 1);
   border: none;
-  background-image: linear-gradient(
+  background-image: var(--button-gradient);
+  /* linear-gradient(
     150deg,
     rgba(255, 199, 39, 1),
 rgba(158, 64, 186, 1),
 rgba(112, 0, 255, 1)
-  );
+  ); */
   box-shadow: 1px 9px 15px rgba(0, 0, 0, 0.2);
   margin: 0 auto;
   text-transform: uppercase;
@@ -212,7 +213,6 @@ export const StyledCancelBtn = styled.button`
     transform: scale(1.1);
     box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.5);
   }
-
 `;
 
 
@@ -331,4 +331,3 @@ export const styledSelectCategories = {
 // export const StyledTitle = styled.h2`
 
 // `;
-
