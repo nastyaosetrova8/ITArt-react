@@ -6,7 +6,7 @@ export const StyledOverlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(34, 13, 91, 0.23);
+  background-color: var(--backdrop-background);
   backdrop-filter: blur(3.5px);
   overscroll-behavior: contain;
   @media screen and (max-width: 768px) {
@@ -23,10 +23,7 @@ transform: translate(-50%, -50%);
   align-items: center;
   flex-direction: column;
   max-width: 100vw;
-  /* max-height: 100vh; */
-    /* max-width: 540px; */
-  /* max-height: 511px; */
-  padding: 40px 80px;
+  max-height: 100vh;
   border-radius: 8px;
   background: radial-gradient(
     circle,

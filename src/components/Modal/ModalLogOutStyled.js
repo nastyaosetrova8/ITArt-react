@@ -1,14 +1,19 @@
 import styled from 'styled-components';
-//import button-gradient from '../../stylesheet/vars.css'
-//import { Card } from '@mui/material';
-//import loginPicture from '../../assets/images/login_desktop@1x.jpg';
+
 
 export const ModalWrap = styled.div`
-  /* max-width: 533px;
 padding: 60px 117px;
+
 @media (max-width: 780px){
   padding: 240px 20px;
-} */
+}
+`;
+
+export const TitleWrapper = styled.div`
+@media (max-width: 780px){
+  max-width: 214px;
+  text-align: center;
+}
 `;
 
 export const LogoStyle = styled.div`
@@ -42,6 +47,7 @@ export const LogoStyle = styled.div`
     }
   }
 `;
+
 export const ButtonsBox = styled.div`
   width: 300px;
   display: flex;

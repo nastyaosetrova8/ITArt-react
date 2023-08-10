@@ -10,6 +10,7 @@ import {
   StyledInputsWrapper,
   StyledSwitchWrapper,
   StyledTitle,
+  StyledWrapModal,
 } from 'components/ModalAddTransactions/ModalAddTransactions.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { editTransactionThunk } from 'redux/Thunks/TransactionsThunk';
@@ -17,7 +18,6 @@ import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
 import { selectSavedId, selectTransactions } from 'redux/selectors';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import {
   CategoryNameStyled,
@@ -25,8 +25,8 @@ import {
   ExpensePassive,
   IncomeActive,
   IncomePassive,
+  StyledSpan,
 } from './ModalEditStyled';
-import { notifyAmountInvalid, notifyAmountMissing } from 'components/Toastify/Toastify';
 
 export const ModalEditTransaction = () => {
   const dispatch = useDispatch();
@@ -55,15 +55,12 @@ export const ModalEditTransaction = () => {
       type: currentTransaction.type,
     },
 
-    validationSchema: 
-    Yup.object().shape({
+    validationSchema: Yup.object().shape({
       amount: Yup.number('Enter sum')
         .positive('Invalid number')
         .required('Required'),
-        transactionDate: Yup.date().required('Required'),
-        comment: Yup.string()
-        .min(1)
-      .max(20, 'Must be 20 characters or less'),
+      transactionDate: Yup.date().required('Required'),
+      comment: Yup.string().min(1).max(20, 'Must be 20 characters or less'),
     }),
 
     onSubmit: value => {
@@ -94,28 +91,30 @@ export const ModalEditTransaction = () => {
   const correctAmount = Math.abs(test);
 
   return (
-    <div>
+    <StyledWrapModal>
       <StyledTitle>Edit transaction</StyledTitle>
       <StyledSwitchWrapper>
         {currentTransaction.type === 'INCOME' ? (
           <>
             <IncomeActive>Income</IncomeActive>
-            <span> / </span>
+            <StyledSpan>&#47;</StyledSpan>
             <ExpensePassive>Expense</ExpensePassive>
           </>
         ) : (
           <>
             <IncomePassive>Income</IncomePassive>
-            <span> / </span>
+            <StyledSpan>&#47;</StyledSpan>
             <ExpenseActive>Expense</ExpenseActive>
           </>
         )}
       </StyledSwitchWrapper>
       <StyledForm onSubmit={formik.handleSubmit}>
-        <CategoryNameStyled>
-        <p>{currentNameCategory.name}</p>
-        </CategoryNameStyled>
-        
+
+       {currentTransaction.type !== 'INCOME' && 
+        (<CategoryNameStyled>
+          <p>{currentNameCategory.name}</p>
+        </CategoryNameStyled>)}
+
         <StyledInputsWrapper>
           <InputAmountStyled
             type="number"
@@ -126,25 +125,23 @@ export const ModalEditTransaction = () => {
             min="1"
           />
 
-<StyledDatetimeWrap>
-          <StyledDatetime
-            value={formik.values.transactionDate}
-            onChange={value =>
-              formik.setFieldValue('transactionDate', value._d)
-            }
-            closeOnSelect={true}
-            timeFormat={false}
-            dateFormat="DD.MM.yyyy"
-          />
-          <StyledCalendarIcon color={'rgba(115, 74, 239, 1)'} />
-
+          <StyledDatetimeWrap>
+            <StyledDatetime
+              value={formik.values.transactionDate}
+              onChange={value =>
+                formik.setFieldValue('transactionDate', value._d)
+              }
+              closeOnSelect={true}
+              timeFormat={false}
+              dateFormat="DD.MM.yyyy"
+            />
+            <StyledCalendarIcon color={'rgba(115, 74, 239, 1)'} />
           </StyledDatetimeWrap>
         </StyledInputsWrapper>
         <InputCommentStyled
           type="text"
           name="comment"
           value={formik.values.comment}
-          // placeholder="Comment"
           autoComplete="off"
           onChange={formik.handleChange}
         />
@@ -155,6 +152,6 @@ export const ModalEditTransaction = () => {
       <StyledCancelBtn type="button" onClick={handleClickBtnClose}>
         Cancel
       </StyledCancelBtn>
-    </div>
+    </StyledWrapModal>
   );
 };
