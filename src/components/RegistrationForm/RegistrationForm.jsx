@@ -64,6 +64,7 @@ export const RegistrationForm = () => {
                     </InputAdornment>
                   ),
                 }}
+                sx={{ input: { color: 'var(--white)' } }}
                 autoFocus='true'
                 color= 'secondary'
                 fullWidth = 'true'
@@ -84,6 +85,7 @@ export const RegistrationForm = () => {
                     </InputAdornment>
                   ),
                 }}
+                sx={{ input: { color: 'var(--white)' } }}
                 color= 'secondary'
                 fullWidth = 'true'
                 placeholder='Email'                
@@ -118,6 +120,7 @@ export const RegistrationForm = () => {
                     </InputAdornment>
                   ),
                 }}
+                sx={{ input: { color: 'var(--white)' } }}
                 color= 'secondary'
                 fullWidth = 'true'
                 placeholder='Password'
@@ -153,6 +156,7 @@ export const RegistrationForm = () => {
                     </InputAdornment>
                   ),
                 }}
+                sx={{ input: { color: 'var(--white)' } }}
                 color= 'secondary'
                 fullWidth = 'true'
                 placeholder='Confirm password'

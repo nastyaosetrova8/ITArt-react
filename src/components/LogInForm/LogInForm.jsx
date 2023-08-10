@@ -54,6 +54,8 @@ export const LogInForm = () => {
                     </InputAdornment>                  
                   ),                  
                 }}
+                
+                sx={{ input: { color: 'var(--white)' } }}
                 autoFocus='true'                
                 color= 'secondary'
                 fullWidth = 'true'
@@ -89,6 +91,7 @@ export const LogInForm = () => {
                     </InputAdornment>
                   ),
                 }}
+                sx={{ input: { color: 'var(--white)' } }}
                 color= 'secondary'
                 fullWidth = 'true'
                 placeholder='Password'                
