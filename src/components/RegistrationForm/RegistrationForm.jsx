@@ -65,9 +65,9 @@ export const RegistrationForm = () => {
                   ),
                 }}
                 sx={{ input: { color: 'var(--white)' } }}
-                autoFocus='true'
+                autoFocus = {Boolean('true')}
                 color= 'secondary'
-                fullWidth = 'true'
+                fullWidth = {Boolean('true')}
                 placeholder='Name'
                 variant="standard"
                 label="Name"
@@ -87,7 +87,7 @@ export const RegistrationForm = () => {
                 }}
                 sx={{ input: { color: 'var(--white)' } }}
                 color= 'secondary'
-                fullWidth = 'true'
+                fullWidth = {Boolean('true')}
                 placeholder='Email'                
                 variant="standard"
                 label="Email"
@@ -122,7 +122,7 @@ export const RegistrationForm = () => {
                 }}
                 sx={{ input: { color: 'var(--white)' } }}
                 color= 'secondary'
-                fullWidth = 'true'
+                fullWidth = {Boolean('true')}
                 placeholder='Password'
                 variant="standard"
                 label="Password"
@@ -158,7 +158,7 @@ export const RegistrationForm = () => {
                 }}
                 sx={{ input: { color: 'var(--white)' } }}
                 color= 'secondary'
-                fullWidth = 'true'
+                fullWidth = {Boolean('true')}
                 placeholder='Confirm password'
                 variant="standard"
                 label="Confirm password"
