@@ -1,13 +1,41 @@
 {
   "files": {
-    "main.css": "/ITArt/static/css/main.b5320759.css",
-    "main.js": "/ITArt/static/js/main.2b1d3212.js",
+    "main.css": "/ITArt/static/css/main.3d9aa721.css",
+    "main.js": "/ITArt/static/js/main.3ba93af8.js",
+    "static/js/893.c365fe22.chunk.js": "/ITArt/static/js/893.c365fe22.chunk.js",
+    "static/js/829.317eeca1.chunk.js": "/ITArt/static/js/829.317eeca1.chunk.js",
+    "static/js/707.dbfb23d4.chunk.js": "/ITArt/static/js/707.dbfb23d4.chunk.js",
+    "static/js/708.42d3922c.chunk.js": "/ITArt/static/js/708.42d3922c.chunk.js",
+    "static/js/724.18dc218b.chunk.js": "/ITArt/static/js/724.18dc218b.chunk.js",
+    "static/js/694.65caf688.chunk.js": "/ITArt/static/js/694.65caf688.chunk.js",
+    "static/js/61.ec24913d.chunk.js": "/ITArt/static/js/61.ec24913d.chunk.js",
+    "static/js/162.b1472f15.chunk.js": "/ITArt/static/js/162.b1472f15.chunk.js",
+    "static/js/544.4bc46bdb.chunk.js": "/ITArt/static/js/544.4bc46bdb.chunk.js",
+    "static/js/128.b2ebd9ec.chunk.js": "/ITArt/static/js/128.b2ebd9ec.chunk.js",
+    "static/media/Circe-Regular.ttf": "/ITArt/static/media/Circe-Regular.814e4dd4329ffdb6c9ed.ttf",
+    "static/media/Circe-Bold.ttf": "/ITArt/static/media/Circe-Bold.63396ee791f60623acbf.ttf",
+    "static/media/Poppins-Regular.ttf": "/ITArt/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
+    "static/media/Poppins-SemiBold.ttf": "/ITArt/static/media/Poppins-SemiBold.ac8d04b620e54be9b0f0.ttf",
+    "static/media/Poppins-Bold.ttf": "/ITArt/static/media/Poppins-Bold.cdb29a5d7ccf57ff05a3.ttf",
+    "static/media/registration_desktop@1x.jpg": "/ITArt/static/media/registration_desktop@1x.b4f9afaba45efef6d8d0.jpg",
+    "static/media/login_desktop@1x.jpg": "/ITArt/static/media/login_desktop@1x.a1f82ae6cd9cae70f456.jpg",
     "index.html": "/ITArt/index.html",
-    "main.b5320759.css.map": "/ITArt/static/css/main.b5320759.css.map",
-    "main.2b1d3212.js.map": "/ITArt/static/js/main.2b1d3212.js.map"
+    "static/media/logo.svg": "/ITArt/static/media/logo.dbc52635efdf8219ee1a2f3c5f17f1d2.svg",
+    "main.3d9aa721.css.map": "/ITArt/static/css/main.3d9aa721.css.map",
+    "main.3ba93af8.js.map": "/ITArt/static/js/main.3ba93af8.js.map",
+    "893.c365fe22.chunk.js.map": "/ITArt/static/js/893.c365fe22.chunk.js.map",
+    "829.317eeca1.chunk.js.map": "/ITArt/static/js/829.317eeca1.chunk.js.map",
+    "707.dbfb23d4.chunk.js.map": "/ITArt/static/js/707.dbfb23d4.chunk.js.map",
+    "708.42d3922c.chunk.js.map": "/ITArt/static/js/708.42d3922c.chunk.js.map",
+    "724.18dc218b.chunk.js.map": "/ITArt/static/js/724.18dc218b.chunk.js.map",
+    "694.65caf688.chunk.js.map": "/ITArt/static/js/694.65caf688.chunk.js.map",
+    "61.ec24913d.chunk.js.map": "/ITArt/static/js/61.ec24913d.chunk.js.map",
+    "162.b1472f15.chunk.js.map": "/ITArt/static/js/162.b1472f15.chunk.js.map",
+    "544.4bc46bdb.chunk.js.map": "/ITArt/static/js/544.4bc46bdb.chunk.js.map",
+    "128.b2ebd9ec.chunk.js.map": "/ITArt/static/js/128.b2ebd9ec.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b5320759.css",
-    "static/js/main.2b1d3212.js"
+    "static/css/main.3d9aa721.css",
+    "static/js/main.3ba93af8.js"
   ]
 }
