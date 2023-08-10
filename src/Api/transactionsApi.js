@@ -22,7 +22,7 @@ export const updateTransaction = async ({transData, id}) => {
     `/api/transactions/${transId}`,
     transData
   );
-  console.log(data);
+  // console.log(data);
   return data;
 };
 
