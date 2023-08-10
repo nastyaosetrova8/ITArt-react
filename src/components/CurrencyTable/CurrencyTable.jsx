@@ -24,7 +24,7 @@ export const CurrencyTable = ({ dataCurrency }) => {
   const usdCurr = dataCurrency.find(item => item.currencyCodeA === 840);
   const eurCurr = dataCurrency.find(item => item.currencyCodeA === 978);
 
-  const screenWidth = window.innerWidth;
+  // const screenWidth = window.innerWidth;
 
   return (
     <StyledWrapperCurrency className="currency-area">
