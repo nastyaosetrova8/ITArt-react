@@ -6,6 +6,12 @@ export const StyledBalance = styled.div`
   box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
   margin-bottom: 32px;
 
+  @media (max-width: 1280px) {
+    width: 100%;
+    width: 336px;
+    padding-left: 40px;
+  }
+
   .balance {
     color: var(--white, #fbfbfb);
     font-size: 30px;

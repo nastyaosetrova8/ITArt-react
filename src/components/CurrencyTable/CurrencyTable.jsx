@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import { StyledTableContainer, StyledWrapperDiagramm } from './StyledTable';
+import { StyledWrapperCurrency } from './StyledWrapperCurrency';
 
 export const CurrencyTable = ({ dataCurrency }) => {
   console.log('dataCurrency: ', dataCurrency);
@@ -26,7 +27,7 @@ export const CurrencyTable = ({ dataCurrency }) => {
   const eurCurr = dataCurrency.find(item => item.currencyCodeA === 978);
 
   return (
-    <>
+    <StyledWrapperCurrency className="currency-area">
       <StyledTableContainer
         component={Paper}
         sx={{ background: 'transparent', boxShadow: 'none' }}
@@ -64,7 +65,7 @@ export const CurrencyTable = ({ dataCurrency }) => {
         <p className="currencyUSD">{usdCurr.rateSell.toFixed(2)}</p>
         <p className="currencyEUR">{eurCurr.rateSell.toFixed(2)}</p>
       </StyledWrapperDiagramm>
-    </>
+    </StyledWrapperCurrency>
   );
 };
 
