@@ -2,19 +2,31 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledSideBar = styled.div`
-  box-sizing: border-box;
   border-right: 1px solid var(--white-60);
   color: #fbfbfb;
 
   width: 100%;
   max-width: 480px;
-  height: 100vh;
+  height: 641px;
 
-  /* background: linear-gradient(
-    220deg,
-    rgba(109, 84, 235, 0.6) 3.47%,
-    rgba(101, 35, 146, 0.6) 90.06%
-  ); */
+  @media (max-width: 1280px) {
+    border-right: none;
+    display: flex;
+    flex-direction: row;
+    max-width: 704px;
+    height: 214px;
+
+    .area-nav-balance {
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      height: 214px;
+      padding-bottom: 0;
+      font-size: 18px;
+    }
+  }
 
   nav {
     display: flex;

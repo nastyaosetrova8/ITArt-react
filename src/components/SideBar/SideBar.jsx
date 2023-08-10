@@ -7,21 +7,23 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 function SideBar() {
   return (
     <StyledSideBar>
-      <nav>
-        <StyledLink to="/home">
-          <div className="wrap">
-            <HomeIcon className="icon-home" />
-          </div>
-          Home
-        </StyledLink>
-        <StyledLink to="/statistic">
-          <div className="wrap">
-            <TimelineIcon className="icon-diag" />
-          </div>
-          Statistic
-        </StyledLink>
-      </nav>
-      <Balance />
+      <div className="area-nav-balance">
+        <nav>
+          <StyledLink to="/home">
+            <div className="wrap">
+              <HomeIcon className="icon-home" />
+            </div>
+            Home
+          </StyledLink>
+          <StyledLink to="/statistic">
+            <div className="wrap">
+              <TimelineIcon className="icon-diag" />
+            </div>
+            Statistic
+          </StyledLink>
+        </nav>
+        <Balance />
+      </div>
       <Currency />
     </StyledSideBar>
   );

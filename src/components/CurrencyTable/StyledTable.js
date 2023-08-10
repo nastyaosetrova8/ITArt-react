@@ -5,8 +5,21 @@ import bgCurrency from '../../assets/images/currency_desktop@1x.png';
 export const StyledTableContainer = styled(TableContainer)`
   width: 100%;
   color: var(--white);
-  background: yellow;
   margin-bottom: 36px;
+
+  @media (max-width: 1280px) {
+    margin-bottom: -5px;
+
+    .th-currency {
+      padding: 12px 0 12px 50px;
+    }
+    .th-purshase {
+      padding-right: 20px;
+    }
+    td {
+      padding: 12px 0 0 35px;
+    }
+  }
 
   .th-currency {
     padding: 16px 0 16px 50px;
@@ -58,6 +71,22 @@ export const StyledWrapperDiagramm = styled.div`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+
+  @media (max-width: 1280px) {
+    max-width: 336px;
+    height: 166px;
+
+    .currencyUSD {
+      display: none;
+    }
+    .currencyEUR {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 
   .currencyUSD {
     position: absolute;
