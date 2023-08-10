@@ -71,8 +71,6 @@ export const ModalAddTransaction = () => {
     }),
 
     onSubmit: value => {
-      notifyDataEdded();
-
       const date = new Date(value.transactionDate);
       const formatYear = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -87,7 +85,7 @@ export const ModalAddTransaction = () => {
             amount: Number(-value.amount),
             transactionDate: formattedDate,
           })
-        );
+        ).unwrap().then(()=>notifyExpenseEdded())                
       } else {
         dispatch(
           addTransactionThunk({
@@ -97,16 +95,17 @@ export const ModalAddTransaction = () => {
             amount: Number(value.amount),
             transactionDate: formattedDate,
           })
-        );
+        ).unwrap().then(()=>notifyIncomeEdded())
+                
       }
       handleClickBtnClose();
     },
   });
 
   return (
-    <StyledWrapModal>
-      <StyledTitle>Add transaction</StyledTitle>
-      <StyledSwitchWrapper>
+    <>
+        <StyledTitle>Add transaction</StyledTitle>
+      <StyledSwitchWrapper>     
         <p className={formik.values.type ? css.income : css.text}>Income</p>
 
         <StyledSwitch>
@@ -182,6 +181,6 @@ export const ModalAddTransaction = () => {
       <StyledCancelBtn type="button" onClick={handleClickBtnClose}>
         Cancel
       </StyledCancelBtn>
-    </StyledWrapModal>
+    </>
   );
 };

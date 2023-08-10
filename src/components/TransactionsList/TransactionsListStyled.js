@@ -7,7 +7,8 @@ export const TransactionContainer = styled.ul`
   overflow: auto;
 `;
 export const TransactionList = styled.ul`
-  max-width: 280px;
+  width: 100%;
+  width: 280px;
   margin-top: 8px;
   border-radius: 10px;
   overflow: hidden;
@@ -57,6 +58,9 @@ export const HeadRow = styled.tr`
   box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(100px);
   overflow-y: auto;
+  @media (max-width: 1280px) {
+    grid-template-columns: 0.72fr 0.5fr 1.05fr 1.5fr 0.7fr 0.7fr 0.1fr;
+  }
 `;
 export const HeadTitle = styled.th`
   font-weight: 600;

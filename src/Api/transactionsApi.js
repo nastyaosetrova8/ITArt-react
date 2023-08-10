@@ -7,7 +7,7 @@ export const getTransactions = async () => {
 };
 export const addTransaction = async transaction => {
   const { data } = await instance.post('/api/transactions', transaction);
-  console.log('data: ', data);
+  // console.log('data: ', data);
 
   return data;
 };

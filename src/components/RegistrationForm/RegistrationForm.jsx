@@ -64,7 +64,11 @@ export const RegistrationForm = () => {
                     </InputAdornment>
                   ),
                 }}
-                style={{ width: '100%' }}
+                sx={{ input: { color: 'var(--white)' } }}
+                autoFocus='true'
+                color= 'secondary'
+                fullWidth = 'true'
+                placeholder='Name'
                 variant="standard"
                 label="Name"
                 name="username"
@@ -81,7 +85,10 @@ export const RegistrationForm = () => {
                     </InputAdornment>
                   ),
                 }}
-                style={{ width: '100%' }}
+                sx={{ input: { color: 'var(--white)' } }}
+                color= 'secondary'
+                fullWidth = 'true'
+                placeholder='Email'                
                 variant="standard"
                 label="Email"
                 name="email"
@@ -113,7 +120,10 @@ export const RegistrationForm = () => {
                     </InputAdornment>
                   ),
                 }}
-                style={{ width: '100%' }}
+                sx={{ input: { color: 'var(--white)' } }}
+                color= 'secondary'
+                fullWidth = 'true'
+                placeholder='Password'
                 variant="standard"
                 label="Password"
                 name="password"
@@ -146,7 +156,10 @@ export const RegistrationForm = () => {
                     </InputAdornment>
                   ),
                 }}
-                style={{ width: '100%' }}
+                sx={{ input: { color: 'var(--white)' } }}
+                color= 'secondary'
+                fullWidth = 'true'
+                placeholder='Confirm password'
                 variant="standard"
                 label="Confirm password"
                 name="confirmPassword"

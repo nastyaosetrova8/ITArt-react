@@ -27,6 +27,7 @@ import {
   IncomePassive,
   StyledSpan,
 } from './ModalEditStyled';
+import { notifyAmountInvalid, notifyAmountMissing, notifyEdited } from 'components/Toastify/Toastify';
 
 export const ModalEditTransaction = () => {
   const dispatch = useDispatch();
@@ -82,7 +83,7 @@ export const ModalEditTransaction = () => {
         },
         id: idTransaction,
       };
-      dispatch(editTransactionThunk(dataEdit));
+      dispatch(editTransactionThunk(dataEdit)).unwrap().then(()=>notifyEdited());
       handleClickBtnClose();
     },
   });

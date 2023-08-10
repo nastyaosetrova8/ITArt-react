@@ -4,9 +4,13 @@ import styled from 'styled-components';
 export const StyledHeader = styled.div`
   display: flex;
   align-items: center;
-  padding: 16px;
+  padding: 16px 32px;
   background: var(--header-background);
   box-shadow: var(--header-shadow);
+
+  @media (max-width: 1280px) {
+    padding: 16px 32px;
+  }
 
   .user-name {
     margin: 0 12px 0 auto;
