@@ -8,7 +8,7 @@ font-size: 16px;
 `;
 
 export const IncomePassive = styled.p`
-color: rgba(255, 255, 255, 0.6);
+color: var( --white-60);
 font-size: 16px;
   line-height: 1.5px;
   font-weight: 600px;
@@ -22,12 +22,15 @@ font-size: 16px;
 `;
 
 export const ExpensePassive = styled.p`
-color:rgba(255, 255, 255, 0.6);
+color: var( --white-60);
 font-size: 16px;
   line-height: 1.5px;
   font-weight: 600px;
 `;
 
+export const StyledSpan = styled.p`
+font-size: 18px;
+`;
 
 export const CategoryNameStyled = styled.div`
   box-sizing: border-box;
@@ -38,7 +41,7 @@ export const CategoryNameStyled = styled.div`
   color: #fbfbfb;
   font-size: 18px;
   font-weight: 400px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid var( --white-40);
   transition: border-bottom 250ms linear;
 
   &:hover,

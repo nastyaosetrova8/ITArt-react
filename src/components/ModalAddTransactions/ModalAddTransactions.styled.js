@@ -8,19 +8,18 @@ import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import Select from 'react-select';
 
-// export const TitleWrapper = styled.div`
-//   margin: 0 auto;
-//   max-width: 380px;
+export const StyledWrapModal = styled.div`
+  padding: 40px 80px;
 
-//   @media screen and (max-width: 768px) {
-//     max-width: 280px;
-// }
-// `;
+  @media screen and (max-width: 768px) {
+    padding: 40px 20px;
+  }
+`;
 
 export const StyledTitle = styled.h2`
   margin-bottom: 40px;
-  color: rgba(251, 251, 251, 1);
-  font-size: 26px;
+  color: var(--white);
+  font-size: 28px;
   line-height: 1.5;
   font-weight: 400;
   text-align: center;
@@ -31,14 +30,8 @@ export const StyledSwitchWrapper = styled.h2`
   align-items: center;
   justify-content: center;
   gap: 24px;
-  align-items: center;
   margin-bottom: 42px;
 `;
-
-// export const StyledIncome = styled.span`
-//   color: ${({ isSelected }) =>
-//     isSelected === true ? 'rgba(255, 182, 39, 1)' : 'rgba(255, 255, 255, 0.6)'};
-// `;
 
 export const StyledSwitch = styled.label`
   position: relative;
@@ -46,24 +39,6 @@ export const StyledSwitch = styled.label`
   width: 80px;
   height: 40px;
 `;
-
-// export const StyledSwitchInput = styled.input`
-// display: none;
-// `;
-
-// export const StyledSlider = styled.span`
-// position: absolute;
-//   cursor: pointer;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   background-color: #ffffff;
-//   -webkit-transition: 0.4s;
-//   transition: 0.4s;
-//   border-radius: 30px;
-//   display: block;
-// `;
 
 export const StyledPlusBtn = styled(BsPlusLg)`
   width: 30px;
@@ -77,7 +52,7 @@ export const StyledPlusBtn = styled(BsPlusLg)`
 export const StyledMinusBtn = styled(HiOutlineMinus)`
   width: 30px;
   height: 30px;
-  color: rgba(251, 251, 251, 1);
+  color: var(--white);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -113,7 +88,7 @@ export const InputAmountStyled = styled.input`
   font-weight: 400px;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid var(--white-40);
   transition: border-bottom 250ms linear;
   & input {
     width: 181px;
@@ -121,7 +96,7 @@ export const InputAmountStyled = styled.input`
 
   &:hover,
   &:focus {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid var(--white-60);
   }
 
   @media screen and (max-width: 768px) {
@@ -139,11 +114,11 @@ export const StyledDatetimeWrap = styled.div`
   padding-bottom: 8px;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid var(--white-40);
   transition: border-bottom 250ms linear;
   &:hover,
   &:focus {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.822);
+    border-bottom: 1px solid var(--white-60);
   }
 
   @media screen and (max-width: 768px) {
@@ -153,23 +128,22 @@ export const StyledDatetimeWrap = styled.div`
 `;
 
 export const StyledDatetime = styled(Datetime)`
+  color: var(--white-button-text);
+  width: 89px;
   & input {
     background: transparent;
     border: none;
     outline: none;
-    color: rgb(251, 251, 251);
+    color: var(--white);
     font-size: 18px;
     line-height: 1.5;
     font-weight: 400;
   }
-  width: 89px;
-  /* background: linear-gradient(
-    0deg,
-    rgba(83, 61, 186, 1) 0%,
-    rgba(80, 48, 154, 1) 36%,
-    rgba(106, 70, 165, 1) 61%,
-    rgba(133, 93, 175, 1) 100%
-  ); */
+
+  &:hover,
+  &:focus {
+    color: var(--violet);
+  }
 `;
 
 export const StyledCalendarIcon = styled(RiCalendar2Fill)`
@@ -189,7 +163,7 @@ export const InputCommentStyled = styled.input`
   font-weight: 400px;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid var(--white-40);
   transition: border-bottom 250ms linear;
 
   &::placeholder {
@@ -200,7 +174,7 @@ export const InputCommentStyled = styled.input`
   }
   &:hover,
   &:focus {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid var( --white-60);
   }
 
   @media screen and (max-width: 768px) {
@@ -219,15 +193,13 @@ export const StyledAddBtn = styled.button`
   padding: 12px 128px;
   font-size: 18px;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 1);
+  color: var(--white);
   border: transparent;
   background-image: var(--button-gradient);
   box-shadow: 1px 9px 15px rgba(0, 0, 0, 0.2);
   margin: 0 auto;
   text-transform: uppercase;
   transition: transform 300ms ease-in;
-  /* width: 300px;
-    height: 50px; */
 
   &:hover,
   &:focus {
@@ -251,8 +223,8 @@ export const StyledCancelBtn = styled.button`
   margin: 0 auto;
   font-size: 18px;
   line-height: 1.5;
-  background-color: rgba(255, 255, 255, 1);
-  color: rgba(98, 63, 139, 1);
+  background-color: var(--white);
+  color: --white-button-text;
   margin-left: auto;
   text-transform: uppercase;
   border: none;
@@ -292,12 +264,12 @@ export const styledSelectCategories = {
 
       fontSize: '18px',
       fontWeight: '400',
-      color: 'rgba(255, 255, 255, 0.6)',
+      color: 'var(--white-60)',
       backgroundColor: 'transparent',
       cursor: 'pointer',
       '&:hover': {
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        color: '#FF868D',
+        backgroundColor: 'var(--form-color)',
+        color: 'var(--dashboard-out-text)',
         fontWeight: '400',
       },
       textAlign: 'left',
@@ -306,7 +278,7 @@ export const styledSelectCategories = {
   control: styles => ({
     ...styles,
     border: 'none',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.4)',
+    borderBottom: '1px solid var(--white-40)',
     borderRadius: 0,
     boxShadow: 'none',
     backgroundColor: 'transparent',
@@ -324,10 +296,6 @@ export const styledSelectCategories = {
       transition,
       right: 5,
       color: '#FBFBFB',
-      /* display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center', */
-      /* padding: '8px 20px', */
     };
   },
 
@@ -345,9 +313,7 @@ export const styledSelectCategories = {
   },
   menuList: base => ({
     ...base,
-    '::-webkit-scrollbar': {
-      /* display: 'none', */
-    },
+    '::-webkit-scrollbar': {},
   }),
 
   placeholder: () => {
@@ -355,7 +321,6 @@ export const styledSelectCategories = {
       color: 'rgba(255, 255, 255, 0.5)',
       position: 'absolute',
       left: 10,
-      /* padding: '8px 20px', */
     };
   },
   indicatorSeparator: () => ({}),
@@ -370,7 +335,7 @@ export const styledSelectCategories = {
     return {
       ...provided,
       size: '18px',
-      color: 'rgba(255, 255, 255, 0.4)',
+      color: 'var(--white-40)',
       '&:hover': {
         color: '#fbfbfb',
       },
@@ -381,13 +346,8 @@ export const styledSelectCategories = {
     return {
       ...provided,
       margin: '0px',
-      color: '#FBFBFB',
-      /* padding: '8px 20px', */
+      color: 'var(--white)',
       minWidth: '100%',
     };
   },
 };
-
-// export const StyledTitle = styled.h2`
-
-// `;

@@ -25,11 +25,11 @@ import {
   StyledPlusBtn,
   StyledSwitch,
   StyledSwitchWrapper,
-  StyledTitle,  
+  StyledTitle,
+  StyledWrapModal,
   styledSelectCategories,
 } from './ModalAddTransactions.styled';
-import {  notifyExpenseEdded, notifyIncomeEdded } from 'components/Toastify/Toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { notifyDataEdded } from 'components/Toastify/Toastify';
 
 export const ModalAddTransaction = () => {
   const dispatch = useDispatch();
@@ -62,15 +62,12 @@ export const ModalAddTransaction = () => {
       comment: '',
     },
 
-    validationSchema: 
-    Yup.object().shape({
+    validationSchema: Yup.object().shape({
       amount: Yup.number('Enter sum')
         .positive('Invalid number')
         .required('Required'),
-        transactionDate: Yup.date().required('Required'),
-        comment: Yup.string()
-        .min(1)
-      .max(20, 'Must be 20 characters or less'),
+      transactionDate: Yup.date().required('Required'),
+      comment: Yup.string().min(1).max(20, 'Must be 20 characters or less'),
     }),
 
     onSubmit: value => {
@@ -106,7 +103,7 @@ export const ModalAddTransaction = () => {
   });
 
   return (
-    <div>
+    <>
         <StyledTitle>Add transaction</StyledTitle>
       <StyledSwitchWrapper>     
         <p className={formik.values.type ? css.income : css.text}>Income</p>
@@ -119,7 +116,6 @@ export const ModalAddTransaction = () => {
             value={formik.values.type}
             onClick={formik.handleChange}
           />
-
           <span className={css.slider}>
             <span
               className={`${css.btnSwitch} ${
@@ -185,6 +181,6 @@ export const ModalAddTransaction = () => {
       <StyledCancelBtn type="button" onClick={handleClickBtnClose}>
         Cancel
       </StyledCancelBtn>
-    </div>
+    </>
   );
 };
