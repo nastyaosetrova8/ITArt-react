@@ -1,4 +1,3 @@
-import SideBar from 'components/SideBar/SideBar';
 import styled from 'styled-components';
 
 const StyledContainer = styled.div`
