@@ -20,14 +20,7 @@ export const deleteTransaction = async idTransaction => {
 
 export const updateTransaction = async ({transData, id}) => {
   const transId = id;
-  // const transDat = {
-  //   transactionDate: dataEdit.transactionDate,
-  //   type: dataEdit.type,
-  //   categoryId: dataEdit.categoryId,
-  //   comment: dataEdit.comment,
-  //   amount: dataEdit.amount,
-  // };
-  // token.set(tokenTrans);
+
   const { data } = await instance.patch(
     `/api/transactions/${transId}`,
     transData

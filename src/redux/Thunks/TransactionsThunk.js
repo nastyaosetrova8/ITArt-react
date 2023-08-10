@@ -6,13 +6,9 @@ import {
   getTransactions,
   getTransCategories,
   updateTransaction,
-  // updateTransaction,
 } from 'Api/transactionsApi';
 import { updateBalance } from 'redux/Slices/AuthUserSlice';
 import { getCurrentUserThunk } from './AuthUserThunk';
-
-// import { useSelector } from 'react-redux';
-// import { selectToken } from 'redux/selectors';
 
 export const getTransactionsThunk = createAsyncThunk(
   'transactions/getTransactions',
@@ -31,7 +27,6 @@ export const addTransactionThunk = createAsyncThunk(
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
-      //return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -46,31 +41,15 @@ export const deleteTransactionThunk = createAsyncThunk(
   }
 );
 
-// export const updateTransactionThunk = createAsyncThunk(
-//   'transaction/updateTransaction',
-//   transaction => {
-//     const data = updateTransaction(transaction);
-//     return data;
-//   }
-// );
-
 export const editTransactionThunk = createAsyncThunk(
   'transactions/editTransaction',
   async (dataEdit, thunkAPI) => {
-    console.log(dataEdit);
-
-    // const transId = dataEdit.data.id;
-    // // const data = data.data;
-    // const token = dataEdit.token;
-
     try {
-
-      // token.set(tokenTrans);
       const newTrans = await updateTransaction(dataEdit);
       thunkAPI.dispatch(getTransactionsThunk());
       thunkAPI.dispatch(getCurrentUserThunk());
-
       return newTrans;
+      
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

@@ -139,7 +139,7 @@ export const TransactionsList = () => {
             marginLeft: 'auto',
           }}
         >
-          <TableContainer sx={{ maxHeight: 440 }}>
+          <TableContainer sx={{ maxHeight: 380 }}>
             <Table
               stickyHeader
               aria-label="sticky table"

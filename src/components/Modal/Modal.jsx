@@ -3,28 +3,26 @@ import { createPortal } from 'react-dom';
 import { StyledCloseBtn, StyledModal, StyledOverlay } from './Modal.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineClose } from 'react-icons/ai';
-import {
-  selectIsShowModal,
-  selectModalName,
-} from 'redux/modal/modalSelectors';
-import {
-  saveIdTransaction,
-  toggleShowModal,
-} from 'redux/modal/modalSlice';
+import { selectIsShowModal, selectModalName } from 'redux/modal/modalSelectors';
+import { saveIdTransaction, toggleShowModal } from 'redux/modal/modalSlice';
 import { ModalAddTransaction } from 'components/ModalAddTransactions/ModalAddTransactions';
 import { LogOutForm } from './ModalLogOut';
 import { ModalEditTransaction } from 'components/ModalEditTransactions/ModalEditTransactions';
 
-
 const modalRoot = document.querySelector('#modal-root');
 
 export default function Modal() {
-
   const dispatch = useDispatch();
   const isShowModal = useSelector(selectIsShowModal);
   const modalName = useSelector(selectModalName);
 
   useEffect(() => {
+    if (isShowModal) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+
     const handleKeyDown = e => {
       if (e.code === 'Escape') {
         dispatch(toggleShowModal(''));
@@ -35,7 +33,7 @@ export default function Modal() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [dispatch]);
+  }, [dispatch, isShowModal]);
 
   const handleClickOverlay = e => {
     if (e.target === e.currentTarget) {
@@ -65,4 +63,3 @@ export default function Modal() {
     modalRoot
   );
 }
-

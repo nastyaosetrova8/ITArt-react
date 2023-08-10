@@ -28,6 +28,7 @@ export const initialSummaryState = {
   year: 0,
   month: 0,
 };
+
 export const initialModalState = {
   transactions: [],
   categories: [],  

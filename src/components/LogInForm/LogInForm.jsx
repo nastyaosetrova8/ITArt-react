@@ -47,14 +47,19 @@ export const LogInForm = () => {
           <InputBtnWrap>
             <InputsWrap>
               <TextField
-                InputProps={{
+                InputProps={{                  
                   startAdornment: (
                     <InputAdornment position="start">
                       <EmailIcon sx={{color: 'var(--white-40)'}}/>
-                    </InputAdornment>
-                  ),
+                    </InputAdornment>                  
+                  ),                  
                 }}
-                style={{ maxWidth: '100%' }}
+                
+                sx={{ input: { color: 'var(--white)' } }}
+                autoFocus='true'                
+                color= 'secondary'
+                fullWidth = 'true'
+                placeholder='Email'
                 variant="standard"
                 label="Email"
                 name="email"
@@ -85,8 +90,11 @@ export const LogInForm = () => {
                       </IconButton>
                     </InputAdornment>
                   ),
-                }}                
-                style={{ maxWidth: '100%' }}
+                }}
+                sx={{ input: { color: 'var(--white)' } }}
+                color= 'secondary'
+                fullWidth = 'true'
+                placeholder='Password'                
                 variant="standard"
                 label="Password"
                 name="password"

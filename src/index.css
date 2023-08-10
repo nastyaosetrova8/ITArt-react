@@ -65,3 +65,7 @@ button {
 img {
   display: block;
 }
+
+.no-scroll {
+  overflow: hidden;
+}
