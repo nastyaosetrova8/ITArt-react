@@ -6,12 +6,6 @@ export const StyledBalance = styled.div`
   box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
   margin-bottom: 32px;
 
-  @media (max-width: 1280px) {
-    width: 100%;
-    width: 336px;
-    padding-left: 40px;
-  }
-
   .balance {
     color: var(--white, #fbfbfb);
     font-size: 30px;
@@ -28,5 +22,22 @@ export const StyledBalance = styled.div`
     line-height: normal;
     text-transform: uppercase;
     margin: 0 0 12px 0;
+  }
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    font-size: 36px;
+    width: 280px;
+    padding-left: 32px;
+    border-radius: 8px;
+
+    .balance {
+      padding: 0;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1280px) {
+    width: 336px;
+    padding-left: 40px;
+    border-radius: 8px;
   }
 `;

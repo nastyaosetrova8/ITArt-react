@@ -1,4 +1,6 @@
-import StyledContainer from 'components/Container/StyledContainer';
+import StyledContainer, {
+  SideBarHide,
+} from 'components/Container/StyledContainer';
 import DiagramTab from 'components/DiagramTab/DiagramTab';
 import { StyledTitle } from 'components/DiagramTab/StyledDiagramTab';
 import SideBar from 'components/SideBar/SideBar';
@@ -6,7 +8,9 @@ import SideBar from 'components/SideBar/SideBar';
 function SummaryPage() {
   return (
     <StyledContainer>
-      <SideBar />
+      <SideBarHide>
+        <SideBar />
+      </SideBarHide>
       <div>
         <StyledTitle>Statistics</StyledTitle>
         <DiagramTab />

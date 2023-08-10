@@ -11,8 +11,6 @@ import { StyledTableContainer, StyledWrapperDiagramm } from './StyledTable';
 import { StyledWrapperCurrency } from './StyledWrapperCurrency';
 
 export const CurrencyTable = ({ dataCurrency }) => {
-  console.log('dataCurrency: ', dataCurrency);
-
   const nameCurrencies = { USD: 840, EUR: 978 };
 
   const tableRows = dataCurrency.map(currency => ({
@@ -25,6 +23,8 @@ export const CurrencyTable = ({ dataCurrency }) => {
 
   const usdCurr = dataCurrency.find(item => item.currencyCodeA === 840);
   const eurCurr = dataCurrency.find(item => item.currencyCodeA === 978);
+
+  const screenWidth = window.innerWidth;
 
   return (
     <StyledWrapperCurrency className="currency-area">

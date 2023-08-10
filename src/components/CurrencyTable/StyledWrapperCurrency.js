@@ -6,4 +6,8 @@ export const StyledWrapperCurrency = styled.div`
     max-width: 336px;
     margin-left: auto;
   }
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    display: none;
+  }
 `;
