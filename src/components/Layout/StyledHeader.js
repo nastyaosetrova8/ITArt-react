@@ -8,10 +8,6 @@ export const StyledHeader = styled.div`
   background: var(--header-background);
   box-shadow: var(--header-shadow);
 
-  @media (max-width: 1280px) {
-    padding: 16px 32px;
-  }
-
   .user-name {
     margin: 0 12px 0 auto;
     color: var(--white-60);
@@ -31,6 +27,10 @@ export const StyledHeader = styled.div`
   .btn-exit-text {
     font-size: 16px;
     color: var(--white-60);
+  }
+
+  @media (max-width: 1280px) {
+    padding: 16px 32px;
   }
 `;
 

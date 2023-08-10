@@ -72,9 +72,9 @@ export const StyledWrapperDiagramm = styled.div`
   background-position: center;
   background-repeat: no-repeat;
 
-  @media (max-width: 1280px) {
+  @media (min-width: 768px) and (max-width: 1280px) {
     max-width: 336px;
-    height: 166px;
+    height: 70px;
 
     .currencyUSD {
       display: none;
@@ -84,7 +84,7 @@ export const StyledWrapperDiagramm = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (min-width: 320px) and (max-width: 767px) {
     display: none;
   }
 

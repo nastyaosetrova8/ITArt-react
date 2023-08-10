@@ -3,6 +3,7 @@ import { StyledLink, StyledSideBar } from './StyledSideBar';
 import Currency from 'components/Currency/Currency';
 import HomeIcon from '@mui/icons-material/Home';
 import TimelineIcon from '@mui/icons-material/Timeline';
+import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
 
 function SideBar() {
   return (
@@ -13,16 +14,23 @@ function SideBar() {
             <div className="wrap">
               <HomeIcon className="icon-home" />
             </div>
-            Home
+            <span>Home</span>
           </StyledLink>
           <StyledLink to="/statistic">
             <div className="wrap">
               <TimelineIcon className="icon-diag" />
             </div>
-            Statistic
+            <span>Statistic</span>
           </StyledLink>
+          {window.innerWidth < 768 && (
+            <button type="" className="wrap">
+              <AttachMoneyOutlinedIcon className="icon-money" />
+            </button>
+          )}
         </nav>
-        <Balance />
+        <div className="balance-invisible">
+          <Balance />
+        </div>
       </div>
       <Currency />
     </StyledSideBar>
