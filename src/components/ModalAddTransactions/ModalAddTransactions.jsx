@@ -29,7 +29,7 @@ import {
   StyledWrapModal,
   styledSelectCategories,
 } from './ModalAddTransactions.styled';
-import { notifyDataEdded } from 'components/Toastify/Toastify';
+import { notifyExpenseEdded, notifyIncomeEdded } from 'components/Toastify/Toastify';
 
 export const ModalAddTransaction = () => {
   const dispatch = useDispatch();
@@ -103,7 +103,7 @@ export const ModalAddTransaction = () => {
   });
 
   return (
-    <>
+    <StyledWrapModal>
         <StyledTitle>Add transaction</StyledTitle>
       <StyledSwitchWrapper>     
         <p className={formik.values.type ? css.income : css.text}>Income</p>
@@ -181,6 +181,6 @@ export const ModalAddTransaction = () => {
       <StyledCancelBtn type="button" onClick={handleClickBtnClose}>
         Cancel
       </StyledCancelBtn>
-    </>
+    </StyledWrapModal>
   );
 };
