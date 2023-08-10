@@ -27,7 +27,7 @@ import {
   IncomePassive,
   StyledSpan,
 } from './ModalEditStyled';
-import { notifyAmountInvalid, notifyAmountMissing, notifyEdited } from 'components/Toastify/Toastify';
+import { notifyEdited } from 'components/Toastify/Toastify';
 
 export const ModalEditTransaction = () => {
   const dispatch = useDispatch();
